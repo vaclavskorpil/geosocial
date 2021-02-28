@@ -2,11 +2,11 @@ part of 'business_cubit.dart';
 
 @freezed
 abstract class BusinessState with _$BusinessState {
-  factory BusinessState.succes({@required List<Business> businesses}) = _BusinessState;
+  factory BusinessState.succes({
+    @required List<Business> businesses,
+    @required bool isFetching,
+    @required Option<Failure> failure
+  }) = _BusinessState;
 
-  factory BusinessState.loading() = Loading;
-
-  factory BusinessState.failure() = Failure;
-
-  factory BusinessState.initial() => Loading();
+  factory BusinessState.initial() => BusinessState.succes(businesses: [],isFetching: true, failure: none());
 }

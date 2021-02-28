@@ -27,7 +27,7 @@ Future<GetIt> $initGetIt(
   gh.lazySingletonAsync<CustomDio>(() => CustomDio.createDio());
   final resolvedDio = await registerModule.dio;
   gh.factory<Dio>(() => resolvedDio);
-  gh.lazySingleton<GraphQLService>(() => GraphQLService());
+  gh.lazySingleton<GraphQLService>(() => GraphQLService.createGQLService());
   gh.lazySingleton<BusinessRepository>(
       () => BusinessRepository(get<GraphQLService>()));
   gh.factory<BusinessCubit>(

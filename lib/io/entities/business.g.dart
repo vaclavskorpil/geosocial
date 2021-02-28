@@ -14,6 +14,21 @@ _$_Business _$_$_BusinessFromJson(Map<String, dynamic> json) {
     json['phone'] as String,
     json['price'] as String,
     (json['distance'] as num)?.toDouble(),
+    (json['categories'] as List)
+        ?.map((e) =>
+            e == null ? null : Category.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    json['location'] == null
+        ? null
+        : Location.fromJson(json['location'] as Map<String, dynamic>),
+    json['coordinates'] == null
+        ? null
+        : Coordinates.fromJson(json['coordinates'] as Map<String, dynamic>),
+    (json['photos'] as List)?.map((e) => e as String)?.toList(),
+    (json['hours'] as List)
+        ?.map(
+            (e) => e == null ? null : Hours.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }
 
@@ -25,4 +40,9 @@ Map<String, dynamic> _$_$_BusinessToJson(_$_Business instance) =>
       'phone': instance.phone,
       'price': instance.price,
       'distance': instance.distance,
+      'categories': instance.categories,
+      'location': instance.location,
+      'coordinates': instance.coordinates,
+      'photos': instance.photos,
+      'hours': instance.hours,
     };
