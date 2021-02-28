@@ -1,0 +1,30 @@
+query SearchBusinesses($location: String, $limit: Int, $offset: Int) {
+  search(location: $location, limit: $limit, offset: $offset) {
+    total
+    business {
+      id
+      name
+      url
+      price
+      rating
+      distance
+      categories {
+        title
+        alias
+      }
+      location {
+        city
+        address1
+      }
+      coordinates {
+        latitude
+        longitude
+      }
+
+      photos
+      hours {
+        is_open_now
+      }
+    }
+  }
+}

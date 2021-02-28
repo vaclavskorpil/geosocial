@@ -1,5 +1,5 @@
 import 'package:geosocial/io/api/graphql/graphql_client.dart';
-import 'package:geosocial/io/api/graphql/queries/get_buisinesses.dart';
+import 'package:geosocial/io/api/graphql/queries/graphql_queries.graphql.dart';
 import 'package:geosocial/io/entities/business.dart';
 import 'package:injectable/injectable.dart';
 
@@ -11,10 +11,10 @@ class BusinessRepository {
 
   BusinessRepository(this._graphQl);
 
-  Future<List<Business>> getBusinesses() async {
+  Future<List<Business>> getBusinesses(String location, int limit, int offset) async {
 
     final result = await _graphQl
-        .performQuery(getBusinessesQuery, variables: {'location': 'pardubice'});
+        .execute(SearchBusinessesQuery(variables: SearchBusinessesArguments(location: location, limit: limit,offset: offset )));
 
     if (result.hasException) {
       throw GetBusinessesRequestFailure();

@@ -14,20 +14,15 @@ class _$BusinessStateTearOff {
   const _$BusinessStateTearOff();
 
 // ignore: unused_element
-  _BusinessState succes({@required List<Business> businesses}) {
+  _BusinessState succes(
+      {@required List<Business> businesses,
+      @required bool isFetching,
+      @required Option<Failure> failure}) {
     return _BusinessState(
       businesses: businesses,
+      isFetching: isFetching,
+      failure: failure,
     );
-  }
-
-// ignore: unused_element
-  Loading loading() {
-    return Loading();
-  }
-
-// ignore: unused_element
-  Failure failure() {
-    return Failure();
   }
 }
 
@@ -37,32 +32,34 @@ const $BusinessState = _$BusinessStateTearOff();
 
 /// @nodoc
 mixin _$BusinessState {
+  List<Business> get businesses;
+  bool get isFetching;
+  Option<Failure> get failure;
+
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult succes(List<Business> businesses),
-    @required TResult loading(),
-    @required TResult failure(),
+    @required
+        TResult succes(List<Business> businesses, bool isFetching,
+            Option<Failure> failure),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult succes(List<Business> businesses),
-    TResult loading(),
-    TResult failure(),
+    TResult succes(
+        List<Business> businesses, bool isFetching, Option<Failure> failure),
     @required TResult orElse(),
   });
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult succes(_BusinessState value),
-    @required TResult loading(Loading value),
-    @required TResult failure(Failure value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult succes(_BusinessState value),
-    TResult loading(Loading value),
-    TResult failure(Failure value),
     @required TResult orElse(),
   });
+
+  @JsonKey(ignore: true)
+  $BusinessStateCopyWith<BusinessState> get copyWith;
 }
 
 /// @nodoc
@@ -70,6 +67,8 @@ abstract class $BusinessStateCopyWith<$Res> {
   factory $BusinessStateCopyWith(
           BusinessState value, $Res Function(BusinessState) then) =
       _$BusinessStateCopyWithImpl<$Res>;
+  $Res call(
+      {List<Business> businesses, bool isFetching, Option<Failure> failure});
 }
 
 /// @nodoc
@@ -80,14 +79,33 @@ class _$BusinessStateCopyWithImpl<$Res>
   final BusinessState _value;
   // ignore: unused_field
   final $Res Function(BusinessState) _then;
+
+  @override
+  $Res call({
+    Object businesses = freezed,
+    Object isFetching = freezed,
+    Object failure = freezed,
+  }) {
+    return _then(_value.copyWith(
+      businesses: businesses == freezed
+          ? _value.businesses
+          : businesses as List<Business>,
+      isFetching:
+          isFetching == freezed ? _value.isFetching : isFetching as bool,
+      failure: failure == freezed ? _value.failure : failure as Option<Failure>,
+    ));
+  }
 }
 
 /// @nodoc
-abstract class _$BusinessStateCopyWith<$Res> {
+abstract class _$BusinessStateCopyWith<$Res>
+    implements $BusinessStateCopyWith<$Res> {
   factory _$BusinessStateCopyWith(
           _BusinessState value, $Res Function(_BusinessState) then) =
       __$BusinessStateCopyWithImpl<$Res>;
-  $Res call({List<Business> businesses});
+  @override
+  $Res call(
+      {List<Business> businesses, bool isFetching, Option<Failure> failure});
 }
 
 /// @nodoc
@@ -104,25 +122,40 @@ class __$BusinessStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object businesses = freezed,
+    Object isFetching = freezed,
+    Object failure = freezed,
   }) {
     return _then(_BusinessState(
       businesses: businesses == freezed
           ? _value.businesses
           : businesses as List<Business>,
+      isFetching:
+          isFetching == freezed ? _value.isFetching : isFetching as bool,
+      failure: failure == freezed ? _value.failure : failure as Option<Failure>,
     ));
   }
 }
 
 /// @nodoc
 class _$_BusinessState with DiagnosticableTreeMixin implements _BusinessState {
-  _$_BusinessState({@required this.businesses}) : assert(businesses != null);
+  _$_BusinessState(
+      {@required this.businesses,
+      @required this.isFetching,
+      @required this.failure})
+      : assert(businesses != null),
+        assert(isFetching != null),
+        assert(failure != null);
 
   @override
   final List<Business> businesses;
+  @override
+  final bool isFetching;
+  @override
+  final Option<Failure> failure;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BusinessState.succes(businesses: $businesses)';
+    return 'BusinessState.succes(businesses: $businesses, isFetching: $isFetching, failure: $failure)';
   }
 
   @override
@@ -130,7 +163,9 @@ class _$_BusinessState with DiagnosticableTreeMixin implements _BusinessState {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'BusinessState.succes'))
-      ..add(DiagnosticsProperty('businesses', businesses));
+      ..add(DiagnosticsProperty('businesses', businesses))
+      ..add(DiagnosticsProperty('isFetching', isFetching))
+      ..add(DiagnosticsProperty('failure', failure));
   }
 
   @override
@@ -139,12 +174,20 @@ class _$_BusinessState with DiagnosticableTreeMixin implements _BusinessState {
         (other is _BusinessState &&
             (identical(other.businesses, businesses) ||
                 const DeepCollectionEquality()
-                    .equals(other.businesses, businesses)));
+                    .equals(other.businesses, businesses)) &&
+            (identical(other.isFetching, isFetching) ||
+                const DeepCollectionEquality()
+                    .equals(other.isFetching, isFetching)) &&
+            (identical(other.failure, failure) ||
+                const DeepCollectionEquality().equals(other.failure, failure)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(businesses);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(businesses) ^
+      const DeepCollectionEquality().hash(isFetching) ^
+      const DeepCollectionEquality().hash(failure);
 
   @JsonKey(ignore: true)
   @override
@@ -154,27 +197,24 @@ class _$_BusinessState with DiagnosticableTreeMixin implements _BusinessState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult succes(List<Business> businesses),
-    @required TResult loading(),
-    @required TResult failure(),
+    @required
+        TResult succes(List<Business> businesses, bool isFetching,
+            Option<Failure> failure),
   }) {
     assert(succes != null);
-    assert(loading != null);
-    assert(failure != null);
-    return succes(businesses);
+    return succes(businesses, isFetching, failure);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult succes(List<Business> businesses),
-    TResult loading(),
-    TResult failure(),
+    TResult succes(
+        List<Business> businesses, bool isFetching, Option<Failure> failure),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (succes != null) {
-      return succes(businesses);
+      return succes(businesses, isFetching, failure);
     }
     return orElse();
   }
@@ -183,12 +223,8 @@ class _$_BusinessState with DiagnosticableTreeMixin implements _BusinessState {
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult succes(_BusinessState value),
-    @required TResult loading(Loading value),
-    @required TResult failure(Failure value),
   }) {
     assert(succes != null);
-    assert(loading != null);
-    assert(failure != null);
     return succes(this);
   }
 
@@ -196,8 +232,6 @@ class _$_BusinessState with DiagnosticableTreeMixin implements _BusinessState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult succes(_BusinessState value),
-    TResult loading(Loading value),
-    TResult failure(Failure value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -209,210 +243,18 @@ class _$_BusinessState with DiagnosticableTreeMixin implements _BusinessState {
 }
 
 abstract class _BusinessState implements BusinessState {
-  factory _BusinessState({@required List<Business> businesses}) =
-      _$_BusinessState;
+  factory _BusinessState(
+      {@required List<Business> businesses,
+      @required bool isFetching,
+      @required Option<Failure> failure}) = _$_BusinessState;
 
+  @override
   List<Business> get businesses;
+  @override
+  bool get isFetching;
+  @override
+  Option<Failure> get failure;
+  @override
   @JsonKey(ignore: true)
   _$BusinessStateCopyWith<_BusinessState> get copyWith;
-}
-
-/// @nodoc
-abstract class $LoadingCopyWith<$Res> {
-  factory $LoadingCopyWith(Loading value, $Res Function(Loading) then) =
-      _$LoadingCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class _$LoadingCopyWithImpl<$Res> extends _$BusinessStateCopyWithImpl<$Res>
-    implements $LoadingCopyWith<$Res> {
-  _$LoadingCopyWithImpl(Loading _value, $Res Function(Loading) _then)
-      : super(_value, (v) => _then(v as Loading));
-
-  @override
-  Loading get _value => super._value as Loading;
-}
-
-/// @nodoc
-class _$Loading with DiagnosticableTreeMixin implements Loading {
-  _$Loading();
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BusinessState.loading()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'BusinessState.loading'));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is Loading);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    @required TResult succes(List<Business> businesses),
-    @required TResult loading(),
-    @required TResult failure(),
-  }) {
-    assert(succes != null);
-    assert(loading != null);
-    assert(failure != null);
-    return loading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult succes(List<Business> businesses),
-    TResult loading(),
-    TResult failure(),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    @required TResult succes(_BusinessState value),
-    @required TResult loading(Loading value),
-    @required TResult failure(Failure value),
-  }) {
-    assert(succes != null);
-    assert(loading != null);
-    assert(failure != null);
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult succes(_BusinessState value),
-    TResult loading(Loading value),
-    TResult failure(Failure value),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Loading implements BusinessState {
-  factory Loading() = _$Loading;
-}
-
-/// @nodoc
-abstract class $FailureCopyWith<$Res> {
-  factory $FailureCopyWith(Failure value, $Res Function(Failure) then) =
-      _$FailureCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class _$FailureCopyWithImpl<$Res> extends _$BusinessStateCopyWithImpl<$Res>
-    implements $FailureCopyWith<$Res> {
-  _$FailureCopyWithImpl(Failure _value, $Res Function(Failure) _then)
-      : super(_value, (v) => _then(v as Failure));
-
-  @override
-  Failure get _value => super._value as Failure;
-}
-
-/// @nodoc
-class _$Failure with DiagnosticableTreeMixin implements Failure {
-  _$Failure();
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BusinessState.failure()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'BusinessState.failure'));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is Failure);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    @required TResult succes(List<Business> businesses),
-    @required TResult loading(),
-    @required TResult failure(),
-  }) {
-    assert(succes != null);
-    assert(loading != null);
-    assert(failure != null);
-    return failure();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult succes(List<Business> businesses),
-    TResult loading(),
-    TResult failure(),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (failure != null) {
-      return failure();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    @required TResult succes(_BusinessState value),
-    @required TResult loading(Loading value),
-    @required TResult failure(Failure value),
-  }) {
-    assert(succes != null);
-    assert(loading != null);
-    assert(failure != null);
-    return failure(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult succes(_BusinessState value),
-    TResult loading(Loading value),
-    TResult failure(Failure value),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (failure != null) {
-      return failure(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Failure implements BusinessState {
-  factory Failure() = _$Failure;
 }

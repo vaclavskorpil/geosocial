@@ -17,8 +17,18 @@ class _$BusinessTearOff {
   const _$BusinessTearOff();
 
 // ignore: unused_element
-  _Business call(String name, String id, String url, @nullable String phone,
-      @nullable String price, @nullable double distance) {
+  _Business call(
+      String name,
+      String id,
+      @nullable String url,
+      @nullable String phone,
+      @nullable String price,
+      @nullable double distance,
+      @nullable List<Category> categories,
+      @nullable Location location,
+      @nullable Coordinates coordinates,
+      @nullable List<String> photos,
+      @nullable List<Hours> hours) {
     return _Business(
       name,
       id,
@@ -26,6 +36,11 @@ class _$BusinessTearOff {
       phone,
       price,
       distance,
+      categories,
+      location,
+      coordinates,
+      photos,
+      hours,
     );
   }
 
@@ -43,6 +58,7 @@ const $Business = _$BusinessTearOff();
 mixin _$Business {
   String get name;
   String get id;
+  @nullable
   String get url;
   @nullable
   String get phone;
@@ -50,6 +66,16 @@ mixin _$Business {
   String get price;
   @nullable
   double get distance;
+  @nullable
+  List<Category> get categories;
+  @nullable
+  Location get location;
+  @nullable
+  Coordinates get coordinates;
+  @nullable
+  List<String> get photos;
+  @nullable
+  List<Hours> get hours;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -63,10 +89,18 @@ abstract class $BusinessCopyWith<$Res> {
   $Res call(
       {String name,
       String id,
-      String url,
+      @nullable String url,
       @nullable String phone,
       @nullable String price,
-      @nullable double distance});
+      @nullable double distance,
+      @nullable List<Category> categories,
+      @nullable Location location,
+      @nullable Coordinates coordinates,
+      @nullable List<String> photos,
+      @nullable List<Hours> hours});
+
+  $LocationCopyWith<$Res> get location;
+  $CoordinatesCopyWith<$Res> get coordinates;
 }
 
 /// @nodoc
@@ -85,6 +119,11 @@ class _$BusinessCopyWithImpl<$Res> implements $BusinessCopyWith<$Res> {
     Object phone = freezed,
     Object price = freezed,
     Object distance = freezed,
+    Object categories = freezed,
+    Object location = freezed,
+    Object coordinates = freezed,
+    Object photos = freezed,
+    Object hours = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed ? _value.name : name as String,
@@ -93,7 +132,36 @@ class _$BusinessCopyWithImpl<$Res> implements $BusinessCopyWith<$Res> {
       phone: phone == freezed ? _value.phone : phone as String,
       price: price == freezed ? _value.price : price as String,
       distance: distance == freezed ? _value.distance : distance as double,
+      categories: categories == freezed
+          ? _value.categories
+          : categories as List<Category>,
+      location: location == freezed ? _value.location : location as Location,
+      coordinates: coordinates == freezed
+          ? _value.coordinates
+          : coordinates as Coordinates,
+      photos: photos == freezed ? _value.photos : photos as List<String>,
+      hours: hours == freezed ? _value.hours : hours as List<Hours>,
     ));
+  }
+
+  @override
+  $LocationCopyWith<$Res> get location {
+    if (_value.location == null) {
+      return null;
+    }
+    return $LocationCopyWith<$Res>(_value.location, (value) {
+      return _then(_value.copyWith(location: value));
+    });
+  }
+
+  @override
+  $CoordinatesCopyWith<$Res> get coordinates {
+    if (_value.coordinates == null) {
+      return null;
+    }
+    return $CoordinatesCopyWith<$Res>(_value.coordinates, (value) {
+      return _then(_value.copyWith(coordinates: value));
+    });
   }
 }
 
@@ -105,10 +173,20 @@ abstract class _$BusinessCopyWith<$Res> implements $BusinessCopyWith<$Res> {
   $Res call(
       {String name,
       String id,
-      String url,
+      @nullable String url,
       @nullable String phone,
       @nullable String price,
-      @nullable double distance});
+      @nullable double distance,
+      @nullable List<Category> categories,
+      @nullable Location location,
+      @nullable Coordinates coordinates,
+      @nullable List<String> photos,
+      @nullable List<Hours> hours});
+
+  @override
+  $LocationCopyWith<$Res> get location;
+  @override
+  $CoordinatesCopyWith<$Res> get coordinates;
 }
 
 /// @nodoc
@@ -128,6 +206,11 @@ class __$BusinessCopyWithImpl<$Res> extends _$BusinessCopyWithImpl<$Res>
     Object phone = freezed,
     Object price = freezed,
     Object distance = freezed,
+    Object categories = freezed,
+    Object location = freezed,
+    Object coordinates = freezed,
+    Object photos = freezed,
+    Object hours = freezed,
   }) {
     return _then(_Business(
       name == freezed ? _value.name : name as String,
@@ -136,6 +219,11 @@ class __$BusinessCopyWithImpl<$Res> extends _$BusinessCopyWithImpl<$Res>
       phone == freezed ? _value.phone : phone as String,
       price == freezed ? _value.price : price as String,
       distance == freezed ? _value.distance : distance as double,
+      categories == freezed ? _value.categories : categories as List<Category>,
+      location == freezed ? _value.location : location as Location,
+      coordinates == freezed ? _value.coordinates : coordinates as Coordinates,
+      photos == freezed ? _value.photos : photos as List<String>,
+      hours == freezed ? _value.hours : hours as List<Hours>,
     ));
   }
 }
@@ -144,11 +232,20 @@ class __$BusinessCopyWithImpl<$Res> extends _$BusinessCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_Business implements _Business {
-  _$_Business(this.name, this.id, this.url, @nullable this.phone,
-      @nullable this.price, @nullable this.distance)
+  _$_Business(
+      this.name,
+      this.id,
+      @nullable this.url,
+      @nullable this.phone,
+      @nullable this.price,
+      @nullable this.distance,
+      @nullable this.categories,
+      @nullable this.location,
+      @nullable this.coordinates,
+      @nullable this.photos,
+      @nullable this.hours)
       : assert(name != null),
-        assert(id != null),
-        assert(url != null);
+        assert(id != null);
 
   factory _$_Business.fromJson(Map<String, dynamic> json) =>
       _$_$_BusinessFromJson(json);
@@ -158,6 +255,7 @@ class _$_Business implements _Business {
   @override
   final String id;
   @override
+  @nullable
   final String url;
   @override
   @nullable
@@ -168,10 +266,25 @@ class _$_Business implements _Business {
   @override
   @nullable
   final double distance;
+  @override
+  @nullable
+  final List<Category> categories;
+  @override
+  @nullable
+  final Location location;
+  @override
+  @nullable
+  final Coordinates coordinates;
+  @override
+  @nullable
+  final List<String> photos;
+  @override
+  @nullable
+  final List<Hours> hours;
 
   @override
   String toString() {
-    return 'Business(name: $name, id: $id, url: $url, phone: $phone, price: $price, distance: $distance)';
+    return 'Business(name: $name, id: $id, url: $url, phone: $phone, price: $price, distance: $distance, categories: $categories, location: $location, coordinates: $coordinates, photos: $photos, hours: $hours)';
   }
 
   @override
@@ -190,7 +303,20 @@ class _$_Business implements _Business {
                 const DeepCollectionEquality().equals(other.price, price)) &&
             (identical(other.distance, distance) ||
                 const DeepCollectionEquality()
-                    .equals(other.distance, distance)));
+                    .equals(other.distance, distance)) &&
+            (identical(other.categories, categories) ||
+                const DeepCollectionEquality()
+                    .equals(other.categories, categories)) &&
+            (identical(other.location, location) ||
+                const DeepCollectionEquality()
+                    .equals(other.location, location)) &&
+            (identical(other.coordinates, coordinates) ||
+                const DeepCollectionEquality()
+                    .equals(other.coordinates, coordinates)) &&
+            (identical(other.photos, photos) ||
+                const DeepCollectionEquality().equals(other.photos, photos)) &&
+            (identical(other.hours, hours) ||
+                const DeepCollectionEquality().equals(other.hours, hours)));
   }
 
   @override
@@ -201,7 +327,12 @@ class _$_Business implements _Business {
       const DeepCollectionEquality().hash(url) ^
       const DeepCollectionEquality().hash(phone) ^
       const DeepCollectionEquality().hash(price) ^
-      const DeepCollectionEquality().hash(distance);
+      const DeepCollectionEquality().hash(distance) ^
+      const DeepCollectionEquality().hash(categories) ^
+      const DeepCollectionEquality().hash(location) ^
+      const DeepCollectionEquality().hash(coordinates) ^
+      const DeepCollectionEquality().hash(photos) ^
+      const DeepCollectionEquality().hash(hours);
 
   @JsonKey(ignore: true)
   @override
@@ -215,8 +346,18 @@ class _$_Business implements _Business {
 }
 
 abstract class _Business implements Business {
-  factory _Business(String name, String id, String url, @nullable String phone,
-      @nullable String price, @nullable double distance) = _$_Business;
+  factory _Business(
+      String name,
+      String id,
+      @nullable String url,
+      @nullable String phone,
+      @nullable String price,
+      @nullable double distance,
+      @nullable List<Category> categories,
+      @nullable Location location,
+      @nullable Coordinates coordinates,
+      @nullable List<String> photos,
+      @nullable List<Hours> hours) = _$_Business;
 
   factory _Business.fromJson(Map<String, dynamic> json) = _$_Business.fromJson;
 
@@ -225,6 +366,7 @@ abstract class _Business implements Business {
   @override
   String get id;
   @override
+  @nullable
   String get url;
   @override
   @nullable
@@ -235,6 +377,21 @@ abstract class _Business implements Business {
   @override
   @nullable
   double get distance;
+  @override
+  @nullable
+  List<Category> get categories;
+  @override
+  @nullable
+  Location get location;
+  @override
+  @nullable
+  Coordinates get coordinates;
+  @override
+  @nullable
+  List<String> get photos;
+  @override
+  @nullable
+  List<Hours> get hours;
   @override
   @JsonKey(ignore: true)
   _$BusinessCopyWith<_Business> get copyWith;
