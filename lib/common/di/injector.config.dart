@@ -11,6 +11,7 @@ import 'package:injectable/injectable.dart';
 import '../../ui/buisinesses_list/cubit/business_cubit.dart';
 import '../../io/repository/business_repository.dart';
 import '../../io/api/custom_dio.dart';
+import '../../ui/filter/cubit/cubit/filter_cubit.dart';
 import '../../io/api/graphql/graphql_client.dart';
 import 'modules.dart';
 
@@ -27,6 +28,7 @@ Future<GetIt> $initGetIt(
   gh.lazySingletonAsync<CustomDio>(() => CustomDio.createDio());
   final resolvedDio = await registerModule.dio;
   gh.factory<Dio>(() => resolvedDio);
+  gh.factory<FilterCubit>(() => FilterCubit());
   gh.lazySingleton<GraphQLService>(() => GraphQLService.createGQLService());
   gh.lazySingleton<BusinessRepository>(
       () => BusinessRepository(get<GraphQLService>()));

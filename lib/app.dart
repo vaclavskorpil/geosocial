@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geosocial/ui/theme/theme.dart';
 
 import 'ui/home/home_page.dart';
 
@@ -7,11 +8,8 @@ class GeosocialApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      title: 'GeoSocial app',
+      theme: geosocialTheme,
       home: HomePage(),
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:geosocial/io/entities/business.dart';
+import 'package:geosocial/io/entities/filter_dto.dart';
 import 'package:geosocial/io/repository/business_repository.dart';
 import 'package:injectable/injectable.dart';
 import 'package:dartz/dartz.dart';
@@ -12,9 +13,12 @@ part 'business_cubit.freezed.dart';
 
 @injectable
 class BusinessCubit extends Cubit<BusinessState> {
+  
   final BusinessRepository businessRepo;
+  FilterDTO _filterDTO;
   final fetchMoreTreshold = 15;
   final fetchItemLimit = 20;
+
   BusinessCubit({@required this.businessRepo}) : super(BusinessState.initial());
 
   void fetchBusinesses() async {
@@ -30,7 +34,8 @@ class BusinessCubit extends Cubit<BusinessState> {
           isFetching: false,
           failure: none()));
     } catch (GetBusinessesRequestFailure) {
-      emit(state.copyWith(isFetching: false, failure: optionOf(Failure.serverError())));
+      emit(state.copyWith(
+          isFetching: false, failure: optionOf(Failure.serverError())));
     }
   }
 }
