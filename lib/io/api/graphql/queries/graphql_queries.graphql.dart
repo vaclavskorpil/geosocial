@@ -160,7 +160,14 @@ class SearchBusinesses$Query with EquatableMixin {
 
 @JsonSerializable(explicitToJson: true)
 class SearchBusinessesArguments extends JsonSerializable with EquatableMixin {
-  SearchBusinessesArguments({this.location, this.limit, this.offset});
+  SearchBusinessesArguments(
+      {this.location,
+      this.searchTerm,
+      this.radius,
+      this.categories,
+      this.price,
+      this.limit,
+      this.offset});
 
   @override
   factory SearchBusinessesArguments.fromJson(Map<String, dynamic> json) =>
@@ -168,12 +175,21 @@ class SearchBusinessesArguments extends JsonSerializable with EquatableMixin {
 
   final String location;
 
+  final String searchTerm;
+
+  final double radius;
+
+  final String categories;
+
+  final String price;
+
   final int limit;
 
   final int offset;
 
   @override
-  List<Object> get props => [location, limit, offset];
+  List<Object> get props =>
+      [location, searchTerm, radius, categories, price, limit, offset];
   @override
   Map<String, dynamic> toJson() => _$SearchBusinessesArgumentsToJson(this);
 }
@@ -190,6 +206,30 @@ class SearchBusinessesQuery
         variableDefinitions: [
           VariableDefinitionNode(
               variable: VariableNode(name: NameNode(value: 'location')),
+              type: NamedTypeNode(
+                  name: NameNode(value: 'String'), isNonNull: false),
+              defaultValue: DefaultValueNode(value: null),
+              directives: []),
+          VariableDefinitionNode(
+              variable: VariableNode(name: NameNode(value: 'searchTerm')),
+              type: NamedTypeNode(
+                  name: NameNode(value: 'String'), isNonNull: false),
+              defaultValue: DefaultValueNode(value: null),
+              directives: []),
+          VariableDefinitionNode(
+              variable: VariableNode(name: NameNode(value: 'radius')),
+              type: NamedTypeNode(
+                  name: NameNode(value: 'Float'), isNonNull: false),
+              defaultValue: DefaultValueNode(value: null),
+              directives: []),
+          VariableDefinitionNode(
+              variable: VariableNode(name: NameNode(value: 'categories')),
+              type: NamedTypeNode(
+                  name: NameNode(value: 'String'), isNonNull: false),
+              defaultValue: DefaultValueNode(value: null),
+              directives: []),
+          VariableDefinitionNode(
+              variable: VariableNode(name: NameNode(value: 'price')),
               type: NamedTypeNode(
                   name: NameNode(value: 'String'), isNonNull: false),
               defaultValue: DefaultValueNode(value: null),
@@ -216,6 +256,18 @@ class SearchBusinessesQuery
                 ArgumentNode(
                     name: NameNode(value: 'location'),
                     value: VariableNode(name: NameNode(value: 'location'))),
+                ArgumentNode(
+                    name: NameNode(value: 'term'),
+                    value: VariableNode(name: NameNode(value: 'searchTerm'))),
+                ArgumentNode(
+                    name: NameNode(value: 'radius'),
+                    value: VariableNode(name: NameNode(value: 'radius'))),
+                ArgumentNode(
+                    name: NameNode(value: 'categories'),
+                    value: VariableNode(name: NameNode(value: 'categories'))),
+                ArgumentNode(
+                    name: NameNode(value: 'price'),
+                    value: VariableNode(name: NameNode(value: 'price'))),
                 ArgumentNode(
                     name: NameNode(value: 'limit'),
                     value: VariableNode(name: NameNode(value: 'limit'))),

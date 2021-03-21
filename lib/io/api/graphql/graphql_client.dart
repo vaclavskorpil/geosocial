@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:geosocial/common/constatns.dart';
+import 'package:geosocial/common/constants/constatns.dart';
 import 'package:geosocial/common/di/injector.dart';
 import 'package:gql_dio_link/gql_dio_link.dart';
 import 'package:injectable/injectable.dart';
@@ -15,7 +15,7 @@ class GraphQLService {
 
   @factoryMethod
   static GraphQLService createGQLService() {
-    final AuthLink authLink = AuthLink(getToken: () async => 'Bearer $apiKey');
+    final AuthLink authLink = AuthLink(getToken: () async => 'Bearer ${Constants.apiKey}');
 
     final DioLink dioLink = DioLink("", client: injector<Dio>());
 
@@ -31,23 +31,4 @@ class GraphQLService {
     final result = await _client.query(QueryOptions(document: query.document, variables: query.getVariablesMap()));
     return result;
   }
-
-  // Future<QueryResult> performQuery(String query,
-  //     {Map<String, dynamic> variables}) async {
-  //   print(' performing query');
-  //   try {
-  //     var document = gql(query);
-  //   } catch (e) {
-  //     print(e.toString);
-  //   }
-
-  //   QueryOptions options = QueryOptions(
-  //       document: gql(query), variables: {'location': 'pardubice'});
-  //   print(' performing query');
-  //   final result = await _client.(Bussi);
-
-  //   print('Result $result');
-
-  //   return result;
-  // }
 }
