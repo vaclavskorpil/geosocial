@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:geosocial/ui/common/custom_icons_icons.dart';
-import 'package:geosocial/ui/filter/filter_dialog.dart';
 import 'package:geosocial/common/constants/dimens.dart';
+import 'package:geosocial/presentation/common/custom_icons_icons.dart';
+import 'package:geosocial/presentation/filter/filter_dialog.dart';
 
 class FilterIcon extends StatelessWidget {
   @override

@@ -1,8 +1,7 @@
-import 'package:geosocial/io/api/graphql/graphql_client.dart';
-import 'package:geosocial/io/api/graphql/queries/graphql_queries.graphql.dart';
-import 'package:geosocial/io/entities/business.dart';
-import 'package:geosocial/io/entities/filter_dto.dart';
-import 'package:geosocial/io/repository/filter_repository.dart';
+import 'package:geosocial/datalayer/data_providers/api/graphql/graphql_client.dart';
+import 'package:geosocial/datalayer/data_providers/api/graphql/queries/graphql_queries.graphql.dart';
+import 'package:geosocial/datalayer/entities/business.dart';
+import 'package:geosocial/datalayer/entities/filter_dto.dart';
 import 'package:injectable/injectable.dart';
 
 class GetBusinessesRequestFailure implements Exception {}

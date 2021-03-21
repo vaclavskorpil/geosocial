@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:geosocial/io/entities/coordinates.dart';
-import 'package:geosocial/io/entities/location.dart';
+import 'package:geosocial/datalayer/entities/coordinates.dart';
+import 'package:geosocial/datalayer/entities/location.dart';
 
 import 'category.dart';
 import 'hours.dart';

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:geosocial/ui/theme/theme.dart';
-
-import 'ui/home/home_page.dart';
+import 'package:geosocial/presentation/home/home_page.dart';
+import 'package:geosocial/presentation/theme/theme.dart';
 
 class GeosocialApp extends StatelessWidget {
   // This widget is the root of your application.

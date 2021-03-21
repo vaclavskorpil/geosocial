@@ -1,12 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:geosocial/common/constants/constatns.dart';
-import 'package:geosocial/common/di/injector.dart';
+import 'package:geosocial/datalayer/dependenci_injection/injector.dart';
 import 'package:gql_dio_link/gql_dio_link.dart';
 import 'package:injectable/injectable.dart';
 import 'package:graphql/client.dart';
 
 import 'package:artemis/artemis.dart';
-import 'package:artemis/client.dart';
 
 @lazySingleton
 class GraphQLService {

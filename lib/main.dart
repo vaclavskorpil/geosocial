@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:geosocial/app.dart';
 import 'package:geosocial/common/constants/constatns.dart';
-import 'package:geosocial/common/di/injector.dart';
+import 'package:geosocial/datalayer/dependenci_injection/injector.dart';
+
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 

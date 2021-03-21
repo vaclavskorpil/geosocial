@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:geosocial/io/entities/category.dart';
-import 'package:geosocial/io/entities/filter_dto.dart';
-import 'package:geosocial/io/repository/filter_repository.dart';
+import 'package:geosocial/datalayer/entities/category.dart';
+import 'package:geosocial/datalayer/entities/filter_dto.dart';
+import 'package:geosocial/datalayer/repository/filter_repository.dart';
 import 'package:injectable/injectable.dart';
 
 part 'filter_state.dart';

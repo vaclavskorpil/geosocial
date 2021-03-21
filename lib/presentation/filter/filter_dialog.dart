@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geosocial/common/di/injector.dart';
-import 'package:geosocial/io/entities/category.dart';
 import 'package:geosocial/common/constants/dimens.dart';
-import 'package:geosocial/ui/common/labeled_input_field.dart';
-import 'package:geosocial/ui/filter/category_card.dart';
-import 'package:geosocial/ui/theme/my_colors.dart';
-
-import 'cubit/cubit/filter_cubit.dart';
+import 'package:geosocial/datalayer/dependenci_injection/injector.dart';
+import 'package:geosocial/datalayer/entities/category.dart';
+import 'package:geosocial/domain/fitler_cubit/filter_cubit.dart';
+import 'package:geosocial/presentation/common/labeled_input_field.dart';
+import 'package:geosocial/presentation/filter/category_card.dart';
+import 'package:geosocial/presentation/theme/my_colors.dart';
 
 class FilterDialog extends StatelessWidget {
   final inputFieldPadding = const EdgeInsets.fromLTRB(
