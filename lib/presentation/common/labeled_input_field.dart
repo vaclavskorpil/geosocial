@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:geosocial/ui/common/input_field.dart';
+
+import 'input_field.dart';
 
 class LabeledInput extends StatelessWidget {
   final String _label;

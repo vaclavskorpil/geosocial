@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:geosocial/io/api/app_storage.dart';
-import 'package:geosocial/io/entities/filter_dto.dart';
+import 'package:geosocial/datalayer/data_providers/local_storage/app_storage.dart';
+import 'package:geosocial/datalayer/entities/filter_dto.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class FilterRepository {

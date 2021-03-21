@@ -1,11 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:geosocial/io/api/app_storage.dart';
-import 'package:geosocial/io/entities/business.dart';
-import 'package:geosocial/io/entities/filter_dto.dart';
-import 'package:geosocial/io/repository/business_repository.dart';
-import 'package:geosocial/io/repository/filter_repository.dart';
+import 'package:geosocial/datalayer/entities/business.dart';
+import 'package:geosocial/datalayer/entities/filter_dto.dart';
+import 'package:geosocial/datalayer/repository/business_repository.dart';
+import 'package:geosocial/datalayer/repository/filter_repository.dart';
 import 'package:injectable/injectable.dart';
 import 'package:dartz/dartz.dart';
 import 'package:geosocial/common/failures/failure.dart';

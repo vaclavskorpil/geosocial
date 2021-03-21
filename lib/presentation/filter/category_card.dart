@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geosocial/common/constants/dimens.dart';
-import 'package:geosocial/io/entities/category.dart';
-import 'package:geosocial/ui/filter/neoumorphic_toggle_button.dart';
+import 'package:geosocial/datalayer/entities/category.dart';
+import 'package:geosocial/domain/fitler_cubit/filter_cubit.dart';
 
-import 'cubit/cubit/filter_cubit.dart';
+import 'neoumorphic_toggle_button.dart';
 
 class CategoryCard extends StatelessWidget {
   final _size = 67.0;

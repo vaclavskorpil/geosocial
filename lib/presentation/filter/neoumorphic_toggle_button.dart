@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geosocial/common/constants/dimens.dart';
-
-import 'package:geosocial/ui/theme/my_colors.dart';
+import 'package:geosocial/presentation/theme/my_colors.dart';
 
 typedef Widget NeumorficAnimatedWidget(
     double elevation, double negativeElevation);

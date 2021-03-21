@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geosocial/common/di/injector.dart';
-import 'package:geosocial/io/entities/business.dart';
-import 'package:geosocial/ui/buisinesses_list/cubit/business_cubit.dart';
+import 'package:geosocial/datalayer/dependenci_injection/injector.dart';
+import 'package:geosocial/datalayer/entities/business.dart';
+import 'package:geosocial/domailn/businesses_cubit/business_cubit.dart';
+
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 
 class BusinessList extends StatelessWidget {
