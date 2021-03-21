@@ -14,12 +14,17 @@ class _$FilterDTOTearOff {
   const _$FilterDTOTearOff();
 
 // ignore: unused_element
-  _FilterDto call(String location, String filterQuery, double radius,
-      List<Category> categories) {
+  _FilterDto call(
+      @HiveField(0) String location,
+      @HiveField(1) String filterQuery,
+      @HiveField(2) double radius,
+      @HiveField(3) List<int> priceLevel,
+      @HiveField(4) List<Category> categories) {
     return _FilterDto(
       location,
       filterQuery,
       radius,
+      priceLevel,
       categories,
     );
   }
@@ -31,9 +36,15 @@ const $FilterDTO = _$FilterDTOTearOff();
 
 /// @nodoc
 mixin _$FilterDTO {
+  @HiveField(0)
   String get location;
+  @HiveField(1)
   String get filterQuery;
+  @HiveField(2)
   double get radius;
+  @HiveField(3)
+  List<int> get priceLevel;
+  @HiveField(4)
   List<Category> get categories;
 
   @JsonKey(ignore: true)
@@ -45,10 +56,11 @@ abstract class $FilterDTOCopyWith<$Res> {
   factory $FilterDTOCopyWith(FilterDTO value, $Res Function(FilterDTO) then) =
       _$FilterDTOCopyWithImpl<$Res>;
   $Res call(
-      {String location,
-      String filterQuery,
-      double radius,
-      List<Category> categories});
+      {@HiveField(0) String location,
+      @HiveField(1) String filterQuery,
+      @HiveField(2) double radius,
+      @HiveField(3) List<int> priceLevel,
+      @HiveField(4) List<Category> categories});
 }
 
 /// @nodoc
@@ -64,6 +76,7 @@ class _$FilterDTOCopyWithImpl<$Res> implements $FilterDTOCopyWith<$Res> {
     Object location = freezed,
     Object filterQuery = freezed,
     Object radius = freezed,
+    Object priceLevel = freezed,
     Object categories = freezed,
   }) {
     return _then(_value.copyWith(
@@ -71,6 +84,8 @@ class _$FilterDTOCopyWithImpl<$Res> implements $FilterDTOCopyWith<$Res> {
       filterQuery:
           filterQuery == freezed ? _value.filterQuery : filterQuery as String,
       radius: radius == freezed ? _value.radius : radius as double,
+      priceLevel:
+          priceLevel == freezed ? _value.priceLevel : priceLevel as List<int>,
       categories: categories == freezed
           ? _value.categories
           : categories as List<Category>,
@@ -85,10 +100,11 @@ abstract class _$FilterDtoCopyWith<$Res> implements $FilterDTOCopyWith<$Res> {
       __$FilterDtoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String location,
-      String filterQuery,
-      double radius,
-      List<Category> categories});
+      {@HiveField(0) String location,
+      @HiveField(1) String filterQuery,
+      @HiveField(2) double radius,
+      @HiveField(3) List<int> priceLevel,
+      @HiveField(4) List<Category> categories});
 }
 
 /// @nodoc
@@ -105,37 +121,55 @@ class __$FilterDtoCopyWithImpl<$Res> extends _$FilterDTOCopyWithImpl<$Res>
     Object location = freezed,
     Object filterQuery = freezed,
     Object radius = freezed,
+    Object priceLevel = freezed,
     Object categories = freezed,
   }) {
     return _then(_FilterDto(
       location == freezed ? _value.location : location as String,
       filterQuery == freezed ? _value.filterQuery : filterQuery as String,
       radius == freezed ? _value.radius : radius as double,
+      priceLevel == freezed ? _value.priceLevel : priceLevel as List<int>,
       categories == freezed ? _value.categories : categories as List<Category>,
     ));
   }
 }
 
+@HiveType(typeId: 1, adapterName: 'FilterDTOHive')
+
 /// @nodoc
-class _$_FilterDto implements _FilterDto {
-  _$_FilterDto(this.location, this.filterQuery, this.radius, this.categories)
+class _$_FilterDto extends _FilterDto {
+  const _$_FilterDto(
+      @HiveField(0) this.location,
+      @HiveField(1) this.filterQuery,
+      @HiveField(2) this.radius,
+      @HiveField(3) this.priceLevel,
+      @HiveField(4) this.categories)
       : assert(location != null),
         assert(filterQuery != null),
         assert(radius != null),
-        assert(categories != null);
+        assert(priceLevel != null),
+        assert(categories != null),
+        super._();
 
   @override
+  @HiveField(0)
   final String location;
   @override
+  @HiveField(1)
   final String filterQuery;
   @override
+  @HiveField(2)
   final double radius;
   @override
+  @HiveField(3)
+  final List<int> priceLevel;
+  @override
+  @HiveField(4)
   final List<Category> categories;
 
   @override
   String toString() {
-    return 'FilterDTO(location: $location, filterQuery: $filterQuery, radius: $radius, categories: $categories)';
+    return 'FilterDTO(location: $location, filterQuery: $filterQuery, radius: $radius, priceLevel: $priceLevel, categories: $categories)';
   }
 
   @override
@@ -150,6 +184,9 @@ class _$_FilterDto implements _FilterDto {
                     .equals(other.filterQuery, filterQuery)) &&
             (identical(other.radius, radius) ||
                 const DeepCollectionEquality().equals(other.radius, radius)) &&
+            (identical(other.priceLevel, priceLevel) ||
+                const DeepCollectionEquality()
+                    .equals(other.priceLevel, priceLevel)) &&
             (identical(other.categories, categories) ||
                 const DeepCollectionEquality()
                     .equals(other.categories, categories)));
@@ -161,6 +198,7 @@ class _$_FilterDto implements _FilterDto {
       const DeepCollectionEquality().hash(location) ^
       const DeepCollectionEquality().hash(filterQuery) ^
       const DeepCollectionEquality().hash(radius) ^
+      const DeepCollectionEquality().hash(priceLevel) ^
       const DeepCollectionEquality().hash(categories);
 
   @JsonKey(ignore: true)
@@ -169,17 +207,29 @@ class _$_FilterDto implements _FilterDto {
       __$FilterDtoCopyWithImpl<_FilterDto>(this, _$identity);
 }
 
-abstract class _FilterDto implements FilterDTO {
-  factory _FilterDto(String location, String filterQuery, double radius,
-      List<Category> categories) = _$_FilterDto;
+abstract class _FilterDto extends FilterDTO {
+  const _FilterDto._() : super._();
+  const factory _FilterDto(
+      @HiveField(0) String location,
+      @HiveField(1) String filterQuery,
+      @HiveField(2) double radius,
+      @HiveField(3) List<int> priceLevel,
+      @HiveField(4) List<Category> categories) = _$_FilterDto;
 
   @override
+  @HiveField(0)
   String get location;
   @override
+  @HiveField(1)
   String get filterQuery;
   @override
+  @HiveField(2)
   double get radius;
   @override
+  @HiveField(3)
+  List<int> get priceLevel;
+  @override
+  @HiveField(4)
   List<Category> get categories;
   @override
   @JsonKey(ignore: true)

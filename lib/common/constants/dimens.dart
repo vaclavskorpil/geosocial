@@ -1,4 +1,3 @@
-import 'package:geosocial/ui/common/input_field.dart';
 
 class Dimens {
   Dimens._();
@@ -15,4 +14,7 @@ class Dimens {
 
   static const iconSizeSmall = 16.0;
   static const iconSizeNormal = 24.0;
+
+  static const textFontSizeNormal = 16.0;
+  static const textFontSizeSmall = 12.0;
 }

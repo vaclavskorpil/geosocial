@@ -15,12 +15,14 @@ class _$FilterStateTearOff {
 
 // ignore: unused_element
   _Succes succes(String location, String filterQuery, double radius,
-      List<Category> categories) {
+      RangeValues priceLevel, List<Category> categories, bool applyFilter) {
     return _Succes(
       location,
       filterQuery,
       radius,
+      priceLevel,
       categories,
+      applyFilter,
     );
   }
 }
@@ -34,18 +36,25 @@ mixin _$FilterState {
   String get location;
   String get filterQuery;
   double get radius;
+  RangeValues get priceLevel;
   List<Category> get categories;
+  bool get applyFilter;
 
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required
-        TResult succes(String location, String filterQuery, double radius,
-            List<Category> categories),
+        TResult succes(
+            String location,
+            String filterQuery,
+            double radius,
+            RangeValues priceLevel,
+            List<Category> categories,
+            bool applyFilter),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult succes(String location, String filterQuery, double radius,
-        List<Category> categories),
+        RangeValues priceLevel, List<Category> categories, bool applyFilter),
     @required TResult orElse(),
   });
   @optionalTypeArgs
@@ -71,7 +80,9 @@ abstract class $FilterStateCopyWith<$Res> {
       {String location,
       String filterQuery,
       double radius,
-      List<Category> categories});
+      RangeValues priceLevel,
+      List<Category> categories,
+      bool applyFilter});
 }
 
 /// @nodoc
@@ -87,16 +98,22 @@ class _$FilterStateCopyWithImpl<$Res> implements $FilterStateCopyWith<$Res> {
     Object location = freezed,
     Object filterQuery = freezed,
     Object radius = freezed,
+    Object priceLevel = freezed,
     Object categories = freezed,
+    Object applyFilter = freezed,
   }) {
     return _then(_value.copyWith(
       location: location == freezed ? _value.location : location as String,
       filterQuery:
           filterQuery == freezed ? _value.filterQuery : filterQuery as String,
       radius: radius == freezed ? _value.radius : radius as double,
+      priceLevel:
+          priceLevel == freezed ? _value.priceLevel : priceLevel as RangeValues,
       categories: categories == freezed
           ? _value.categories
           : categories as List<Category>,
+      applyFilter:
+          applyFilter == freezed ? _value.applyFilter : applyFilter as bool,
     ));
   }
 }
@@ -110,7 +127,9 @@ abstract class _$SuccesCopyWith<$Res> implements $FilterStateCopyWith<$Res> {
       {String location,
       String filterQuery,
       double radius,
-      List<Category> categories});
+      RangeValues priceLevel,
+      List<Category> categories,
+      bool applyFilter});
 }
 
 /// @nodoc
@@ -127,24 +146,31 @@ class __$SuccesCopyWithImpl<$Res> extends _$FilterStateCopyWithImpl<$Res>
     Object location = freezed,
     Object filterQuery = freezed,
     Object radius = freezed,
+    Object priceLevel = freezed,
     Object categories = freezed,
+    Object applyFilter = freezed,
   }) {
     return _then(_Succes(
       location == freezed ? _value.location : location as String,
       filterQuery == freezed ? _value.filterQuery : filterQuery as String,
       radius == freezed ? _value.radius : radius as double,
+      priceLevel == freezed ? _value.priceLevel : priceLevel as RangeValues,
       categories == freezed ? _value.categories : categories as List<Category>,
+      applyFilter == freezed ? _value.applyFilter : applyFilter as bool,
     ));
   }
 }
 
 /// @nodoc
 class _$_Succes implements _Succes {
-  const _$_Succes(this.location, this.filterQuery, this.radius, this.categories)
+  const _$_Succes(this.location, this.filterQuery, this.radius, this.priceLevel,
+      this.categories, this.applyFilter)
       : assert(location != null),
         assert(filterQuery != null),
         assert(radius != null),
-        assert(categories != null);
+        assert(priceLevel != null),
+        assert(categories != null),
+        assert(applyFilter != null);
 
   @override
   final String location;
@@ -153,11 +179,15 @@ class _$_Succes implements _Succes {
   @override
   final double radius;
   @override
+  final RangeValues priceLevel;
+  @override
   final List<Category> categories;
+  @override
+  final bool applyFilter;
 
   @override
   String toString() {
-    return 'FilterState.succes(location: $location, filterQuery: $filterQuery, radius: $radius, categories: $categories)';
+    return 'FilterState.succes(location: $location, filterQuery: $filterQuery, radius: $radius, priceLevel: $priceLevel, categories: $categories, applyFilter: $applyFilter)';
   }
 
   @override
@@ -172,9 +202,15 @@ class _$_Succes implements _Succes {
                     .equals(other.filterQuery, filterQuery)) &&
             (identical(other.radius, radius) ||
                 const DeepCollectionEquality().equals(other.radius, radius)) &&
+            (identical(other.priceLevel, priceLevel) ||
+                const DeepCollectionEquality()
+                    .equals(other.priceLevel, priceLevel)) &&
             (identical(other.categories, categories) ||
                 const DeepCollectionEquality()
-                    .equals(other.categories, categories)));
+                    .equals(other.categories, categories)) &&
+            (identical(other.applyFilter, applyFilter) ||
+                const DeepCollectionEquality()
+                    .equals(other.applyFilter, applyFilter)));
   }
 
   @override
@@ -183,7 +219,9 @@ class _$_Succes implements _Succes {
       const DeepCollectionEquality().hash(location) ^
       const DeepCollectionEquality().hash(filterQuery) ^
       const DeepCollectionEquality().hash(radius) ^
-      const DeepCollectionEquality().hash(categories);
+      const DeepCollectionEquality().hash(priceLevel) ^
+      const DeepCollectionEquality().hash(categories) ^
+      const DeepCollectionEquality().hash(applyFilter);
 
   @JsonKey(ignore: true)
   @override
@@ -194,23 +232,30 @@ class _$_Succes implements _Succes {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required
-        TResult succes(String location, String filterQuery, double radius,
-            List<Category> categories),
+        TResult succes(
+            String location,
+            String filterQuery,
+            double radius,
+            RangeValues priceLevel,
+            List<Category> categories,
+            bool applyFilter),
   }) {
     assert(succes != null);
-    return succes(location, filterQuery, radius, categories);
+    return succes(
+        location, filterQuery, radius, priceLevel, categories, applyFilter);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult succes(String location, String filterQuery, double radius,
-        List<Category> categories),
+        RangeValues priceLevel, List<Category> categories, bool applyFilter),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (succes != null) {
-      return succes(location, filterQuery, radius, categories);
+      return succes(
+          location, filterQuery, radius, priceLevel, categories, applyFilter);
     }
     return orElse();
   }
@@ -239,8 +284,13 @@ class _$_Succes implements _Succes {
 }
 
 abstract class _Succes implements FilterState {
-  const factory _Succes(String location, String filterQuery, double radius,
-      List<Category> categories) = _$_Succes;
+  const factory _Succes(
+      String location,
+      String filterQuery,
+      double radius,
+      RangeValues priceLevel,
+      List<Category> categories,
+      bool applyFilter) = _$_Succes;
 
   @override
   String get location;
@@ -249,7 +299,11 @@ abstract class _Succes implements FilterState {
   @override
   double get radius;
   @override
+  RangeValues get priceLevel;
+  @override
   List<Category> get categories;
+  @override
+  bool get applyFilter;
   @override
   @JsonKey(ignore: true)
   _$SuccesCopyWith<_Succes> get copyWith;

@@ -154,6 +154,10 @@ SearchBusinessesArguments _$SearchBusinessesArgumentsFromJson(
     Map<String, dynamic> json) {
   return SearchBusinessesArguments(
     location: json['location'] as String,
+    searchTerm: json['searchTerm'] as String,
+    radius: (json['radius'] as num)?.toDouble(),
+    categories: json['categories'] as String,
+    price: json['price'] as String,
     limit: json['limit'] as int,
     offset: json['offset'] as int,
   );
@@ -163,6 +167,10 @@ Map<String, dynamic> _$SearchBusinessesArgumentsToJson(
         SearchBusinessesArguments instance) =>
     <String, dynamic>{
       'location': instance.location,
+      'searchTerm': instance.searchTerm,
+      'radius': instance.radius,
+      'categories': instance.categories,
+      'price': instance.price,
       'limit': instance.limit,
       'offset': instance.offset,
     };

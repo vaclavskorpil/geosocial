@@ -1,14 +1,17 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
+import 'package:hive/hive.dart';
 
 part 'category.freezed.dart';
 part 'category.g.dart';
 
 @freezed
 abstract class Category with _$Category {
-  factory Category(String title, String alias) = _Category;
+  @HiveType(typeId: 2, adapterName: "CategoryHive")
+  factory Category(
+    @HiveField(0) String title,
+    @HiveField(1) String alias,
+  ) = _Category;
 
-
-    factory Category.fromJson(Map<String, dynamic> json) =>
+  factory Category.fromJson(Map<String, dynamic> json) =>
       _$CategoryFromJson(json);
 }

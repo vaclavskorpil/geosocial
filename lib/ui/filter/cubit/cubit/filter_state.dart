@@ -6,8 +6,11 @@ abstract class FilterState with _$FilterState {
      String location,
      String filterQuery,
      double radius,
-     List<Category> categories
+     RangeValues priceLevel,
+     List<Category> categories,
+     bool applyFilter 
   )= _Succes;
 
-  factory FilterState.initial() => FilterState.succes("","",250,[]);
+  
+  factory FilterState.initial() => FilterState.succes("","",250,RangeValues(1,4), [], false);
 }
