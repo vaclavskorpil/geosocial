@@ -1,5 +1,21 @@
-query SearchBusinesses($location: String, $limit: Int, $offset: Int) {
-  search(location: $location, limit: $limit, offset: $offset) {
+query SearchBusinesses(
+  $location: String
+  $searchTerm: String
+  $radius: Float
+  $categories: String
+  $price: String
+  $limit: Int
+  $offset: Int
+) {
+  search(
+    location: $location
+    term: $searchTerm
+    radius: $radius
+    categories: $categories
+    price: $price
+    limit: $limit
+    offset: $offset
+  ) {
     total
     business {
       id

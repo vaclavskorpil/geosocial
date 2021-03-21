@@ -79,17 +79,17 @@ class BusinessTileBody extends StatelessWidget {
     return Row(
       children: [
         FancyShimmerImage(imageUrl: _business.photos.first ?? ""),
-        BusinessInfo(_business),
-        BusinessTrailnigInfo(_business)
+        /* BusinessInfo(_business), */
+        /* BusinessTrailnigInfo(_business) */
       ],
     );
   }
 }
 
 class BusinessInfo extends StatelessWidget {
-  final Business _business;
+  /* final Business _business;
   BusinessInfo(this._business);
-
+ */
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -99,9 +99,9 @@ class BusinessInfo extends StatelessWidget {
 }
 
 class BusinessTrailnigInfo extends StatelessWidget {
-  final Business _business;
+/*   final Business _business;
   BusinessTrailnigInfo(this._business);
-
+ */
   @override
   Widget build(BuildContext context) {
     return Column(

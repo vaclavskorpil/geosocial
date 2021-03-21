@@ -17,7 +17,7 @@ class _$CategoryTearOff {
   const _$CategoryTearOff();
 
 // ignore: unused_element
-  _Category call(String title, String alias) {
+  _Category call(@HiveField(0) String title, @HiveField(1) String alias) {
     return _Category(
       title,
       alias,
@@ -36,7 +36,9 @@ const $Category = _$CategoryTearOff();
 
 /// @nodoc
 mixin _$Category {
+  @HiveField(0)
   String get title;
+  @HiveField(1)
   String get alias;
 
   Map<String, dynamic> toJson();
@@ -48,7 +50,7 @@ mixin _$Category {
 abstract class $CategoryCopyWith<$Res> {
   factory $CategoryCopyWith(Category value, $Res Function(Category) then) =
       _$CategoryCopyWithImpl<$Res>;
-  $Res call({String title, String alias});
+  $Res call({@HiveField(0) String title, @HiveField(1) String alias});
 }
 
 /// @nodoc
@@ -76,7 +78,7 @@ abstract class _$CategoryCopyWith<$Res> implements $CategoryCopyWith<$Res> {
   factory _$CategoryCopyWith(_Category value, $Res Function(_Category) then) =
       __$CategoryCopyWithImpl<$Res>;
   @override
-  $Res call({String title, String alias});
+  $Res call({@HiveField(0) String title, @HiveField(1) String alias});
 }
 
 /// @nodoc
@@ -101,10 +103,11 @@ class __$CategoryCopyWithImpl<$Res> extends _$CategoryCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
+@HiveType(typeId: 2, adapterName: 'CategoryHive')
 
 /// @nodoc
 class _$_Category implements _Category {
-  _$_Category(this.title, this.alias)
+  _$_Category(@HiveField(0) this.title, @HiveField(1) this.alias)
       : assert(title != null),
         assert(alias != null);
 
@@ -112,8 +115,10 @@ class _$_Category implements _Category {
       _$_$_CategoryFromJson(json);
 
   @override
+  @HiveField(0)
   final String title;
   @override
+  @HiveField(1)
   final String alias;
 
   @override
@@ -149,13 +154,16 @@ class _$_Category implements _Category {
 }
 
 abstract class _Category implements Category {
-  factory _Category(String title, String alias) = _$_Category;
+  factory _Category(@HiveField(0) String title, @HiveField(1) String alias) =
+      _$_Category;
 
   factory _Category.fromJson(Map<String, dynamic> json) = _$_Category.fromJson;
 
   @override
+  @HiveField(0)
   String get title;
   @override
+  @HiveField(1)
   String get alias;
   @override
   @JsonKey(ignore: true)
