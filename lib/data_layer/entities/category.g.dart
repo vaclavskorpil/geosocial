@@ -6,9 +6,9 @@ part of 'category.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class CategoryHive extends TypeAdapter<_$_Category> {
+class CategoryAdapter extends TypeAdapter<_$_Category> {
   @override
-  final int typeId = 2;
+  final int typeId = 4;
 
   @override
   _$_Category read(BinaryReader reader) {
@@ -38,7 +38,7 @@ class CategoryHive extends TypeAdapter<_$_Category> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is CategoryHive &&
+      other is CategoryAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

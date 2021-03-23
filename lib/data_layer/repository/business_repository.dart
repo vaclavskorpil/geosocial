@@ -1,16 +1,24 @@
-import 'package:geosocial/datalayer/data_providers/api/graphql/graphql_client.dart';
-import 'package:geosocial/datalayer/data_providers/api/graphql/queries/graphql_queries.graphql.dart';
-import 'package:geosocial/datalayer/entities/business.dart';
-import 'package:geosocial/datalayer/entities/filter_dto.dart';
+
+import 'package:geosocial/data_layer/data_sources/network/graphql/graphql_client.dart';
+import 'package:geosocial/data_layer/data_sources/network/graphql/queries/graphql_queries.graphql.dart';
+import 'package:geosocial/data_layer/entities/business.dart';
+import 'package:geosocial/data_layer/entities/filter_dto.dart';
 import 'package:injectable/injectable.dart';
 
 class GetBusinessesRequestFailure implements Exception {}
 
-@lazySingleton
-class BusinessRepository {
+
+abstract class BusinessRepository{
+   Future<List<Business>>getBusinesses(FilterDTO filter, int limit, int offset);
+}
+
+
+
+@LazySingleton(as: BusinessRepository)
+class BusinessRepositoryImpl extends BusinessRepository {
   final GraphQLService _graphQl;
  
-  BusinessRepository(this._graphQl);
+  BusinessRepositoryImpl(this._graphQl);
   
 
   Future<List<Business>> getBusinesses(FilterDTO filter, int limit, int offset) async {

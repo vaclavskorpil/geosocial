@@ -10,4 +10,5 @@ final injector = GetIt.instance;
   preferRelativeImports: true, // default
   asExtension: false, // default
 )
-void configureDependencies() => $initGetIt(injector);
+
+Future<void> configureDependencies() async => await $initGetIt(injector);

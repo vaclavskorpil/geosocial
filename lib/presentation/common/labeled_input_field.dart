@@ -4,10 +4,10 @@ import 'input_field.dart';
 
 class LabeledInput extends StatelessWidget {
   final String _label;
-  final TextEditingController _controller;
+  final String _text;
   final Function(String) _onTextChange;
 
-  LabeledInput(this._label, this._controller, this._onTextChange);
+  LabeledInput(this._label, this._onTextChange, this._text);
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +15,10 @@ class LabeledInput extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(_label),
-        const SizedBox(height: 1,),
-        InputField(_controller, _onTextChange),
+        const SizedBox(
+          height: 1,
+        ),
+        InputField(_onTextChange, _text),
       ],
     );
   }

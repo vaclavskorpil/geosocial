@@ -3,42 +3,15 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:geosocial/common/constants/dimens.dart';
 
-class InputField extends StatefulWidget {
-  final TextEditingController _controller;
-  final Function(String) _onTextChange;
 
-  InputField(this._controller, this._onTextChange);
-  @override
-  _InputFieldState createState() =>
-      _InputFieldState(_controller, _onTextChange);
-}
-
-class _InputFieldState extends State<InputField> {
+class InputField extends StatelessWidget {
   final _focusNode = FocusNode();
   bool _isIconVisible = false;
   final Function(String) _onTextChange;
 
-  final TextEditingController _controller;
+  final String _text;
 
-  _InputFieldState(this._controller, this._onTextChange);
-
-  void _testVisibility() {
-    var visibility = _controller.text.isNotEmpty && _focusNode.hasFocus;
-
-    if (visibility != _isIconVisible) {
-      setState(() {
-        _isIconVisible = visibility;
-      });
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _controller.addListener(() {
-      _onTextChange(_controller.text);
-    });
-  }
+  InputField(this._onTextChange, this._text);
 
   @override
   Widget build(BuildContext context) {
@@ -67,10 +40,9 @@ class _InputFieldState extends State<InputField> {
         ),
         height: Dimens.inputFieldHeight,
         child: Stack(alignment: Alignment.centerRight, children: [
-          TextFormField(
+          TextField(
             focusNode: _focusNode
               ..addListener(() {
-                _testVisibility();
               }),
             decoration: InputDecoration(
               enabledBorder: _getOutlineInputBorder(Colors.black12),
@@ -83,11 +55,12 @@ class _InputFieldState extends State<InputField> {
               ),
             ),
             onChanged: (text) {
-              _testVisibility();
+              _onTextChange(text);
             },
-            controller: _controller,
+            controller: TextEditingController(text: _text),
           ),
-          _DeleteIcon(isIconVisible: _isIconVisible, controller: _controller)
+          _DeleteIcon(
+              isIconVisible: _isIconVisible, onTextChange: _onTextChange)
         ]),
       ),
     );
@@ -106,25 +79,19 @@ class _InputFieldState extends State<InputField> {
       ),
     );
   }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 }
 
 class _DeleteIcon extends StatelessWidget {
-  const _DeleteIcon({
-    Key key,
-    @required bool isIconVisible,
-    @required TextEditingController controller,
-  })  : _isIconVisible = isIconVisible,
-        _controller = controller,
+  const _DeleteIcon(
+      {Key key,
+      @required bool isIconVisible,
+      @required Function(String) onTextChange})
+      : _isIconVisible = isIconVisible,
+        _onTextChange = onTextChange,
         super(key: key);
 
   final bool _isIconVisible;
-  final TextEditingController _controller;
+  final Function(String) _onTextChange;
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +102,7 @@ class _DeleteIcon extends StatelessWidget {
           color: Colors.transparent,
           child: IconButton(
             onPressed: () {
-              _controller.text = "";
+              _onTextChange('');
             },
             icon: const Icon(
               Icons.cancel,

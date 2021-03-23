@@ -8,5 +8,5 @@ abstract class BusinessState with _$BusinessState {
     @required Option<Failure> failure
   }) = _BusinessState;
 
-  factory BusinessState.initial() => BusinessState.succes(businesses: [],isFetching: true, failure: none());
+  factory BusinessState.initial() => BusinessState.succes(businesses: [],isFetching: false, failure: none());
 }

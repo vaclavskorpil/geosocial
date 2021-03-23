@@ -134,7 +134,7 @@ class __$FilterDtoCopyWithImpl<$Res> extends _$FilterDTOCopyWithImpl<$Res>
   }
 }
 
-@HiveType(typeId: 1, adapterName: 'FilterDTOHive')
+@HiveType(typeId: 2, adapterName: "FilterDTOAdapter")
 
 /// @nodoc
 class _$_FilterDto extends _FilterDto {

@@ -14,15 +14,16 @@ class _$FilterStateTearOff {
   const _$FilterStateTearOff();
 
 // ignore: unused_element
-  _Succes succes(String location, String filterQuery, double radius,
-      RangeValues priceLevel, List<Category> categories, bool applyFilter) {
+  _Succes succes({FilterDTO filter}) {
     return _Succes(
-      location,
-      filterQuery,
-      radius,
-      priceLevel,
-      categories,
-      applyFilter,
+      filter: filter,
+    );
+  }
+
+// ignore: unused_element
+  _ApplyFilter applyFilter({FilterDTO filter}) {
+    return _ApplyFilter(
+      filter: filter,
     );
   }
 }
@@ -33,37 +34,28 @@ const $FilterState = _$FilterStateTearOff();
 
 /// @nodoc
 mixin _$FilterState {
-  String get location;
-  String get filterQuery;
-  double get radius;
-  RangeValues get priceLevel;
-  List<Category> get categories;
-  bool get applyFilter;
+  FilterDTO get filter;
 
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required
-        TResult succes(
-            String location,
-            String filterQuery,
-            double radius,
-            RangeValues priceLevel,
-            List<Category> categories,
-            bool applyFilter),
+    @required TResult succes(FilterDTO filter),
+    @required TResult applyFilter(FilterDTO filter),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult succes(String location, String filterQuery, double radius,
-        RangeValues priceLevel, List<Category> categories, bool applyFilter),
+    TResult succes(FilterDTO filter),
+    TResult applyFilter(FilterDTO filter),
     @required TResult orElse(),
   });
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult succes(_Succes value),
+    @required TResult applyFilter(_ApplyFilter value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult succes(_Succes value),
+    TResult applyFilter(_ApplyFilter value),
     @required TResult orElse(),
   });
 
@@ -76,13 +68,9 @@ abstract class $FilterStateCopyWith<$Res> {
   factory $FilterStateCopyWith(
           FilterState value, $Res Function(FilterState) then) =
       _$FilterStateCopyWithImpl<$Res>;
-  $Res call(
-      {String location,
-      String filterQuery,
-      double radius,
-      RangeValues priceLevel,
-      List<Category> categories,
-      bool applyFilter});
+  $Res call({FilterDTO filter});
+
+  $FilterDTOCopyWith<$Res> get filter;
 }
 
 /// @nodoc
@@ -95,26 +83,21 @@ class _$FilterStateCopyWithImpl<$Res> implements $FilterStateCopyWith<$Res> {
 
   @override
   $Res call({
-    Object location = freezed,
-    Object filterQuery = freezed,
-    Object radius = freezed,
-    Object priceLevel = freezed,
-    Object categories = freezed,
-    Object applyFilter = freezed,
+    Object filter = freezed,
   }) {
     return _then(_value.copyWith(
-      location: location == freezed ? _value.location : location as String,
-      filterQuery:
-          filterQuery == freezed ? _value.filterQuery : filterQuery as String,
-      radius: radius == freezed ? _value.radius : radius as double,
-      priceLevel:
-          priceLevel == freezed ? _value.priceLevel : priceLevel as RangeValues,
-      categories: categories == freezed
-          ? _value.categories
-          : categories as List<Category>,
-      applyFilter:
-          applyFilter == freezed ? _value.applyFilter : applyFilter as bool,
+      filter: filter == freezed ? _value.filter : filter as FilterDTO,
     ));
+  }
+
+  @override
+  $FilterDTOCopyWith<$Res> get filter {
+    if (_value.filter == null) {
+      return null;
+    }
+    return $FilterDTOCopyWith<$Res>(_value.filter, (value) {
+      return _then(_value.copyWith(filter: value));
+    });
   }
 }
 
@@ -123,13 +106,10 @@ abstract class _$SuccesCopyWith<$Res> implements $FilterStateCopyWith<$Res> {
   factory _$SuccesCopyWith(_Succes value, $Res Function(_Succes) then) =
       __$SuccesCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {String location,
-      String filterQuery,
-      double radius,
-      RangeValues priceLevel,
-      List<Category> categories,
-      bool applyFilter});
+  $Res call({FilterDTO filter});
+
+  @override
+  $FilterDTOCopyWith<$Res> get filter;
 }
 
 /// @nodoc
@@ -143,85 +123,37 @@ class __$SuccesCopyWithImpl<$Res> extends _$FilterStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object location = freezed,
-    Object filterQuery = freezed,
-    Object radius = freezed,
-    Object priceLevel = freezed,
-    Object categories = freezed,
-    Object applyFilter = freezed,
+    Object filter = freezed,
   }) {
     return _then(_Succes(
-      location == freezed ? _value.location : location as String,
-      filterQuery == freezed ? _value.filterQuery : filterQuery as String,
-      radius == freezed ? _value.radius : radius as double,
-      priceLevel == freezed ? _value.priceLevel : priceLevel as RangeValues,
-      categories == freezed ? _value.categories : categories as List<Category>,
-      applyFilter == freezed ? _value.applyFilter : applyFilter as bool,
+      filter: filter == freezed ? _value.filter : filter as FilterDTO,
     ));
   }
 }
 
 /// @nodoc
 class _$_Succes implements _Succes {
-  const _$_Succes(this.location, this.filterQuery, this.radius, this.priceLevel,
-      this.categories, this.applyFilter)
-      : assert(location != null),
-        assert(filterQuery != null),
-        assert(radius != null),
-        assert(priceLevel != null),
-        assert(categories != null),
-        assert(applyFilter != null);
+  const _$_Succes({this.filter});
 
   @override
-  final String location;
-  @override
-  final String filterQuery;
-  @override
-  final double radius;
-  @override
-  final RangeValues priceLevel;
-  @override
-  final List<Category> categories;
-  @override
-  final bool applyFilter;
+  final FilterDTO filter;
 
   @override
   String toString() {
-    return 'FilterState.succes(location: $location, filterQuery: $filterQuery, radius: $radius, priceLevel: $priceLevel, categories: $categories, applyFilter: $applyFilter)';
+    return 'FilterState.succes(filter: $filter)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Succes &&
-            (identical(other.location, location) ||
-                const DeepCollectionEquality()
-                    .equals(other.location, location)) &&
-            (identical(other.filterQuery, filterQuery) ||
-                const DeepCollectionEquality()
-                    .equals(other.filterQuery, filterQuery)) &&
-            (identical(other.radius, radius) ||
-                const DeepCollectionEquality().equals(other.radius, radius)) &&
-            (identical(other.priceLevel, priceLevel) ||
-                const DeepCollectionEquality()
-                    .equals(other.priceLevel, priceLevel)) &&
-            (identical(other.categories, categories) ||
-                const DeepCollectionEquality()
-                    .equals(other.categories, categories)) &&
-            (identical(other.applyFilter, applyFilter) ||
-                const DeepCollectionEquality()
-                    .equals(other.applyFilter, applyFilter)));
+            (identical(other.filter, filter) ||
+                const DeepCollectionEquality().equals(other.filter, filter)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(location) ^
-      const DeepCollectionEquality().hash(filterQuery) ^
-      const DeepCollectionEquality().hash(radius) ^
-      const DeepCollectionEquality().hash(priceLevel) ^
-      const DeepCollectionEquality().hash(categories) ^
-      const DeepCollectionEquality().hash(applyFilter);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(filter);
 
   @JsonKey(ignore: true)
   @override
@@ -231,31 +163,24 @@ class _$_Succes implements _Succes {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required
-        TResult succes(
-            String location,
-            String filterQuery,
-            double radius,
-            RangeValues priceLevel,
-            List<Category> categories,
-            bool applyFilter),
+    @required TResult succes(FilterDTO filter),
+    @required TResult applyFilter(FilterDTO filter),
   }) {
     assert(succes != null);
-    return succes(
-        location, filterQuery, radius, priceLevel, categories, applyFilter);
+    assert(applyFilter != null);
+    return succes(filter);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult succes(String location, String filterQuery, double radius,
-        RangeValues priceLevel, List<Category> categories, bool applyFilter),
+    TResult succes(FilterDTO filter),
+    TResult applyFilter(FilterDTO filter),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (succes != null) {
-      return succes(
-          location, filterQuery, radius, priceLevel, categories, applyFilter);
+      return succes(filter);
     }
     return orElse();
   }
@@ -264,8 +189,10 @@ class _$_Succes implements _Succes {
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult succes(_Succes value),
+    @required TResult applyFilter(_ApplyFilter value),
   }) {
     assert(succes != null);
+    assert(applyFilter != null);
     return succes(this);
   }
 
@@ -273,6 +200,7 @@ class _$_Succes implements _Succes {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult succes(_Succes value),
+    TResult applyFilter(_ApplyFilter value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -284,27 +212,134 @@ class _$_Succes implements _Succes {
 }
 
 abstract class _Succes implements FilterState {
-  const factory _Succes(
-      String location,
-      String filterQuery,
-      double radius,
-      RangeValues priceLevel,
-      List<Category> categories,
-      bool applyFilter) = _$_Succes;
+  const factory _Succes({FilterDTO filter}) = _$_Succes;
 
   @override
-  String get location;
-  @override
-  String get filterQuery;
-  @override
-  double get radius;
-  @override
-  RangeValues get priceLevel;
-  @override
-  List<Category> get categories;
-  @override
-  bool get applyFilter;
+  FilterDTO get filter;
   @override
   @JsonKey(ignore: true)
   _$SuccesCopyWith<_Succes> get copyWith;
+}
+
+/// @nodoc
+abstract class _$ApplyFilterCopyWith<$Res>
+    implements $FilterStateCopyWith<$Res> {
+  factory _$ApplyFilterCopyWith(
+          _ApplyFilter value, $Res Function(_ApplyFilter) then) =
+      __$ApplyFilterCopyWithImpl<$Res>;
+  @override
+  $Res call({FilterDTO filter});
+
+  @override
+  $FilterDTOCopyWith<$Res> get filter;
+}
+
+/// @nodoc
+class __$ApplyFilterCopyWithImpl<$Res> extends _$FilterStateCopyWithImpl<$Res>
+    implements _$ApplyFilterCopyWith<$Res> {
+  __$ApplyFilterCopyWithImpl(
+      _ApplyFilter _value, $Res Function(_ApplyFilter) _then)
+      : super(_value, (v) => _then(v as _ApplyFilter));
+
+  @override
+  _ApplyFilter get _value => super._value as _ApplyFilter;
+
+  @override
+  $Res call({
+    Object filter = freezed,
+  }) {
+    return _then(_ApplyFilter(
+      filter: filter == freezed ? _value.filter : filter as FilterDTO,
+    ));
+  }
+}
+
+/// @nodoc
+class _$_ApplyFilter implements _ApplyFilter {
+  const _$_ApplyFilter({this.filter});
+
+  @override
+  final FilterDTO filter;
+
+  @override
+  String toString() {
+    return 'FilterState.applyFilter(filter: $filter)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _ApplyFilter &&
+            (identical(other.filter, filter) ||
+                const DeepCollectionEquality().equals(other.filter, filter)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(filter);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ApplyFilterCopyWith<_ApplyFilter> get copyWith =>
+      __$ApplyFilterCopyWithImpl<_ApplyFilter>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult succes(FilterDTO filter),
+    @required TResult applyFilter(FilterDTO filter),
+  }) {
+    assert(succes != null);
+    assert(applyFilter != null);
+    return applyFilter(filter);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult succes(FilterDTO filter),
+    TResult applyFilter(FilterDTO filter),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (applyFilter != null) {
+      return applyFilter(filter);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult succes(_Succes value),
+    @required TResult applyFilter(_ApplyFilter value),
+  }) {
+    assert(succes != null);
+    assert(applyFilter != null);
+    return applyFilter(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult succes(_Succes value),
+    TResult applyFilter(_ApplyFilter value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (applyFilter != null) {
+      return applyFilter(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ApplyFilter implements FilterState {
+  const factory _ApplyFilter({FilterDTO filter}) = _$_ApplyFilter;
+
+  @override
+  FilterDTO get filter;
+  @override
+  @JsonKey(ignore: true)
+  _$ApplyFilterCopyWith<_ApplyFilter> get copyWith;
 }

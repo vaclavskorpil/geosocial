@@ -6,7 +6,7 @@ part 'category.g.dart';
 
 @freezed
 abstract class Category with _$Category {
-  @HiveType(typeId: 2, adapterName: "CategoryHive")
+  @HiveType(typeId: 4, adapterName: "CategoryAdapter")
   factory Category(
     @HiveField(0) String title,
     @HiveField(1) String alias,

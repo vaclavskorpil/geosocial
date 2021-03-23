@@ -1,9 +1,9 @@
 import 'package:geosocial/common/constants/constatns.dart';
-import 'package:geosocial/datalayer/entities/filter_dto.dart';
+import 'package:geosocial/data_layer/entities/filter_dto.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 
-@singleton
+@lazySingleton
 class AppStorage {
   final _filterKey = "Filter";
 

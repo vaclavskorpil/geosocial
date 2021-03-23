@@ -9,10 +9,9 @@ part 'filter_dto.g.dart';
 
 @freezed
 abstract class FilterDTO with _$FilterDTO {
-  @HiveType(typeId: 1, adapterName: "FilterDTOHive")
   const FilterDTO._();
 
-  @HiveType(typeId: 1, adapterName: "FilterDTOHive")
+  @HiveType(typeId: 2, adapterName: "FilterDTOAdapter")
   const factory FilterDTO(
     @HiveField(0) String location,
     @HiveField(1) String filterQuery,
@@ -21,22 +20,7 @@ abstract class FilterDTO with _$FilterDTO {
     @HiveField(4) List<Category> categories,
   ) = _FilterDto;
 
-  factory FilterDTO.formRangeValue(
-    String location,
-    String filterQuery,
-    double radius,
-    RangeValues priceLevel,
-    List<Category> categories,
-  ) =>
-      FilterDTO(
-        location,
-        filterQuery,
-        radius,
-        rangeToList(priceLevel),
-        categories,
-      );
-
-  factory FilterDTO.empty() => FilterDTO("", "", 250, [1, 2, 3, 4], []);
+  factory FilterDTO.empty() => FilterDTO("Pardubice", "", 250, [1, 2, 3, 4], []);
 
   static List<int> rangeToList(RangeValues range) {
     final result = <int>[];

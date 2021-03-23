@@ -103,7 +103,7 @@ class __$CategoryCopyWithImpl<$Res> extends _$CategoryCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
-@HiveType(typeId: 2, adapterName: 'CategoryHive')
+@HiveType(typeId: 4, adapterName: "CategoryAdapter")
 
 /// @nodoc
 class _$_Category implements _Category {

@@ -6,9 +6,9 @@ part of 'filter_dto.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class FilterDTOHive extends TypeAdapter<_$_FilterDto> {
+class FilterDTOAdapter extends TypeAdapter<_$_FilterDto> {
   @override
-  final int typeId = 1;
+  final int typeId = 2;
 
   @override
   _$_FilterDto read(BinaryReader reader) {
@@ -47,7 +47,7 @@ class FilterDTOHive extends TypeAdapter<_$_FilterDto> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FilterDTOHive &&
+      other is FilterDTOAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

@@ -8,6 +8,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 @lazySingleton
 class CustomDio extends DioForNative implements Dio {
+  
   @factoryMethod
   static Future<Dio> createDio() async {
     final Dio dio = Dio();

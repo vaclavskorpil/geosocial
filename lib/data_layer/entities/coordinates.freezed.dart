@@ -107,10 +107,11 @@ class __$CoordinatesCopyWithImpl<$Res> extends _$CoordinatesCopyWithImpl<$Res>
 @JsonSerializable()
 
 /// @nodoc
-class _$_Coordinates implements _Coordinates {
+class _$_Coordinates extends _Coordinates {
   _$_Coordinates(this.latitude, this.longitude)
       : assert(latitude != null),
-        assert(longitude != null);
+        assert(longitude != null),
+        super._();
 
   factory _$_Coordinates.fromJson(Map<String, dynamic> json) =>
       _$_$_CoordinatesFromJson(json);
@@ -154,7 +155,8 @@ class _$_Coordinates implements _Coordinates {
   }
 }
 
-abstract class _Coordinates implements Coordinates {
+abstract class _Coordinates extends Coordinates {
+  _Coordinates._() : super._();
   factory _Coordinates(double latitude, double longitude) = _$_Coordinates;
 
   factory _Coordinates.fromJson(Map<String, dynamic> json) =
