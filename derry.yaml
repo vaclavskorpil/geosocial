@@ -2,4 +2,4 @@ generate: flutter packages pub run build_runner build --delete-conflicting-outpu
 watch: flutter packages pub run build_runner watch
 test: flutter test
 test-cov: flutter test --coverage
-analyze: flutter analyze
+analyze: flutter analyzeda

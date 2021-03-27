@@ -10,5 +10,5 @@ targets:
           fragmens_glob: graphql/*.fragment.graphql
           schema_mapping:
               - schema: schema.graphql
-                output: lib/io/api/graphql/queries/graphql_queries.dart
+                output: lib/data_layer/data_sources/network/graphql/queries/graphql_queries.dart
                 queries_glob: graphql/*.query.graphql

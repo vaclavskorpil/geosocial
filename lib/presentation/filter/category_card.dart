@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geosocial/common/constants/dimens.dart';
-import 'package:geosocial/datalayer/entities/category.dart';
-import 'package:geosocial/domain/fitler_cubit/filter_cubit.dart';
+import 'package:geosocial/data_layer/entities/category.dart';
+import 'package:geosocial/domain/fitler/filter_cubit.dart';
 
 import 'neoumorphic_toggle_button.dart';
 
@@ -15,10 +15,10 @@ class CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FilterCubit, FilterState>(
-      builder: (context, state) {
-        var isToggled = state.categories.contains(_category);
-        print("Is toggled : $isToggled");
+    return Builder(
+      builder: (context) {
+        final isToggled = context.select((FilterCubit cubit) =>
+            cubit.state.filter.categories.contains(_category));
         return NeumorphicToggleButton(
           key: key,
           size: _size,
