@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geosocial/common/constants/dimens.dart';
 import 'package:geosocial/data_layer/dependenci_injection/injector.dart';
 import 'package:geosocial/data_layer/entities/category.dart';
-import 'package:geosocial/domain/businesses_cubit/business_cubit.dart';
-import 'package:geosocial/domain/fitler_cubit/filter_cubit.dart';
+import 'package:geosocial/domain/fitler/filter_cubit.dart';
+import 'package:geosocial/domain/poi/poi_cubit.dart';
+
 import 'package:geosocial/presentation/filter/category_card.dart';
+
 import 'package:geosocial/presentation/theme/my_colors.dart';
 
 class FilterDialog extends StatelessWidget {
@@ -19,14 +22,18 @@ class FilterDialog extends StatelessWidget {
       child: BlocProvider<FilterCubit>(
         create: (context) => injector<FilterCubit>(),
         child: BlocListener<FilterCubit, FilterState>(
+          listenWhen: (_, current) {
+            return current.failure.isSome() || current.applyFilter;
+          },
           listener: (context, state) {
-            state.when(
-              succes: (_) {},
-              applyFilter: (_) {
-                context.read<BusinessCubit>()..fetchNewBusinesses();
-                Navigator.pop(context);
-              },
-            );
+            if (state.failure.isSome()) {
+              // TODO properly handle state
+              Fluttertoast.showToast(msg: "Something bad happend");
+            } else if (state.applyFilter) {
+              //filter was sucesflully aplied, fetch new businesses
+              context.read<POICubit>()..fetchNewBusinesses();
+              Navigator.pop(context);
+            }
           },
           child: SingleChildScrollView(
             child: Container(
@@ -71,18 +78,41 @@ class LocationInput extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: inputFieldPadding,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+      child: Row(
         children: [
-          Text("Filter"),
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Filter"),
+                BlocBuilder<FilterCubit, FilterState>(
+                  buildWhen: (oldState, newState) =>
+                      oldState.filter.location != newState.filter.location,
+                  builder: (context, state) {
+                    //is builded when location changed
+
+                    return TextField(
+                      controller: context
+                          .read<FilterCubit>()
+                          .locationTextEditingController,
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 10),
           Builder(
             builder: (context) {
-              final location = context
-                  .select((FilterCubit cubit) => cubit.state.filter.location);
-              return TextField(
-                controller:
-                    context.read<FilterCubit>().locationTextEditingController,
-              );
+              var isLocationSelected = context.select(
+                  (FilterCubit cubit) => cubit.state.filter.useMyLocation);
+              //todo remve checkbox and put here togleable button
+              return Checkbox(
+                  value: isLocationSelected,
+                  onChanged: (value) {
+                    context.read<FilterCubit>()..useMyLocation(value);
+                  });
             },
           ),
         ],
@@ -134,7 +164,7 @@ class ButtonRow extends StatelessWidget {
       children: [
         Expanded(
             child: OutlinedButton(
-          onPressed: () {},
+          onPressed: () => Navigator.of(context).pop(),
           child: Text("Cancel"),
         )),
         const SizedBox(width: 12),

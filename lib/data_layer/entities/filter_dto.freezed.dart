@@ -19,13 +19,15 @@ class _$FilterDTOTearOff {
       @HiveField(1) String filterQuery,
       @HiveField(2) double radius,
       @HiveField(3) List<int> priceLevel,
-      @HiveField(4) List<Category> categories) {
+      @HiveField(4) List<Category> categories,
+      @HiveField(5) bool useMyLocation) {
     return _FilterDto(
       location,
       filterQuery,
       radius,
       priceLevel,
       categories,
+      useMyLocation,
     );
   }
 }
@@ -46,6 +48,8 @@ mixin _$FilterDTO {
   List<int> get priceLevel;
   @HiveField(4)
   List<Category> get categories;
+  @HiveField(5)
+  bool get useMyLocation;
 
   @JsonKey(ignore: true)
   $FilterDTOCopyWith<FilterDTO> get copyWith;
@@ -60,7 +64,8 @@ abstract class $FilterDTOCopyWith<$Res> {
       @HiveField(1) String filterQuery,
       @HiveField(2) double radius,
       @HiveField(3) List<int> priceLevel,
-      @HiveField(4) List<Category> categories});
+      @HiveField(4) List<Category> categories,
+      @HiveField(5) bool useMyLocation});
 }
 
 /// @nodoc
@@ -78,6 +83,7 @@ class _$FilterDTOCopyWithImpl<$Res> implements $FilterDTOCopyWith<$Res> {
     Object radius = freezed,
     Object priceLevel = freezed,
     Object categories = freezed,
+    Object useMyLocation = freezed,
   }) {
     return _then(_value.copyWith(
       location: location == freezed ? _value.location : location as String,
@@ -89,6 +95,9 @@ class _$FilterDTOCopyWithImpl<$Res> implements $FilterDTOCopyWith<$Res> {
       categories: categories == freezed
           ? _value.categories
           : categories as List<Category>,
+      useMyLocation: useMyLocation == freezed
+          ? _value.useMyLocation
+          : useMyLocation as bool,
     ));
   }
 }
@@ -104,7 +113,8 @@ abstract class _$FilterDtoCopyWith<$Res> implements $FilterDTOCopyWith<$Res> {
       @HiveField(1) String filterQuery,
       @HiveField(2) double radius,
       @HiveField(3) List<int> priceLevel,
-      @HiveField(4) List<Category> categories});
+      @HiveField(4) List<Category> categories,
+      @HiveField(5) bool useMyLocation});
 }
 
 /// @nodoc
@@ -123,6 +133,7 @@ class __$FilterDtoCopyWithImpl<$Res> extends _$FilterDTOCopyWithImpl<$Res>
     Object radius = freezed,
     Object priceLevel = freezed,
     Object categories = freezed,
+    Object useMyLocation = freezed,
   }) {
     return _then(_FilterDto(
       location == freezed ? _value.location : location as String,
@@ -130,11 +141,12 @@ class __$FilterDtoCopyWithImpl<$Res> extends _$FilterDTOCopyWithImpl<$Res>
       radius == freezed ? _value.radius : radius as double,
       priceLevel == freezed ? _value.priceLevel : priceLevel as List<int>,
       categories == freezed ? _value.categories : categories as List<Category>,
+      useMyLocation == freezed ? _value.useMyLocation : useMyLocation as bool,
     ));
   }
 }
 
-@HiveType(typeId: 2, adapterName: "FilterDTOAdapter")
+@HiveType(typeId: 2, adapterName: 'FilterDTOAdapter')
 
 /// @nodoc
 class _$_FilterDto extends _FilterDto {
@@ -143,12 +155,14 @@ class _$_FilterDto extends _FilterDto {
       @HiveField(1) this.filterQuery,
       @HiveField(2) this.radius,
       @HiveField(3) this.priceLevel,
-      @HiveField(4) this.categories)
+      @HiveField(4) this.categories,
+      @HiveField(5) this.useMyLocation)
       : assert(location != null),
         assert(filterQuery != null),
         assert(radius != null),
         assert(priceLevel != null),
         assert(categories != null),
+        assert(useMyLocation != null),
         super._();
 
   @override
@@ -166,10 +180,13 @@ class _$_FilterDto extends _FilterDto {
   @override
   @HiveField(4)
   final List<Category> categories;
+  @override
+  @HiveField(5)
+  final bool useMyLocation;
 
   @override
   String toString() {
-    return 'FilterDTO(location: $location, filterQuery: $filterQuery, radius: $radius, priceLevel: $priceLevel, categories: $categories)';
+    return 'FilterDTO(location: $location, filterQuery: $filterQuery, radius: $radius, priceLevel: $priceLevel, categories: $categories, useMyLocation: $useMyLocation)';
   }
 
   @override
@@ -189,7 +206,10 @@ class _$_FilterDto extends _FilterDto {
                     .equals(other.priceLevel, priceLevel)) &&
             (identical(other.categories, categories) ||
                 const DeepCollectionEquality()
-                    .equals(other.categories, categories)));
+                    .equals(other.categories, categories)) &&
+            (identical(other.useMyLocation, useMyLocation) ||
+                const DeepCollectionEquality()
+                    .equals(other.useMyLocation, useMyLocation)));
   }
 
   @override
@@ -199,7 +219,8 @@ class _$_FilterDto extends _FilterDto {
       const DeepCollectionEquality().hash(filterQuery) ^
       const DeepCollectionEquality().hash(radius) ^
       const DeepCollectionEquality().hash(priceLevel) ^
-      const DeepCollectionEquality().hash(categories);
+      const DeepCollectionEquality().hash(categories) ^
+      const DeepCollectionEquality().hash(useMyLocation);
 
   @JsonKey(ignore: true)
   @override
@@ -214,7 +235,8 @@ abstract class _FilterDto extends FilterDTO {
       @HiveField(1) String filterQuery,
       @HiveField(2) double radius,
       @HiveField(3) List<int> priceLevel,
-      @HiveField(4) List<Category> categories) = _$_FilterDto;
+      @HiveField(4) List<Category> categories,
+      @HiveField(5) bool useMyLocation) = _$_FilterDto;
 
   @override
   @HiveField(0)
@@ -231,6 +253,9 @@ abstract class _FilterDto extends FilterDTO {
   @override
   @HiveField(4)
   List<Category> get categories;
+  @override
+  @HiveField(5)
+  bool get useMyLocation;
   @override
   @JsonKey(ignore: true)
   _$FilterDtoCopyWith<_FilterDto> get copyWith;

@@ -22,13 +22,14 @@ class FilterDTOAdapter extends TypeAdapter<_$_FilterDto> {
       fields[2] as double,
       (fields[3] as List)?.cast<int>(),
       (fields[4] as List)?.cast<Category>(),
+      fields[5] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_FilterDto obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.location)
       ..writeByte(1)
@@ -38,7 +39,9 @@ class FilterDTOAdapter extends TypeAdapter<_$_FilterDto> {
       ..writeByte(3)
       ..write(obj.priceLevel)
       ..writeByte(4)
-      ..write(obj.categories);
+      ..write(obj.categories)
+      ..writeByte(5)
+      ..write(obj.useMyLocation);
   }
 
   @override

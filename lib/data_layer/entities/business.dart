@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:geosocial/data_layer/entities/coordinates.dart';
 import 'package:geosocial/data_layer/entities/location.dart';
+import 'package:geosocial/data_layer/entities/review.dart';
 
 import 'category.dart';
 import 'hours.dart';
@@ -22,6 +23,7 @@ abstract class Business with _$Business {
     @nullable Coordinates coordinates,
     @nullable List<String> photos,
     @nullable List<Hours> hours,
+    @nullable List<Review> reviews,
   ) = _Business;
 
   factory Business.fromJson(Map<String, dynamic> json) =>

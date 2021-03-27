@@ -18,9 +18,11 @@ abstract class FilterDTO with _$FilterDTO {
     @HiveField(2) double radius,
     @HiveField(3) List<int> priceLevel,
     @HiveField(4) List<Category> categories,
+    @HiveField(5) bool useMyLocation,
   ) = _FilterDto;
 
-  factory FilterDTO.empty() => FilterDTO("Pardubice", "", 250, [1, 2, 3, 4], []);
+  factory FilterDTO.empty() =>
+      FilterDTO("Pardubice", "", 250, [1, 2, 3, 4], [], false);
 
   static List<int> rangeToList(RangeValues range) {
     final result = <int>[];
@@ -55,7 +57,7 @@ abstract class FilterDTO with _$FilterDTO {
         sb.write(",");
       }
     }
-    
+
     print("Prices result ${sb.toString()}");
     return sb.toString();
   }

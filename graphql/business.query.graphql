@@ -1,0 +1,39 @@
+query BusinessDetail($id: String) {
+  business(id: $id) {
+    id
+    name
+    url
+    price
+    rating
+    distance
+    categories {
+      title
+      alias
+    }
+    location {
+      city
+      address1
+    }
+    coordinates {
+      latitude
+      longitude
+    }
+    photos
+    hours {
+      is_open_now
+    }
+    reviews{
+        id
+        rating
+        user{
+           id
+           profile_url
+           image_url
+           name 
+        }
+        text
+        url
+    }
+
+  }
+}

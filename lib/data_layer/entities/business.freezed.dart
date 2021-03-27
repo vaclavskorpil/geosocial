@@ -28,7 +28,8 @@ class _$BusinessTearOff {
       @nullable Location location,
       @nullable Coordinates coordinates,
       @nullable List<String> photos,
-      @nullable List<Hours> hours) {
+      @nullable List<Hours> hours,
+      @nullable List<Review> reviews) {
     return _Business(
       name,
       id,
@@ -41,6 +42,7 @@ class _$BusinessTearOff {
       coordinates,
       photos,
       hours,
+      reviews,
     );
   }
 
@@ -76,6 +78,8 @@ mixin _$Business {
   List<String> get photos;
   @nullable
   List<Hours> get hours;
+  @nullable
+  List<Review> get reviews;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -97,7 +101,8 @@ abstract class $BusinessCopyWith<$Res> {
       @nullable Location location,
       @nullable Coordinates coordinates,
       @nullable List<String> photos,
-      @nullable List<Hours> hours});
+      @nullable List<Hours> hours,
+      @nullable List<Review> reviews});
 
   $LocationCopyWith<$Res> get location;
   $CoordinatesCopyWith<$Res> get coordinates;
@@ -124,6 +129,7 @@ class _$BusinessCopyWithImpl<$Res> implements $BusinessCopyWith<$Res> {
     Object coordinates = freezed,
     Object photos = freezed,
     Object hours = freezed,
+    Object reviews = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed ? _value.name : name as String,
@@ -141,6 +147,7 @@ class _$BusinessCopyWithImpl<$Res> implements $BusinessCopyWith<$Res> {
           : coordinates as Coordinates,
       photos: photos == freezed ? _value.photos : photos as List<String>,
       hours: hours == freezed ? _value.hours : hours as List<Hours>,
+      reviews: reviews == freezed ? _value.reviews : reviews as List<Review>,
     ));
   }
 
@@ -181,7 +188,8 @@ abstract class _$BusinessCopyWith<$Res> implements $BusinessCopyWith<$Res> {
       @nullable Location location,
       @nullable Coordinates coordinates,
       @nullable List<String> photos,
-      @nullable List<Hours> hours});
+      @nullable List<Hours> hours,
+      @nullable List<Review> reviews});
 
   @override
   $LocationCopyWith<$Res> get location;
@@ -211,6 +219,7 @@ class __$BusinessCopyWithImpl<$Res> extends _$BusinessCopyWithImpl<$Res>
     Object coordinates = freezed,
     Object photos = freezed,
     Object hours = freezed,
+    Object reviews = freezed,
   }) {
     return _then(_Business(
       name == freezed ? _value.name : name as String,
@@ -224,6 +233,7 @@ class __$BusinessCopyWithImpl<$Res> extends _$BusinessCopyWithImpl<$Res>
       coordinates == freezed ? _value.coordinates : coordinates as Coordinates,
       photos == freezed ? _value.photos : photos as List<String>,
       hours == freezed ? _value.hours : hours as List<Hours>,
+      reviews == freezed ? _value.reviews : reviews as List<Review>,
     ));
   }
 }
@@ -243,7 +253,8 @@ class _$_Business implements _Business {
       @nullable this.location,
       @nullable this.coordinates,
       @nullable this.photos,
-      @nullable this.hours)
+      @nullable this.hours,
+      @nullable this.reviews)
       : assert(name != null),
         assert(id != null);
 
@@ -281,10 +292,13 @@ class _$_Business implements _Business {
   @override
   @nullable
   final List<Hours> hours;
+  @override
+  @nullable
+  final List<Review> reviews;
 
   @override
   String toString() {
-    return 'Business(name: $name, id: $id, url: $url, phone: $phone, price: $price, distance: $distance, categories: $categories, location: $location, coordinates: $coordinates, photos: $photos, hours: $hours)';
+    return 'Business(name: $name, id: $id, url: $url, phone: $phone, price: $price, distance: $distance, categories: $categories, location: $location, coordinates: $coordinates, photos: $photos, hours: $hours, reviews: $reviews)';
   }
 
   @override
@@ -316,7 +330,9 @@ class _$_Business implements _Business {
             (identical(other.photos, photos) ||
                 const DeepCollectionEquality().equals(other.photos, photos)) &&
             (identical(other.hours, hours) ||
-                const DeepCollectionEquality().equals(other.hours, hours)));
+                const DeepCollectionEquality().equals(other.hours, hours)) &&
+            (identical(other.reviews, reviews) ||
+                const DeepCollectionEquality().equals(other.reviews, reviews)));
   }
 
   @override
@@ -332,7 +348,8 @@ class _$_Business implements _Business {
       const DeepCollectionEquality().hash(location) ^
       const DeepCollectionEquality().hash(coordinates) ^
       const DeepCollectionEquality().hash(photos) ^
-      const DeepCollectionEquality().hash(hours);
+      const DeepCollectionEquality().hash(hours) ^
+      const DeepCollectionEquality().hash(reviews);
 
   @JsonKey(ignore: true)
   @override
@@ -357,7 +374,8 @@ abstract class _Business implements Business {
       @nullable Location location,
       @nullable Coordinates coordinates,
       @nullable List<String> photos,
-      @nullable List<Hours> hours) = _$_Business;
+      @nullable List<Hours> hours,
+      @nullable List<Review> reviews) = _$_Business;
 
   factory _Business.fromJson(Map<String, dynamic> json) = _$_Business.fromJson;
 
@@ -392,6 +410,9 @@ abstract class _Business implements Business {
   @override
   @nullable
   List<Hours> get hours;
+  @override
+  @nullable
+  List<Review> get reviews;
   @override
   @JsonKey(ignore: true)
   _$BusinessCopyWith<_Business> get copyWith;

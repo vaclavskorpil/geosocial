@@ -14,16 +14,14 @@ class _$FilterStateTearOff {
   const _$FilterStateTearOff();
 
 // ignore: unused_element
-  _Succes succes({FilterDTO filter}) {
+  _Succes succes(
+      {FilterDTO filter,
+      Option<Failure> failure = const None(),
+      bool applyFilter = false}) {
     return _Succes(
       filter: filter,
-    );
-  }
-
-// ignore: unused_element
-  _ApplyFilter applyFilter({FilterDTO filter}) {
-    return _ApplyFilter(
-      filter: filter,
+      failure: failure,
+      applyFilter: applyFilter,
     );
   }
 }
@@ -35,27 +33,27 @@ const $FilterState = _$FilterStateTearOff();
 /// @nodoc
 mixin _$FilterState {
   FilterDTO get filter;
+  Option<Failure> get failure;
+  bool get applyFilter;
 
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult succes(FilterDTO filter),
-    @required TResult applyFilter(FilterDTO filter),
+    @required
+        TResult succes(
+            FilterDTO filter, Option<Failure> failure, bool applyFilter),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult succes(FilterDTO filter),
-    TResult applyFilter(FilterDTO filter),
+    TResult succes(FilterDTO filter, Option<Failure> failure, bool applyFilter),
     @required TResult orElse(),
   });
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult succes(_Succes value),
-    @required TResult applyFilter(_ApplyFilter value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult succes(_Succes value),
-    TResult applyFilter(_ApplyFilter value),
     @required TResult orElse(),
   });
 
@@ -68,7 +66,7 @@ abstract class $FilterStateCopyWith<$Res> {
   factory $FilterStateCopyWith(
           FilterState value, $Res Function(FilterState) then) =
       _$FilterStateCopyWithImpl<$Res>;
-  $Res call({FilterDTO filter});
+  $Res call({FilterDTO filter, Option<Failure> failure, bool applyFilter});
 
   $FilterDTOCopyWith<$Res> get filter;
 }
@@ -84,9 +82,14 @@ class _$FilterStateCopyWithImpl<$Res> implements $FilterStateCopyWith<$Res> {
   @override
   $Res call({
     Object filter = freezed,
+    Object failure = freezed,
+    Object applyFilter = freezed,
   }) {
     return _then(_value.copyWith(
       filter: filter == freezed ? _value.filter : filter as FilterDTO,
+      failure: failure == freezed ? _value.failure : failure as Option<Failure>,
+      applyFilter:
+          applyFilter == freezed ? _value.applyFilter : applyFilter as bool,
     ));
   }
 
@@ -106,7 +109,7 @@ abstract class _$SuccesCopyWith<$Res> implements $FilterStateCopyWith<$Res> {
   factory _$SuccesCopyWith(_Succes value, $Res Function(_Succes) then) =
       __$SuccesCopyWithImpl<$Res>;
   @override
-  $Res call({FilterDTO filter});
+  $Res call({FilterDTO filter, Option<Failure> failure, bool applyFilter});
 
   @override
   $FilterDTOCopyWith<$Res> get filter;
@@ -124,23 +127,37 @@ class __$SuccesCopyWithImpl<$Res> extends _$FilterStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object filter = freezed,
+    Object failure = freezed,
+    Object applyFilter = freezed,
   }) {
     return _then(_Succes(
       filter: filter == freezed ? _value.filter : filter as FilterDTO,
+      failure: failure == freezed ? _value.failure : failure as Option<Failure>,
+      applyFilter:
+          applyFilter == freezed ? _value.applyFilter : applyFilter as bool,
     ));
   }
 }
 
 /// @nodoc
 class _$_Succes implements _Succes {
-  const _$_Succes({this.filter});
+  const _$_Succes(
+      {this.filter, this.failure = const None(), this.applyFilter = false})
+      : assert(failure != null),
+        assert(applyFilter != null);
 
   @override
   final FilterDTO filter;
+  @JsonKey(defaultValue: const None())
+  @override
+  final Option<Failure> failure;
+  @JsonKey(defaultValue: false)
+  @override
+  final bool applyFilter;
 
   @override
   String toString() {
-    return 'FilterState.succes(filter: $filter)';
+    return 'FilterState.succes(filter: $filter, failure: $failure, applyFilter: $applyFilter)';
   }
 
   @override
@@ -148,12 +165,21 @@ class _$_Succes implements _Succes {
     return identical(this, other) ||
         (other is _Succes &&
             (identical(other.filter, filter) ||
-                const DeepCollectionEquality().equals(other.filter, filter)));
+                const DeepCollectionEquality().equals(other.filter, filter)) &&
+            (identical(other.failure, failure) ||
+                const DeepCollectionEquality()
+                    .equals(other.failure, failure)) &&
+            (identical(other.applyFilter, applyFilter) ||
+                const DeepCollectionEquality()
+                    .equals(other.applyFilter, applyFilter)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(filter);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(filter) ^
+      const DeepCollectionEquality().hash(failure) ^
+      const DeepCollectionEquality().hash(applyFilter);
 
   @JsonKey(ignore: true)
   @override
@@ -163,24 +189,23 @@ class _$_Succes implements _Succes {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult succes(FilterDTO filter),
-    @required TResult applyFilter(FilterDTO filter),
+    @required
+        TResult succes(
+            FilterDTO filter, Option<Failure> failure, bool applyFilter),
   }) {
     assert(succes != null);
-    assert(applyFilter != null);
-    return succes(filter);
+    return succes(filter, failure, applyFilter);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult succes(FilterDTO filter),
-    TResult applyFilter(FilterDTO filter),
+    TResult succes(FilterDTO filter, Option<Failure> failure, bool applyFilter),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (succes != null) {
-      return succes(filter);
+      return succes(filter, failure, applyFilter);
     }
     return orElse();
   }
@@ -189,10 +214,8 @@ class _$_Succes implements _Succes {
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult succes(_Succes value),
-    @required TResult applyFilter(_ApplyFilter value),
   }) {
     assert(succes != null);
-    assert(applyFilter != null);
     return succes(this);
   }
 
@@ -200,7 +223,6 @@ class _$_Succes implements _Succes {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult succes(_Succes value),
-    TResult applyFilter(_ApplyFilter value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -212,134 +234,18 @@ class _$_Succes implements _Succes {
 }
 
 abstract class _Succes implements FilterState {
-  const factory _Succes({FilterDTO filter}) = _$_Succes;
+  const factory _Succes(
+      {FilterDTO filter,
+      Option<Failure> failure,
+      bool applyFilter}) = _$_Succes;
 
   @override
   FilterDTO get filter;
+  @override
+  Option<Failure> get failure;
+  @override
+  bool get applyFilter;
   @override
   @JsonKey(ignore: true)
   _$SuccesCopyWith<_Succes> get copyWith;
-}
-
-/// @nodoc
-abstract class _$ApplyFilterCopyWith<$Res>
-    implements $FilterStateCopyWith<$Res> {
-  factory _$ApplyFilterCopyWith(
-          _ApplyFilter value, $Res Function(_ApplyFilter) then) =
-      __$ApplyFilterCopyWithImpl<$Res>;
-  @override
-  $Res call({FilterDTO filter});
-
-  @override
-  $FilterDTOCopyWith<$Res> get filter;
-}
-
-/// @nodoc
-class __$ApplyFilterCopyWithImpl<$Res> extends _$FilterStateCopyWithImpl<$Res>
-    implements _$ApplyFilterCopyWith<$Res> {
-  __$ApplyFilterCopyWithImpl(
-      _ApplyFilter _value, $Res Function(_ApplyFilter) _then)
-      : super(_value, (v) => _then(v as _ApplyFilter));
-
-  @override
-  _ApplyFilter get _value => super._value as _ApplyFilter;
-
-  @override
-  $Res call({
-    Object filter = freezed,
-  }) {
-    return _then(_ApplyFilter(
-      filter: filter == freezed ? _value.filter : filter as FilterDTO,
-    ));
-  }
-}
-
-/// @nodoc
-class _$_ApplyFilter implements _ApplyFilter {
-  const _$_ApplyFilter({this.filter});
-
-  @override
-  final FilterDTO filter;
-
-  @override
-  String toString() {
-    return 'FilterState.applyFilter(filter: $filter)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _ApplyFilter &&
-            (identical(other.filter, filter) ||
-                const DeepCollectionEquality().equals(other.filter, filter)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(filter);
-
-  @JsonKey(ignore: true)
-  @override
-  _$ApplyFilterCopyWith<_ApplyFilter> get copyWith =>
-      __$ApplyFilterCopyWithImpl<_ApplyFilter>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    @required TResult succes(FilterDTO filter),
-    @required TResult applyFilter(FilterDTO filter),
-  }) {
-    assert(succes != null);
-    assert(applyFilter != null);
-    return applyFilter(filter);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult succes(FilterDTO filter),
-    TResult applyFilter(FilterDTO filter),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (applyFilter != null) {
-      return applyFilter(filter);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    @required TResult succes(_Succes value),
-    @required TResult applyFilter(_ApplyFilter value),
-  }) {
-    assert(succes != null);
-    assert(applyFilter != null);
-    return applyFilter(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult succes(_Succes value),
-    TResult applyFilter(_ApplyFilter value),
-    @required TResult orElse(),
-  }) {
-    assert(orElse != null);
-    if (applyFilter != null) {
-      return applyFilter(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ApplyFilter implements FilterState {
-  const factory _ApplyFilter({FilterDTO filter}) = _$_ApplyFilter;
-
-  @override
-  FilterDTO get filter;
-  @override
-  @JsonKey(ignore: true)
-  _$ApplyFilterCopyWith<_ApplyFilter> get copyWith;
 }

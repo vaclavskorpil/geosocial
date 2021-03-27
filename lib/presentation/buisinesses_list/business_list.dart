@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:geosocial/data_layer/entities/business.dart';
-import 'package:geosocial/domain/businesses_cubit/business_cubit.dart';
+import 'package:geosocial/domain/poi/poi_cubit.dart';
 
 class BusinessList extends StatelessWidget {
   final ScrollController _scrollController = ScrollController();
@@ -10,7 +10,7 @@ class BusinessList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: BlocConsumer<BusinessCubit, BusinessState>(
+        child: BlocConsumer<POICubit, POIState>(
       listenWhen: (_, currentState) => currentState.failure.isSome(),
       listener: (context, state) => {
         //todo handle failure
@@ -19,7 +19,7 @@ class BusinessList extends StatelessWidget {
         return ListView.builder(
           controller: _scrollController
             ..addListener(() {
-              final cubit = context.read<BusinessCubit>();
+              final cubit = context.read<POICubit>();
               const preFetchOffset = 500;
               final shouldFetchMore = (_scrollController.offset >
                       _scrollController.position.maxScrollExtent - preFetchOffset) &&

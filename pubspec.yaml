@@ -43,7 +43,9 @@ dependencies:
   gql_dio_link: ^0.0.4
   pretty_dio_logger: ^1.1.1
 
+  # UI
   fancy_shimmer_image: ^1.2.0 
+  fluttertoast: ^8.0.3 
 
   dartz: ^0.9.2
 
@@ -51,6 +53,9 @@ dependencies:
   graphql: ^4.0.1 
 
   google_maps_flutter: ^2.0.1
+  
+  geolocator: ^7.0.1
+
 
 dev_dependencies:  
   flutter_test:

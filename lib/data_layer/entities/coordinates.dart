@@ -8,7 +8,7 @@ part 'coordinates.g.dart';
 abstract class Coordinates with _$Coordinates {
   Coordinates._();
 
-  factory Coordinates(double latitude, double longitude) = _Coordinates;
+  const factory Coordinates(double latitude, double longitude) = _Coordinates;
 
   LatLng getLatLng() {
     return LatLng(latitude, longitude);

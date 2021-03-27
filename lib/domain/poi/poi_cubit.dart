@@ -5,25 +5,27 @@ import 'package:geosocial/data_layer/entities/business.dart';
 import 'package:geosocial/data_layer/entities/filter_dto.dart';
 import 'package:geosocial/data_layer/repository/business_repository.dart';
 import 'package:geosocial/data_layer/repository/filter_repository.dart';
+import 'package:geosocial/data_layer/services/location_service/location_service.dart';
 import 'package:injectable/injectable.dart';
 import 'package:dartz/dartz.dart';
-import 'package:geosocial/common/failures/failure.dart';
-part 'business_state.dart';
+import 'package:geosocial/common/failures/server_failure.dart';
+part 'poi_state.dart';
 
-part 'business_cubit.freezed.dart';
+part 'poi_cubit.freezed.dart';
 
 @lazySingleton
-class BusinessCubit extends Cubit<BusinessState> {
+class POICubit extends Cubit<POIState> {
   final BusinessRepository _businessRepo;
   final FilterRepository _filterRepo;
-  
+  final LocationService _locationService;
+
   final fetchMoreTreshold = 15;
   final fetchItemLimit = 20;
 
   FilterDTO get _filter => _filterRepo.currentFilter;
 
-  BusinessCubit(this._businessRepo, this._filterRepo)
-      : super(BusinessState.initial());
+  POICubit(this._businessRepo, this._filterRepo, this._locationService)
+      : super(POIState.initial());
 
   void fetchBusinesses() async {
     _fetchBusinesses(_filter, state.businesses.length);
@@ -42,15 +44,18 @@ class BusinessCubit extends Cubit<BusinessState> {
           await _businessRepo.getBusinesses(filter, fetchItemLimit, size);
 
       emit(
-        BusinessState.succes(
-            businesses: result, isFetching: false, failure: none()),
+        POIState.succes(
+          businesses: result,
+          isFetching: false,
+          failure: none()
+        )
       );
 
       print("New businesses fetched $result ");
     } catch (GetBusinessesRequestFailure) {
       emit(
         state.copyWith(
-            isFetching: false, failure: optionOf(Failure.serverError())),
+            isFetching: false, failure: optionOf(ServerFailure.serverError())),
       );
     }
   }
@@ -63,7 +68,7 @@ class BusinessCubit extends Cubit<BusinessState> {
           await _businessRepo.getBusinesses(filter, fetchItemLimit, size);
 
       emit(
-        BusinessState.succes(
+        POIState.succes(
           businesses: state.businesses..addAll(result),
           isFetching: false,
           failure: none(),
@@ -73,7 +78,7 @@ class BusinessCubit extends Cubit<BusinessState> {
       emit(
         state.copyWith(
           isFetching: false,
-          failure: optionOf(Failure.serverError()),
+          failure: optionOf(ServerFailure.serverError()),
         ),
       );
     }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geosocial/common/constants/dimens.dart';
 import 'package:geosocial/data_layer/entities/category.dart';
-import 'package:geosocial/domain/fitler_cubit/filter_cubit.dart';
+import 'package:geosocial/domain/fitler/filter_cubit.dart';
 
 import 'neoumorphic_toggle_button.dart';
 

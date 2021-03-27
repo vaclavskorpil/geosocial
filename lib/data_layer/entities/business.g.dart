@@ -29,6 +29,10 @@ _$_Business _$_$_BusinessFromJson(Map<String, dynamic> json) {
         ?.map(
             (e) => e == null ? null : Hours.fromJson(e as Map<String, dynamic>))
         ?.toList(),
+    (json['reviews'] as List)
+        ?.map((e) =>
+            e == null ? null : Review.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }
 
@@ -45,4 +49,5 @@ Map<String, dynamic> _$_$_BusinessToJson(_$_Business instance) =>
       'coordinates': instance.coordinates,
       'photos': instance.photos,
       'hours': instance.hours,
+      'reviews': instance.reviews,
     };

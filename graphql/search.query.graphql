@@ -1,5 +1,7 @@
 query SearchBusinesses(
   $location: String
+  $latitude: Float
+  $longitude: Float
   $searchTerm: String
   $radius: Float
   $categories: String
@@ -9,6 +11,8 @@ query SearchBusinesses(
 ) {
   search(
     location: $location
+    latitude: $latitude
+    longitude: $longitude
     term: $searchTerm
     radius: $radius
     categories: $categories

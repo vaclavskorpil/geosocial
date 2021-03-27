@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
-part of 'failure.dart';
+part of 'server_failure.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -10,8 +10,8 @@ part of 'failure.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-class _$FailureTearOff {
-  const _$FailureTearOff();
+class _$ServerFailureTearOff {
+  const _$ServerFailureTearOff();
 
 // ignore: unused_element
   _ServerError serverError() {
@@ -26,10 +26,10 @@ class _$FailureTearOff {
 
 /// @nodoc
 // ignore: unused_element
-const $Failure = _$FailureTearOff();
+const $ServerFailure = _$ServerFailureTearOff();
 
 /// @nodoc
-mixin _$Failure {
+mixin _$ServerFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required TResult serverError(),
@@ -55,18 +55,20 @@ mixin _$Failure {
 }
 
 /// @nodoc
-abstract class $FailureCopyWith<$Res> {
-  factory $FailureCopyWith(Failure value, $Res Function(Failure) then) =
-      _$FailureCopyWithImpl<$Res>;
+abstract class $ServerFailureCopyWith<$Res> {
+  factory $ServerFailureCopyWith(
+          ServerFailure value, $Res Function(ServerFailure) then) =
+      _$ServerFailureCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$FailureCopyWithImpl<$Res> implements $FailureCopyWith<$Res> {
-  _$FailureCopyWithImpl(this._value, this._then);
+class _$ServerFailureCopyWithImpl<$Res>
+    implements $ServerFailureCopyWith<$Res> {
+  _$ServerFailureCopyWithImpl(this._value, this._then);
 
-  final Failure _value;
+  final ServerFailure _value;
   // ignore: unused_field
-  final $Res Function(Failure) _then;
+  final $Res Function(ServerFailure) _then;
 }
 
 /// @nodoc
@@ -77,7 +79,7 @@ abstract class _$ServerErrorCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$ServerErrorCopyWithImpl<$Res> extends _$FailureCopyWithImpl<$Res>
+class __$ServerErrorCopyWithImpl<$Res> extends _$ServerFailureCopyWithImpl<$Res>
     implements _$ServerErrorCopyWith<$Res> {
   __$ServerErrorCopyWithImpl(
       _ServerError _value, $Res Function(_ServerError) _then)
@@ -93,7 +95,7 @@ class _$_ServerError implements _ServerError {
 
   @override
   String toString() {
-    return 'Failure.serverError()';
+    return 'ServerFailure.serverError()';
   }
 
   @override
@@ -155,7 +157,7 @@ class _$_ServerError implements _ServerError {
   }
 }
 
-abstract class _ServerError implements Failure {
+abstract class _ServerError implements ServerFailure {
   const factory _ServerError() = _$_ServerError;
 }
 
@@ -168,7 +170,7 @@ abstract class _$NoInternetConnectionCopyWith<$Res> {
 
 /// @nodoc
 class __$NoInternetConnectionCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res>
+    extends _$ServerFailureCopyWithImpl<$Res>
     implements _$NoInternetConnectionCopyWith<$Res> {
   __$NoInternetConnectionCopyWithImpl(
       _NoInternetConnection _value, $Res Function(_NoInternetConnection) _then)
@@ -184,7 +186,7 @@ class _$_NoInternetConnection implements _NoInternetConnection {
 
   @override
   String toString() {
-    return 'Failure.noInternetConnection()';
+    return 'ServerFailure.noInternetConnection()';
   }
 
   @override
@@ -246,6 +248,6 @@ class _$_NoInternetConnection implements _NoInternetConnection {
   }
 }
 
-abstract class _NoInternetConnection implements Failure {
+abstract class _NoInternetConnection implements ServerFailure {
   const factory _NoInternetConnection() = _$_NoInternetConnection;
 }

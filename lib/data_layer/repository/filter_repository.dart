@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:geosocial/data_layer/data_sources/local_storage/app_storage.dart';
 import 'package:geosocial/data_layer/entities/filter_dto.dart';
-import 'package:injectable/injectable.dart';
+
 
 abstract class FilterRepository {
   FilterDTO currentFilter;
@@ -12,7 +12,7 @@ abstract class FilterRepository {
   Future<FilterDTO> getFilter();
 }
 
-@lazySingleton
+// lazy singleton registered in modules
 class FilterRepositoryImpl extends FilterRepository {
   FilterDTO _currentFilter;
 
@@ -38,9 +38,9 @@ class FilterRepositoryImpl extends FilterRepository {
     _currentFilter = await getFilter() ?? FilterDTO.empty();
   }
 
-  @factoryMethod
+  //factory method
   static Future<FilterRepository> createFilterRepository(
       AppStorage appStorage) async {
-    return  FilterRepositoryImpl(appStorage).._loadInitialFilter();
+    return FilterRepositoryImpl(appStorage).._loadInitialFilter();
   }
 }
