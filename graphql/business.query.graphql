@@ -6,6 +6,9 @@ query BusinessDetail($id: String) {
     price
     rating
     distance
+    review_count
+    phone
+    display_phone
     categories {
       title
       alias
@@ -13,6 +16,7 @@ query BusinessDetail($id: String) {
     location {
       city
       address1
+      formatted_address
     }
     coordinates {
       latitude
@@ -20,11 +24,17 @@ query BusinessDetail($id: String) {
     }
     photos
     hours {
+      open{
+        end
+        start
+        day
+      }
       is_open_now
     }
     reviews{
         id
         rating
+        time_created
         user{
            id
            profile_url

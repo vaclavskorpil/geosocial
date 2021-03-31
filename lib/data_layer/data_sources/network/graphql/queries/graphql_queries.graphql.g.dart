@@ -170,7 +170,8 @@ BusinessDetail$Query$Business$Location
         Map<String, dynamic> json) {
   return BusinessDetail$Query$Business$Location()
     ..city = json['city'] as String
-    ..address1 = json['address1'] as String;
+    ..address1 = json['address1'] as String
+    ..formattedAddress = json['formatted_address'] as String;
 }
 
 Map<String, dynamic> _$BusinessDetail$Query$Business$LocationToJson(
@@ -178,6 +179,7 @@ Map<String, dynamic> _$BusinessDetail$Query$Business$LocationToJson(
     <String, dynamic>{
       'city': instance.city,
       'address1': instance.address1,
+      'formatted_address': instance.formattedAddress,
     };
 
 BusinessDetail$Query$Business$Coordinates
@@ -195,15 +197,39 @@ Map<String, dynamic> _$BusinessDetail$Query$Business$CoordinatesToJson(
       'longitude': instance.longitude,
     };
 
+BusinessDetail$Query$Business$Hours$OpenHours
+    _$BusinessDetail$Query$Business$Hours$OpenHoursFromJson(
+        Map<String, dynamic> json) {
+  return BusinessDetail$Query$Business$Hours$OpenHours()
+    ..end = json['end'] as String
+    ..start = json['start'] as String
+    ..day = json['day'] as int;
+}
+
+Map<String, dynamic> _$BusinessDetail$Query$Business$Hours$OpenHoursToJson(
+        BusinessDetail$Query$Business$Hours$OpenHours instance) =>
+    <String, dynamic>{
+      'end': instance.end,
+      'start': instance.start,
+      'day': instance.day,
+    };
+
 BusinessDetail$Query$Business$Hours
     _$BusinessDetail$Query$Business$HoursFromJson(Map<String, dynamic> json) {
   return BusinessDetail$Query$Business$Hours()
+    ..open = (json['open'] as List)
+        ?.map((e) => e == null
+            ? null
+            : BusinessDetail$Query$Business$Hours$OpenHours.fromJson(
+                e as Map<String, dynamic>))
+        ?.toList()
     ..isOpenNow = json['is_open_now'] as bool;
 }
 
 Map<String, dynamic> _$BusinessDetail$Query$Business$HoursToJson(
         BusinessDetail$Query$Business$Hours instance) =>
     <String, dynamic>{
+      'open': instance.open?.map((e) => e?.toJson())?.toList(),
       'is_open_now': instance.isOpenNow,
     };
 
@@ -231,6 +257,7 @@ BusinessDetail$Query$Business$Review
   return BusinessDetail$Query$Business$Review()
     ..id = json['id'] as String
     ..rating = json['rating'] as int
+    ..timeCreated = json['time_created'] as String
     ..user = json['user'] == null
         ? null
         : BusinessDetail$Query$Business$Review$User.fromJson(
@@ -244,6 +271,7 @@ Map<String, dynamic> _$BusinessDetail$Query$Business$ReviewToJson(
     <String, dynamic>{
       'id': instance.id,
       'rating': instance.rating,
+      'time_created': instance.timeCreated,
       'user': instance.user?.toJson(),
       'text': instance.text,
       'url': instance.url,
@@ -258,6 +286,9 @@ BusinessDetail$Query$Business _$BusinessDetail$Query$BusinessFromJson(
     ..price = json['price'] as String
     ..rating = (json['rating'] as num)?.toDouble()
     ..distance = (json['distance'] as num)?.toDouble()
+    ..reviewCount = json['review_count'] as int
+    ..phone = json['phone'] as String
+    ..displayPhone = json['display_phone'] as String
     ..categories = (json['categories'] as List)
         ?.map((e) => e == null
             ? null
@@ -296,6 +327,9 @@ Map<String, dynamic> _$BusinessDetail$Query$BusinessToJson(
       'price': instance.price,
       'rating': instance.rating,
       'distance': instance.distance,
+      'review_count': instance.reviewCount,
+      'phone': instance.phone,
+      'display_phone': instance.displayPhone,
       'categories': instance.categories?.map((e) => e?.toJson())?.toList(),
       'location': instance.location?.toJson(),
       'coordinates': instance.coordinates?.toJson(),

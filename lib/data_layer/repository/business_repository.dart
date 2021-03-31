@@ -1,14 +1,17 @@
+import 'package:geosocial/common/failures/server_failure.dart';
 import 'package:geosocial/data_layer/data_sources/network/graphql/graphql_client.dart';
 import 'package:geosocial/data_layer/data_sources/network/graphql/queries/graphql_queries.graphql.dart';
 import 'package:geosocial/data_layer/entities/business.dart';
 import 'package:geosocial/data_layer/entities/filter_dto.dart';
 import 'package:geosocial/data_layer/services/location_service/location_service.dart';
 import 'package:injectable/injectable.dart';
+import 'package:dartz/dartz.dart';
 
 class GetBusinessesRequestFailure implements Exception {}
 
 abstract class BusinessRepository {
   Future<List<Business>> getBusinesses(FilterDTO filter, int limit, int offset);
+  Future<Either<ServerFailure, Business>> getBusinessDetail(String id);
 }
 
 @LazySingleton(as: BusinessRepository)
@@ -30,7 +33,7 @@ class BusinessRepositoryImpl extends BusinessRepository {
         (failure) => {
           //ignored, failure should never occur
         },
-        (position){
+        (position) {
           longitude = position.longitude;
           latitude = position.latitude;
         },
@@ -52,13 +55,24 @@ class BusinessRepositoryImpl extends BusinessRepository {
       ),
     );
 
-    if (result.hasException) {
-      throw GetBusinessesRequestFailure();
-    }
-
     final data = result.data['search']['business'] as List;
     final businesses = data.map((e) => Business.fromJson(e)).toList();
 
     return businesses;
+  }
+
+  @override
+  Future<Either<ServerFailure, Business>> getBusinessDetail(String id) async {
+    final result = await _graphQl.execute(
+      BusinessDetailQuery(
+        variables: BusinessDetailArguments(id: id),
+      ),
+    );
+    if (result.hasException) {
+      return left(ServerFailure.serverError());
+    }
+
+    final business = Business.fromJson(result.data['business']);
+    return right(business);
   }
 }

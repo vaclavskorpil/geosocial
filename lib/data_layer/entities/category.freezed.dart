@@ -103,11 +103,11 @@ class __$CategoryCopyWithImpl<$Res> extends _$CategoryCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
-@HiveType(typeId: 4, adapterName: 'CategoryAdapter')
+@HiveType(typeId: 4, adapterName: "CategoryAdapter")
 
 /// @nodoc
 class _$_Category implements _Category {
-  const _$_Category(@HiveField(0) this.title, @HiveField(1) this.alias)
+  _$_Category(@HiveField(0) this.title, @HiveField(1) this.alias)
       : assert(title != null),
         assert(alias != null);
 
@@ -154,8 +154,8 @@ class _$_Category implements _Category {
 }
 
 abstract class _Category implements Category {
-  const factory _Category(
-      @HiveField(0) String title, @HiveField(1) String alias) = _$_Category;
+  factory _Category(@HiveField(0) String title, @HiveField(1) String alias) =
+      _$_Category;
 
   factory _Category.fromJson(Map<String, dynamic> json) = _$_Category.fromJson;
 

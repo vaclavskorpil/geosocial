@@ -10,6 +10,7 @@ import 'package:injectable/injectable.dart';
 
 import '../data_sources/local_storage/app_storage.dart';
 import '../repository/business_repository.dart';
+import '../../domain/detail/cubit/detail_cubit.dart';
 import '../../domain/fitler/filter_cubit.dart';
 import '../repository/filter_repository.dart';
 import '../data_sources/network/graphql/graphql_client.dart';
@@ -17,6 +18,7 @@ import '../services/location_service/location_service.dart';
 import '../../domain/maps/cubit/map_cubit.dart';
 import '../../domain/poi/poi_cubit.dart';
 import 'modules.dart';
+import '../../domain/maps/selected_poi/cubit/selected_poi_cubit.dart';
 
 /// adds generated dependencies
 /// to the provided [GetIt] instance
@@ -36,8 +38,10 @@ Future<GetIt> $initGetIt(
   gh.lazySingleton<FilterRepository>(() => resolvedFilterRepository);
   gh.lazySingleton<GraphQLService>(() => GraphQLService.createGQLService());
   gh.lazySingleton<LocationService>(() => LocationServiceImp());
+  gh.factory<SelectedPOICubit>(() => SelectedPOICubit());
   gh.lazySingleton<BusinessRepository>(() =>
       BusinessRepositoryImpl(get<GraphQLService>(), get<LocationService>()));
+  gh.factory<DetailCubit>(() => DetailCubit(get<BusinessRepository>()));
   gh.factory<FilterCubit>(
       () => FilterCubit(get<FilterRepository>(), get<LocationService>()));
   gh.lazySingleton<POICubit>(() => POICubit(

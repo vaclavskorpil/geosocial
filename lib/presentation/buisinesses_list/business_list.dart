@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:geosocial/data_layer/entities/business.dart';
 import 'package:geosocial/domain/poi/poi_cubit.dart';
 
@@ -74,7 +73,7 @@ class BusinessTileBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        FancyShimmerImage(imageUrl: _business.photos.first ?? ""),
+        //FancyShimmerImage(imageUrl: _business.photos.first ?? ""),
         /* BusinessInfo(_business), */
         /* BusinessTrailnigInfo(_business) */
       ],

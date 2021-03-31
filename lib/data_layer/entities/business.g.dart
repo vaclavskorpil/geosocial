@@ -33,6 +33,9 @@ _$_Business _$_$_BusinessFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : Review.fromJson(e as Map<String, dynamic>))
         ?.toList(),
+    (json['rating'] as num)?.toDouble(),
+    json['review_count'] as int,
+    json['disply_phone'] as String,
   );
 }
 
@@ -50,4 +53,7 @@ Map<String, dynamic> _$_$_BusinessToJson(_$_Business instance) =>
       'photos': instance.photos,
       'hours': instance.hours,
       'reviews': instance.reviews,
+      'rating': instance.rating,
+      'review_count': instance.reviewCount,
+      'disply_phone': instance.displayPhone,
     };

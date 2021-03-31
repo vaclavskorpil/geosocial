@@ -18,20 +18,12 @@ class _$LocationTearOff {
 
 // ignore: unused_element
   _Location call(
-      @nullable
-          String address1,
-      @nullable
-          String address2,
-      @nullable
-          String address3,
-      @nullable
-          String city,
-      @JsonKey(name: 'postal_code')
-      @nullable
-          String postalCode,
-      @JsonKey(name: 'formatted_address')
-      @nullable
-          List<String> formattedAddress) {
+      @nullable String address1,
+      @nullable String address2,
+      @nullable String address3,
+      @nullable String city,
+      @JsonKey(name: 'postal_code') @nullable String postalCode,
+      @JsonKey(name: 'formatted_address') @nullable String formattedAddress) {
     return _Location(
       address1,
       address2,
@@ -67,7 +59,7 @@ mixin _$Location {
   String get postalCode;
   @JsonKey(name: 'formatted_address')
   @nullable
-  List<String> get formattedAddress;
+  String get formattedAddress;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -79,20 +71,12 @@ abstract class $LocationCopyWith<$Res> {
   factory $LocationCopyWith(Location value, $Res Function(Location) then) =
       _$LocationCopyWithImpl<$Res>;
   $Res call(
-      {@nullable
-          String address1,
-      @nullable
-          String address2,
-      @nullable
-          String address3,
-      @nullable
-          String city,
-      @JsonKey(name: 'postal_code')
-      @nullable
-          String postalCode,
-      @JsonKey(name: 'formatted_address')
-      @nullable
-          List<String> formattedAddress});
+      {@nullable String address1,
+      @nullable String address2,
+      @nullable String address3,
+      @nullable String city,
+      @JsonKey(name: 'postal_code') @nullable String postalCode,
+      @JsonKey(name: 'formatted_address') @nullable String formattedAddress});
 }
 
 /// @nodoc
@@ -121,7 +105,7 @@ class _$LocationCopyWithImpl<$Res> implements $LocationCopyWith<$Res> {
           postalCode == freezed ? _value.postalCode : postalCode as String,
       formattedAddress: formattedAddress == freezed
           ? _value.formattedAddress
-          : formattedAddress as List<String>,
+          : formattedAddress as String,
     ));
   }
 }
@@ -132,20 +116,12 @@ abstract class _$LocationCopyWith<$Res> implements $LocationCopyWith<$Res> {
       __$LocationCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@nullable
-          String address1,
-      @nullable
-          String address2,
-      @nullable
-          String address3,
-      @nullable
-          String city,
-      @JsonKey(name: 'postal_code')
-      @nullable
-          String postalCode,
-      @JsonKey(name: 'formatted_address')
-      @nullable
-          List<String> formattedAddress});
+      {@nullable String address1,
+      @nullable String address2,
+      @nullable String address3,
+      @nullable String city,
+      @JsonKey(name: 'postal_code') @nullable String postalCode,
+      @JsonKey(name: 'formatted_address') @nullable String formattedAddress});
 }
 
 /// @nodoc
@@ -174,7 +150,7 @@ class __$LocationCopyWithImpl<$Res> extends _$LocationCopyWithImpl<$Res>
       postalCode == freezed ? _value.postalCode : postalCode as String,
       formattedAddress == freezed
           ? _value.formattedAddress
-          : formattedAddress as List<String>,
+          : formattedAddress as String,
     ));
   }
 }
@@ -213,7 +189,7 @@ class _$_Location implements _Location {
   @override
   @JsonKey(name: 'formatted_address')
   @nullable
-  final List<String> formattedAddress;
+  final String formattedAddress;
 
   @override
   String toString() {
@@ -279,7 +255,7 @@ abstract class _Location implements Location {
           String postalCode,
       @JsonKey(name: 'formatted_address')
       @nullable
-          List<String> formattedAddress) = _$_Location;
+          String formattedAddress) = _$_Location;
 
   factory _Location.fromJson(Map<String, dynamic> json) = _$_Location.fromJson;
 
@@ -302,7 +278,7 @@ abstract class _Location implements Location {
   @override
   @JsonKey(name: 'formatted_address')
   @nullable
-  List<String> get formattedAddress;
+  String get formattedAddress;
   @override
   @JsonKey(ignore: true)
   _$LocationCopyWith<_Location> get copyWith;
