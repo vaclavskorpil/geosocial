@@ -20,8 +20,8 @@ class _$UserTearOff {
   _User call(
       String id,
       String name,
-      @JsonKey(name: 'profile_url') String profileUrl,
-      @JsonKey(name: 'image_url') String imageUrl) {
+      @nullable @JsonKey(name: 'profile_url') String profileUrl,
+      @nullable @JsonKey(name: 'image_url') String imageUrl) {
     return _User(
       id,
       name,
@@ -44,8 +44,10 @@ const $User = _$UserTearOff();
 mixin _$User {
   String get id;
   String get name;
+  @nullable
   @JsonKey(name: 'profile_url')
   String get profileUrl;
+  @nullable
   @JsonKey(name: 'image_url')
   String get imageUrl;
 
@@ -61,8 +63,8 @@ abstract class $UserCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      @JsonKey(name: 'profile_url') String profileUrl,
-      @JsonKey(name: 'image_url') String imageUrl});
+      @nullable @JsonKey(name: 'profile_url') String profileUrl,
+      @nullable @JsonKey(name: 'image_url') String imageUrl});
 }
 
 /// @nodoc
@@ -98,8 +100,8 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      @JsonKey(name: 'profile_url') String profileUrl,
-      @JsonKey(name: 'image_url') String imageUrl});
+      @nullable @JsonKey(name: 'profile_url') String profileUrl,
+      @nullable @JsonKey(name: 'image_url') String imageUrl});
 }
 
 /// @nodoc
@@ -131,15 +133,13 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_User implements _User {
-  const _$_User(
+  _$_User(
       this.id,
       this.name,
-      @JsonKey(name: 'profile_url') this.profileUrl,
-      @JsonKey(name: 'image_url') this.imageUrl)
+      @nullable @JsonKey(name: 'profile_url') this.profileUrl,
+      @nullable @JsonKey(name: 'image_url') this.imageUrl)
       : assert(id != null),
-        assert(name != null),
-        assert(profileUrl != null),
-        assert(imageUrl != null);
+        assert(name != null);
 
   factory _$_User.fromJson(Map<String, dynamic> json) =>
       _$_$_UserFromJson(json);
@@ -149,9 +149,11 @@ class _$_User implements _User {
   @override
   final String name;
   @override
+  @nullable
   @JsonKey(name: 'profile_url')
   final String profileUrl;
   @override
+  @nullable
   @JsonKey(name: 'image_url')
   final String imageUrl;
 
@@ -196,11 +198,11 @@ class _$_User implements _User {
 }
 
 abstract class _User implements User {
-  const factory _User(
+  factory _User(
       String id,
       String name,
-      @JsonKey(name: 'profile_url') String profileUrl,
-      @JsonKey(name: 'image_url') String imageUrl) = _$_User;
+      @nullable @JsonKey(name: 'profile_url') String profileUrl,
+      @nullable @JsonKey(name: 'image_url') String imageUrl) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
@@ -209,9 +211,11 @@ abstract class _User implements User {
   @override
   String get name;
   @override
+  @nullable
   @JsonKey(name: 'profile_url')
   String get profileUrl;
   @override
+  @nullable
   @JsonKey(name: 'image_url')
   String get imageUrl;
   @override

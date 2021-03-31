@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geosocial/common/constants/dimens.dart';
 import 'package:geosocial/data_layer/dependenci_injection/injector.dart';
 import 'package:geosocial/data_layer/entities/category.dart';
@@ -9,6 +8,7 @@ import 'package:geosocial/domain/fitler/filter_cubit.dart';
 import 'package:geosocial/domain/poi/poi_cubit.dart';
 
 import 'package:geosocial/presentation/filter/category_card.dart';
+import 'package:geosocial/presentation/styled_widgets/styled_snackbar.dart';
 
 import 'package:geosocial/presentation/theme/my_colors.dart';
 
@@ -28,7 +28,8 @@ class FilterDialog extends StatelessWidget {
           listener: (context, state) {
             if (state.failure.isSome()) {
               // TODO properly handle state
-              Fluttertoast.showToast(msg: "Something bad happend");
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(styledSnackBar("Something went wrong."));
             } else if (state.applyFilter) {
               //filter was sucesflully aplied, fetch new businesses
               context.read<POICubit>()..fetchNewBusinesses();
@@ -39,7 +40,7 @@ class FilterDialog extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 color: MyColors.backgroundWhite,
-                borderRadius: BorderRadius.circular(Dimens.cornerRadius),
+                borderRadius: BorderRadius.circular(Dimens.cornerRadiusDefault),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(Dimens.paddingBig),

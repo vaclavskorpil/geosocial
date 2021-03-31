@@ -17,13 +17,15 @@ class _$ReviewTearOff {
   const _$ReviewTearOff();
 
 // ignore: unused_element
-  _Review call(String id, int rating, User user, String text, String url) {
+  _Review call(String id, int rating, User user, String text,
+      @nullable String url, @JsonKey(name: 'time_created') String timeCreated) {
     return _Review(
       id,
       rating,
       user,
       text,
       url,
+      timeCreated,
     );
   }
 
@@ -43,7 +45,10 @@ mixin _$Review {
   int get rating;
   User get user;
   String get text;
+  @nullable
   String get url;
+  @JsonKey(name: 'time_created')
+  String get timeCreated;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -54,7 +59,13 @@ mixin _$Review {
 abstract class $ReviewCopyWith<$Res> {
   factory $ReviewCopyWith(Review value, $Res Function(Review) then) =
       _$ReviewCopyWithImpl<$Res>;
-  $Res call({String id, int rating, User user, String text, String url});
+  $Res call(
+      {String id,
+      int rating,
+      User user,
+      String text,
+      @nullable String url,
+      @JsonKey(name: 'time_created') String timeCreated});
 
   $UserCopyWith<$Res> get user;
 }
@@ -74,6 +85,7 @@ class _$ReviewCopyWithImpl<$Res> implements $ReviewCopyWith<$Res> {
     Object user = freezed,
     Object text = freezed,
     Object url = freezed,
+    Object timeCreated = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as String,
@@ -81,6 +93,8 @@ class _$ReviewCopyWithImpl<$Res> implements $ReviewCopyWith<$Res> {
       user: user == freezed ? _value.user : user as User,
       text: text == freezed ? _value.text : text as String,
       url: url == freezed ? _value.url : url as String,
+      timeCreated:
+          timeCreated == freezed ? _value.timeCreated : timeCreated as String,
     ));
   }
 
@@ -100,7 +114,13 @@ abstract class _$ReviewCopyWith<$Res> implements $ReviewCopyWith<$Res> {
   factory _$ReviewCopyWith(_Review value, $Res Function(_Review) then) =
       __$ReviewCopyWithImpl<$Res>;
   @override
-  $Res call({String id, int rating, User user, String text, String url});
+  $Res call(
+      {String id,
+      int rating,
+      User user,
+      String text,
+      @nullable String url,
+      @JsonKey(name: 'time_created') String timeCreated});
 
   @override
   $UserCopyWith<$Res> get user;
@@ -122,6 +142,7 @@ class __$ReviewCopyWithImpl<$Res> extends _$ReviewCopyWithImpl<$Res>
     Object user = freezed,
     Object text = freezed,
     Object url = freezed,
+    Object timeCreated = freezed,
   }) {
     return _then(_Review(
       id == freezed ? _value.id : id as String,
@@ -129,6 +150,7 @@ class __$ReviewCopyWithImpl<$Res> extends _$ReviewCopyWithImpl<$Res>
       user == freezed ? _value.user : user as User,
       text == freezed ? _value.text : text as String,
       url == freezed ? _value.url : url as String,
+      timeCreated == freezed ? _value.timeCreated : timeCreated as String,
     ));
   }
 }
@@ -137,12 +159,13 @@ class __$ReviewCopyWithImpl<$Res> extends _$ReviewCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_Review implements _Review {
-  const _$_Review(this.id, this.rating, this.user, this.text, this.url)
+  _$_Review(this.id, this.rating, this.user, this.text, @nullable this.url,
+      @JsonKey(name: 'time_created') this.timeCreated)
       : assert(id != null),
         assert(rating != null),
         assert(user != null),
         assert(text != null),
-        assert(url != null);
+        assert(timeCreated != null);
 
   factory _$_Review.fromJson(Map<String, dynamic> json) =>
       _$_$_ReviewFromJson(json);
@@ -156,11 +179,15 @@ class _$_Review implements _Review {
   @override
   final String text;
   @override
+  @nullable
   final String url;
+  @override
+  @JsonKey(name: 'time_created')
+  final String timeCreated;
 
   @override
   String toString() {
-    return 'Review(id: $id, rating: $rating, user: $user, text: $text, url: $url)';
+    return 'Review(id: $id, rating: $rating, user: $user, text: $text, url: $url, timeCreated: $timeCreated)';
   }
 
   @override
@@ -176,7 +203,10 @@ class _$_Review implements _Review {
             (identical(other.text, text) ||
                 const DeepCollectionEquality().equals(other.text, text)) &&
             (identical(other.url, url) ||
-                const DeepCollectionEquality().equals(other.url, url)));
+                const DeepCollectionEquality().equals(other.url, url)) &&
+            (identical(other.timeCreated, timeCreated) ||
+                const DeepCollectionEquality()
+                    .equals(other.timeCreated, timeCreated)));
   }
 
   @override
@@ -186,7 +216,8 @@ class _$_Review implements _Review {
       const DeepCollectionEquality().hash(rating) ^
       const DeepCollectionEquality().hash(user) ^
       const DeepCollectionEquality().hash(text) ^
-      const DeepCollectionEquality().hash(url);
+      const DeepCollectionEquality().hash(url) ^
+      const DeepCollectionEquality().hash(timeCreated);
 
   @JsonKey(ignore: true)
   @override
@@ -200,8 +231,13 @@ class _$_Review implements _Review {
 }
 
 abstract class _Review implements Review {
-  const factory _Review(
-      String id, int rating, User user, String text, String url) = _$_Review;
+  factory _Review(
+      String id,
+      int rating,
+      User user,
+      String text,
+      @nullable String url,
+      @JsonKey(name: 'time_created') String timeCreated) = _$_Review;
 
   factory _Review.fromJson(Map<String, dynamic> json) = _$_Review.fromJson;
 
@@ -214,7 +250,11 @@ abstract class _Review implements Review {
   @override
   String get text;
   @override
+  @nullable
   String get url;
+  @override
+  @JsonKey(name: 'time_created')
+  String get timeCreated;
   @override
   @JsonKey(ignore: true)
   _$ReviewCopyWith<_Review> get copyWith;

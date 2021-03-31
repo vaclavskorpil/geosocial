@@ -2,7 +2,7 @@
 class Dimens {
   Dimens._();
 
-  static const cornerRadius = 16.0;
+  static const cornerRadiusDefault = 16.0;
   static const textFieldCornerRadius = 10.0;
 
   static const paddingSmall = 4.0;

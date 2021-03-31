@@ -13,7 +13,7 @@ _$_Location _$_$_LocationFromJson(Map<String, dynamic> json) {
     json['address3'] as String,
     json['city'] as String,
     json['postal_code'] as String,
-    (json['formatted_address'] as List)?.map((e) => e as String)?.toList(),
+    json['formatted_address'] as String,
   );
 }
 

@@ -5,11 +5,11 @@ part 'user.g.dart';
 
 @freezed
 abstract class User with _$User {
-  const factory User(
+  factory User(
     String id,
     String name,
-    @JsonKey(name: "profile_url") String profileUrl,
-    @JsonKey(name: "image_url") String imageUrl,
+   @nullable  @JsonKey(name: "profile_url") String profileUrl,
+    @nullable @JsonKey(name: "image_url") String imageUrl,
   ) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) =>

@@ -188,8 +188,11 @@ class BusinessDetail$Query$Business$Location with EquatableMixin {
 
   String address1;
 
+  @JsonKey(name: 'formatted_address')
+  String formattedAddress;
+
   @override
-  List<Object> get props => [city, address1];
+  List<Object> get props => [city, address1, formattedAddress];
   Map<String, dynamic> toJson() =>
       _$BusinessDetail$Query$Business$LocationToJson(this);
 }
@@ -213,6 +216,26 @@ class BusinessDetail$Query$Business$Coordinates with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
+class BusinessDetail$Query$Business$Hours$OpenHours with EquatableMixin {
+  BusinessDetail$Query$Business$Hours$OpenHours();
+
+  factory BusinessDetail$Query$Business$Hours$OpenHours.fromJson(
+          Map<String, dynamic> json) =>
+      _$BusinessDetail$Query$Business$Hours$OpenHoursFromJson(json);
+
+  String end;
+
+  String start;
+
+  int day;
+
+  @override
+  List<Object> get props => [end, start, day];
+  Map<String, dynamic> toJson() =>
+      _$BusinessDetail$Query$Business$Hours$OpenHoursToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class BusinessDetail$Query$Business$Hours with EquatableMixin {
   BusinessDetail$Query$Business$Hours();
 
@@ -220,11 +243,13 @@ class BusinessDetail$Query$Business$Hours with EquatableMixin {
           Map<String, dynamic> json) =>
       _$BusinessDetail$Query$Business$HoursFromJson(json);
 
+  List<BusinessDetail$Query$Business$Hours$OpenHours> open;
+
   @JsonKey(name: 'is_open_now')
   bool isOpenNow;
 
   @override
-  List<Object> get props => [isOpenNow];
+  List<Object> get props => [open, isOpenNow];
   Map<String, dynamic> toJson() =>
       _$BusinessDetail$Query$Business$HoursToJson(this);
 }
@@ -265,6 +290,9 @@ class BusinessDetail$Query$Business$Review with EquatableMixin {
 
   int rating;
 
+  @JsonKey(name: 'time_created')
+  String timeCreated;
+
   BusinessDetail$Query$Business$Review$User user;
 
   String text;
@@ -272,7 +300,7 @@ class BusinessDetail$Query$Business$Review with EquatableMixin {
   String url;
 
   @override
-  List<Object> get props => [id, rating, user, text, url];
+  List<Object> get props => [id, rating, timeCreated, user, text, url];
   Map<String, dynamic> toJson() =>
       _$BusinessDetail$Query$Business$ReviewToJson(this);
 }
@@ -296,6 +324,14 @@ class BusinessDetail$Query$Business with EquatableMixin {
 
   double distance;
 
+  @JsonKey(name: 'review_count')
+  int reviewCount;
+
+  String phone;
+
+  @JsonKey(name: 'display_phone')
+  String displayPhone;
+
   List<BusinessDetail$Query$Business$Category> categories;
 
   BusinessDetail$Query$Business$Location location;
@@ -316,6 +352,9 @@ class BusinessDetail$Query$Business with EquatableMixin {
         price,
         rating,
         distance,
+        reviewCount,
+        phone,
+        displayPhone,
         categories,
         location,
         coordinates,
@@ -716,6 +755,24 @@ class BusinessDetailQuery
                     directives: [],
                     selectionSet: null),
                 FieldNode(
+                    name: NameNode(value: 'review_count'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null),
+                FieldNode(
+                    name: NameNode(value: 'phone'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null),
+                FieldNode(
+                    name: NameNode(value: 'display_phone'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null),
+                FieldNode(
                     name: NameNode(value: 'categories'),
                     alias: null,
                     arguments: [],
@@ -748,6 +805,12 @@ class BusinessDetailQuery
                           selectionSet: null),
                       FieldNode(
                           name: NameNode(value: 'address1'),
+                          alias: null,
+                          arguments: [],
+                          directives: [],
+                          selectionSet: null),
+                      FieldNode(
+                          name: NameNode(value: 'formatted_address'),
                           alias: null,
                           arguments: [],
                           directives: [],
@@ -785,6 +848,31 @@ class BusinessDetailQuery
                     directives: [],
                     selectionSet: SelectionSetNode(selections: [
                       FieldNode(
+                          name: NameNode(value: 'open'),
+                          alias: null,
+                          arguments: [],
+                          directives: [],
+                          selectionSet: SelectionSetNode(selections: [
+                            FieldNode(
+                                name: NameNode(value: 'end'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null),
+                            FieldNode(
+                                name: NameNode(value: 'start'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null),
+                            FieldNode(
+                                name: NameNode(value: 'day'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null)
+                          ])),
+                      FieldNode(
                           name: NameNode(value: 'is_open_now'),
                           alias: null,
                           arguments: [],
@@ -805,6 +893,12 @@ class BusinessDetailQuery
                           selectionSet: null),
                       FieldNode(
                           name: NameNode(value: 'rating'),
+                          alias: null,
+                          arguments: [],
+                          directives: [],
+                          selectionSet: null),
+                      FieldNode(
+                          name: NameNode(value: 'time_created'),
                           alias: null,
                           arguments: [],
                           directives: [],

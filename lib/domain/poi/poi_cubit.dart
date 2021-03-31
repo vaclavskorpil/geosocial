@@ -9,8 +9,8 @@ import 'package:geosocial/data_layer/services/location_service/location_service.
 import 'package:injectable/injectable.dart';
 import 'package:dartz/dartz.dart';
 import 'package:geosocial/common/failures/server_failure.dart';
-part 'poi_state.dart';
 
+part 'poi_state.dart';
 part 'poi_cubit.freezed.dart';
 
 @lazySingleton
@@ -43,16 +43,12 @@ class POICubit extends Cubit<POIState> {
       final result =
           await _businessRepo.getBusinesses(filter, fetchItemLimit, size);
 
-      emit(
-        POIState.succes(
-          businesses: result,
-          isFetching: false,
-          failure: none()
-        )
-      );
+      emit(POIState.succes(
+          businesses: result, isFetching: false, failure: none()));
 
       print("New businesses fetched $result ");
-    } catch (GetBusinessesRequestFailure) {
+    } catch (exception) {
+      print(exception.toString());
       emit(
         state.copyWith(
             isFetching: false, failure: optionOf(ServerFailure.serverError())),

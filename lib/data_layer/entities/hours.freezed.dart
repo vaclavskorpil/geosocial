@@ -17,9 +17,11 @@ class _$HoursTearOff {
   const _$HoursTearOff();
 
 // ignore: unused_element
-  _Hours call(@JsonKey(name: 'is_open_now') bool isOpenNow) {
+  _Hours call(@JsonKey(name: 'is_open_now') bool isOpenNow,
+      @JsonKey(name: 'open') @nullable List<OpenHours> openHours) {
     return _Hours(
       isOpenNow,
+      openHours,
     );
   }
 
@@ -37,6 +39,9 @@ const $Hours = _$HoursTearOff();
 mixin _$Hours {
   @JsonKey(name: 'is_open_now')
   bool get isOpenNow;
+  @JsonKey(name: 'open')
+  @nullable
+  List<OpenHours> get openHours;
 
   Map<String, dynamic> toJson();
   @JsonKey(ignore: true)
@@ -47,7 +52,9 @@ mixin _$Hours {
 abstract class $HoursCopyWith<$Res> {
   factory $HoursCopyWith(Hours value, $Res Function(Hours) then) =
       _$HoursCopyWithImpl<$Res>;
-  $Res call({@JsonKey(name: 'is_open_now') bool isOpenNow});
+  $Res call(
+      {@JsonKey(name: 'is_open_now') bool isOpenNow,
+      @JsonKey(name: 'open') @nullable List<OpenHours> openHours});
 }
 
 /// @nodoc
@@ -61,9 +68,13 @@ class _$HoursCopyWithImpl<$Res> implements $HoursCopyWith<$Res> {
   @override
   $Res call({
     Object isOpenNow = freezed,
+    Object openHours = freezed,
   }) {
     return _then(_value.copyWith(
       isOpenNow: isOpenNow == freezed ? _value.isOpenNow : isOpenNow as bool,
+      openHours: openHours == freezed
+          ? _value.openHours
+          : openHours as List<OpenHours>,
     ));
   }
 }
@@ -73,7 +84,9 @@ abstract class _$HoursCopyWith<$Res> implements $HoursCopyWith<$Res> {
   factory _$HoursCopyWith(_Hours value, $Res Function(_Hours) then) =
       __$HoursCopyWithImpl<$Res>;
   @override
-  $Res call({@JsonKey(name: 'is_open_now') bool isOpenNow});
+  $Res call(
+      {@JsonKey(name: 'is_open_now') bool isOpenNow,
+      @JsonKey(name: 'open') @nullable List<OpenHours> openHours});
 }
 
 /// @nodoc
@@ -88,9 +101,11 @@ class __$HoursCopyWithImpl<$Res> extends _$HoursCopyWithImpl<$Res>
   @override
   $Res call({
     Object isOpenNow = freezed,
+    Object openHours = freezed,
   }) {
     return _then(_Hours(
       isOpenNow == freezed ? _value.isOpenNow : isOpenNow as bool,
+      openHours == freezed ? _value.openHours : openHours as List<OpenHours>,
     ));
   }
 }
@@ -99,7 +114,8 @@ class __$HoursCopyWithImpl<$Res> extends _$HoursCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_Hours implements _Hours {
-  _$_Hours(@JsonKey(name: 'is_open_now') this.isOpenNow)
+  _$_Hours(@JsonKey(name: 'is_open_now') this.isOpenNow,
+      @JsonKey(name: 'open') @nullable this.openHours)
       : assert(isOpenNow != null);
 
   factory _$_Hours.fromJson(Map<String, dynamic> json) =>
@@ -108,10 +124,14 @@ class _$_Hours implements _Hours {
   @override
   @JsonKey(name: 'is_open_now')
   final bool isOpenNow;
+  @override
+  @JsonKey(name: 'open')
+  @nullable
+  final List<OpenHours> openHours;
 
   @override
   String toString() {
-    return 'Hours(isOpenNow: $isOpenNow)';
+    return 'Hours(isOpenNow: $isOpenNow, openHours: $openHours)';
   }
 
   @override
@@ -120,12 +140,17 @@ class _$_Hours implements _Hours {
         (other is _Hours &&
             (identical(other.isOpenNow, isOpenNow) ||
                 const DeepCollectionEquality()
-                    .equals(other.isOpenNow, isOpenNow)));
+                    .equals(other.isOpenNow, isOpenNow)) &&
+            (identical(other.openHours, openHours) ||
+                const DeepCollectionEquality()
+                    .equals(other.openHours, openHours)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(isOpenNow);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(isOpenNow) ^
+      const DeepCollectionEquality().hash(openHours);
 
   @JsonKey(ignore: true)
   @override
@@ -139,13 +164,18 @@ class _$_Hours implements _Hours {
 }
 
 abstract class _Hours implements Hours {
-  factory _Hours(@JsonKey(name: 'is_open_now') bool isOpenNow) = _$_Hours;
+  factory _Hours(@JsonKey(name: 'is_open_now') bool isOpenNow,
+      @JsonKey(name: 'open') @nullable List<OpenHours> openHours) = _$_Hours;
 
   factory _Hours.fromJson(Map<String, dynamic> json) = _$_Hours.fromJson;
 
   @override
   @JsonKey(name: 'is_open_now')
   bool get isOpenNow;
+  @override
+  @JsonKey(name: 'open')
+  @nullable
+  List<OpenHours> get openHours;
   @override
   @JsonKey(ignore: true)
   _$HoursCopyWith<_Hours> get copyWith;

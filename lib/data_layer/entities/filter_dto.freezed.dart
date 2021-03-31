@@ -146,11 +146,11 @@ class __$FilterDtoCopyWithImpl<$Res> extends _$FilterDTOCopyWithImpl<$Res>
   }
 }
 
-@HiveType(typeId: 2, adapterName: 'FilterDTOAdapter')
+@HiveType(typeId: 2, adapterName: "FilterDTOAdapter")
 
 /// @nodoc
 class _$_FilterDto extends _FilterDto {
-  const _$_FilterDto(
+  _$_FilterDto(
       @HiveField(0) this.location,
       @HiveField(1) this.filterQuery,
       @HiveField(2) this.radius,
@@ -229,8 +229,8 @@ class _$_FilterDto extends _FilterDto {
 }
 
 abstract class _FilterDto extends FilterDTO {
-  const _FilterDto._() : super._();
-  const factory _FilterDto(
+  _FilterDto._() : super._();
+  factory _FilterDto(
       @HiveField(0) String location,
       @HiveField(1) String filterQuery,
       @HiveField(2) double radius,

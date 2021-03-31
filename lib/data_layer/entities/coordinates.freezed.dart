@@ -108,7 +108,7 @@ class __$CoordinatesCopyWithImpl<$Res> extends _$CoordinatesCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_Coordinates extends _Coordinates {
-  const _$_Coordinates(this.latitude, this.longitude)
+  _$_Coordinates(this.latitude, this.longitude)
       : assert(latitude != null),
         assert(longitude != null),
         super._();
@@ -156,9 +156,8 @@ class _$_Coordinates extends _Coordinates {
 }
 
 abstract class _Coordinates extends Coordinates {
-  const _Coordinates._() : super._();
-  const factory _Coordinates(double latitude, double longitude) =
-      _$_Coordinates;
+  _Coordinates._() : super._();
+  factory _Coordinates(double latitude, double longitude) = _$_Coordinates;
 
   factory _Coordinates.fromJson(Map<String, dynamic> json) =
       _$_Coordinates.fromJson;

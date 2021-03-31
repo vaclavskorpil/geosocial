@@ -12,7 +12,7 @@ abstract class FilterDTO with _$FilterDTO {
   const FilterDTO._();
 
   @HiveType(typeId: 2, adapterName: "FilterDTOAdapter")
-  const factory FilterDTO(
+  factory FilterDTO(
     @HiveField(0) String location,
     @HiveField(1) String filterQuery,
     @HiveField(2) double radius,

@@ -15,6 +15,7 @@ _$_Review _$_$_ReviewFromJson(Map<String, dynamic> json) {
         : User.fromJson(json['user'] as Map<String, dynamic>),
     json['text'] as String,
     json['url'] as String,
+    json['time_created'] as String,
   );
 }
 
@@ -24,4 +25,5 @@ Map<String, dynamic> _$_$_ReviewToJson(_$_Review instance) => <String, dynamic>{
       'user': instance.user,
       'text': instance.text,
       'url': instance.url,
+      'time_created': instance.timeCreated,
     };

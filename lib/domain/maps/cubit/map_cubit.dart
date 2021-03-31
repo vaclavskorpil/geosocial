@@ -45,7 +45,6 @@ class MapCubit extends Cubit<MapState> {
   ///transforms businesses to set of markers
   ///counts location of camera
   void _transformPoiStateToMapState(POIState poiState) {
-    
     if (poiState.isFetching) {
       emit(state.copyWith(isLoading: true, failure: none()));
       return;
@@ -58,15 +57,11 @@ class MapCubit extends Cubit<MapState> {
       return;
     }
 
-    Set<Marker> markers = poiState.businesses
-        .map((business) => CustomMarker.createMarker(business))
-        .toSet();
-
     var location = _locationService.getCentroid(poiState.businesses
         .map((business) => business.coordinates.getLatLng())
         .toSet());
 
-    emit(MapState.succes(markers, location, false, none()));
+    emit(MapState.succes(poiState.businesses, location, false, none()));
   }
 
   Future<void> _initMapToMyLastKnownPostion() async {
@@ -78,4 +73,6 @@ class MapCubit extends Cubit<MapState> {
 
     emit(state.copyWith(cameraPosition: position));
   }
+
+
 }
