@@ -3,12 +3,11 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:geosocial/common/failures/failure.dart';
-import 'package:geosocial/common/failures/poi_failure.dart';
+
+import 'package:geosocial/common/failures/server_failure.dart';
 import 'package:geosocial/data_layer/entities/business.dart';
 import 'package:geosocial/data_layer/services/location_service/location_service.dart';
 import 'package:geosocial/domain/poi/poi_cubit.dart';
-import 'package:geosocial/presentation/map/custom_marker.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 part 'map_state.dart';
@@ -50,18 +49,30 @@ class MapCubit extends Cubit<MapState> {
       return;
     }
 
-    //if no businesses were found, emit POIFailure and return
-    if (poiState.businesses.isEmpty) {
-      emit(state.copyWith(
-          failure: some(POIFailure.noPoiFound()), isLoading: false));
-      return;
-    }
+    poiState.failure.fold(
+      () {
+        //if no businesses were found, emit POIFailure and return
+        if (poiState.businesses.isEmpty) {
+          emit(state.copyWith(
+              failure: some(ServerFailure.noPoiFound()), isLoading: false));
+          return;
+        }
 
-    var location = _locationService.getCentroid(poiState.businesses
-        .map((business) => business.coordinates.getLatLng())
-        .toSet());
+        // set camera location to centroid of all returnet pois
+        var location = _locationService.getCentroid(poiState.businesses
+            .map((business) => business.coordinates.getLatLng())
+            .toSet());
 
-    emit(MapState.succes(poiState.businesses, location, false, none()));
+        emit(MapState.succes(poiState.businesses, location, false, none()));
+      },
+      // if there is failure just pass it along
+      (failure) => emit(
+        state.copyWith(
+          isLoading: false,
+          failure: some(failure),
+        ),
+      ),
+    );
   }
 
   Future<void> _initMapToMyLastKnownPostion() async {
@@ -73,6 +84,4 @@ class MapCubit extends Cubit<MapState> {
 
     emit(state.copyWith(cameraPosition: position));
   }
-
-
 }

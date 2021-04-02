@@ -16,10 +16,12 @@ class _$FilterStateTearOff {
 // ignore: unused_element
   _Succes succes(
       {FilterDTO filter,
+      bool isValid = false,
       Option<Failure> failure = const None(),
       bool applyFilter = false}) {
     return _Succes(
       filter: filter,
+      isValid: isValid,
       failure: failure,
       applyFilter: applyFilter,
     );
@@ -33,18 +35,20 @@ const $FilterState = _$FilterStateTearOff();
 /// @nodoc
 mixin _$FilterState {
   FilterDTO get filter;
+  bool get isValid;
   Option<Failure> get failure;
   bool get applyFilter;
 
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required
-        TResult succes(
-            FilterDTO filter, Option<Failure> failure, bool applyFilter),
+        TResult succes(FilterDTO filter, bool isValid, Option<Failure> failure,
+            bool applyFilter),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult succes(FilterDTO filter, Option<Failure> failure, bool applyFilter),
+    TResult succes(FilterDTO filter, bool isValid, Option<Failure> failure,
+        bool applyFilter),
     @required TResult orElse(),
   });
   @optionalTypeArgs
@@ -66,7 +70,11 @@ abstract class $FilterStateCopyWith<$Res> {
   factory $FilterStateCopyWith(
           FilterState value, $Res Function(FilterState) then) =
       _$FilterStateCopyWithImpl<$Res>;
-  $Res call({FilterDTO filter, Option<Failure> failure, bool applyFilter});
+  $Res call(
+      {FilterDTO filter,
+      bool isValid,
+      Option<Failure> failure,
+      bool applyFilter});
 
   $FilterDTOCopyWith<$Res> get filter;
 }
@@ -82,11 +90,13 @@ class _$FilterStateCopyWithImpl<$Res> implements $FilterStateCopyWith<$Res> {
   @override
   $Res call({
     Object filter = freezed,
+    Object isValid = freezed,
     Object failure = freezed,
     Object applyFilter = freezed,
   }) {
     return _then(_value.copyWith(
       filter: filter == freezed ? _value.filter : filter as FilterDTO,
+      isValid: isValid == freezed ? _value.isValid : isValid as bool,
       failure: failure == freezed ? _value.failure : failure as Option<Failure>,
       applyFilter:
           applyFilter == freezed ? _value.applyFilter : applyFilter as bool,
@@ -109,7 +119,11 @@ abstract class _$SuccesCopyWith<$Res> implements $FilterStateCopyWith<$Res> {
   factory _$SuccesCopyWith(_Succes value, $Res Function(_Succes) then) =
       __$SuccesCopyWithImpl<$Res>;
   @override
-  $Res call({FilterDTO filter, Option<Failure> failure, bool applyFilter});
+  $Res call(
+      {FilterDTO filter,
+      bool isValid,
+      Option<Failure> failure,
+      bool applyFilter});
 
   @override
   $FilterDTOCopyWith<$Res> get filter;
@@ -127,11 +141,13 @@ class __$SuccesCopyWithImpl<$Res> extends _$FilterStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object filter = freezed,
+    Object isValid = freezed,
     Object failure = freezed,
     Object applyFilter = freezed,
   }) {
     return _then(_Succes(
       filter: filter == freezed ? _value.filter : filter as FilterDTO,
+      isValid: isValid == freezed ? _value.isValid : isValid as bool,
       failure: failure == freezed ? _value.failure : failure as Option<Failure>,
       applyFilter:
           applyFilter == freezed ? _value.applyFilter : applyFilter as bool,
@@ -142,12 +158,19 @@ class __$SuccesCopyWithImpl<$Res> extends _$FilterStateCopyWithImpl<$Res>
 /// @nodoc
 class _$_Succes implements _Succes {
   const _$_Succes(
-      {this.filter, this.failure = const None(), this.applyFilter = false})
-      : assert(failure != null),
+      {this.filter,
+      this.isValid = false,
+      this.failure = const None(),
+      this.applyFilter = false})
+      : assert(isValid != null),
+        assert(failure != null),
         assert(applyFilter != null);
 
   @override
   final FilterDTO filter;
+  @JsonKey(defaultValue: false)
+  @override
+  final bool isValid;
   @JsonKey(defaultValue: const None())
   @override
   final Option<Failure> failure;
@@ -157,7 +180,7 @@ class _$_Succes implements _Succes {
 
   @override
   String toString() {
-    return 'FilterState.succes(filter: $filter, failure: $failure, applyFilter: $applyFilter)';
+    return 'FilterState.succes(filter: $filter, isValid: $isValid, failure: $failure, applyFilter: $applyFilter)';
   }
 
   @override
@@ -166,6 +189,9 @@ class _$_Succes implements _Succes {
         (other is _Succes &&
             (identical(other.filter, filter) ||
                 const DeepCollectionEquality().equals(other.filter, filter)) &&
+            (identical(other.isValid, isValid) ||
+                const DeepCollectionEquality()
+                    .equals(other.isValid, isValid)) &&
             (identical(other.failure, failure) ||
                 const DeepCollectionEquality()
                     .equals(other.failure, failure)) &&
@@ -178,6 +204,7 @@ class _$_Succes implements _Succes {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(filter) ^
+      const DeepCollectionEquality().hash(isValid) ^
       const DeepCollectionEquality().hash(failure) ^
       const DeepCollectionEquality().hash(applyFilter);
 
@@ -190,22 +217,23 @@ class _$_Succes implements _Succes {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required
-        TResult succes(
-            FilterDTO filter, Option<Failure> failure, bool applyFilter),
+        TResult succes(FilterDTO filter, bool isValid, Option<Failure> failure,
+            bool applyFilter),
   }) {
     assert(succes != null);
-    return succes(filter, failure, applyFilter);
+    return succes(filter, isValid, failure, applyFilter);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult succes(FilterDTO filter, Option<Failure> failure, bool applyFilter),
+    TResult succes(FilterDTO filter, bool isValid, Option<Failure> failure,
+        bool applyFilter),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (succes != null) {
-      return succes(filter, failure, applyFilter);
+      return succes(filter, isValid, failure, applyFilter);
     }
     return orElse();
   }
@@ -236,11 +264,14 @@ class _$_Succes implements _Succes {
 abstract class _Succes implements FilterState {
   const factory _Succes(
       {FilterDTO filter,
+      bool isValid,
       Option<Failure> failure,
       bool applyFilter}) = _$_Succes;
 
   @override
   FilterDTO get filter;
+  @override
+  bool get isValid;
   @override
   Option<Failure> get failure;
   @override

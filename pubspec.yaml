@@ -42,6 +42,8 @@ dependencies:
   pretty_dio_logger: ^1.1.1
   url_launcher: ^6.0.3
   shimmer: ^1.1.2
+  vibration: ^1.7.3
+  connectivity: ^3.0.3 
   # UI
   google_fonts: any
 

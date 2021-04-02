@@ -17,66 +17,65 @@ part 'poi_cubit.freezed.dart';
 class POICubit extends Cubit<POIState> {
   final BusinessRepository _businessRepo;
   final FilterRepository _filterRepo;
-  final LocationService _locationService;
 
   final fetchMoreTreshold = 15;
   final fetchItemLimit = 20;
 
   FilterDTO get _filter => _filterRepo.currentFilter;
 
-  POICubit(this._businessRepo, this._filterRepo, this._locationService)
-      : super(POIState.initial());
+  POICubit(this._businessRepo, this._filterRepo) : super(POIState.initial());
 
   void fetchBusinesses() async {
     _fetchBusinesses(_filter, state.businesses.length);
   }
 
   void fetchNewBusinesses() async {
-    print("Fetching new businesses ");
     _fetchBusinessesInitial(_filter, state.businesses.length);
   }
 
   void _fetchBusinessesInitial(FilterDTO filter, int size) async {
     emit(state.copyWith(isFetching: true));
 
-    try {
-      final result =
-          await _businessRepo.getBusinesses(filter, fetchItemLimit, size);
+    final failureOrBusinesses =
+        await _businessRepo.getBusinesses(filter, fetchItemLimit, size);
 
-      emit(POIState.succes(
-          businesses: result, isFetching: false, failure: none()));
-
-      print("New businesses fetched $result ");
-    } catch (exception) {
-      print(exception.toString());
-      emit(
+    failureOrBusinesses.fold(
+      (failure) => emit(
         state.copyWith(
-            isFetching: false, failure: optionOf(ServerFailure.serverError())),
-      );
-    }
+          isFetching: false,
+          failure: some(failure),
+        ),
+      ),
+      (businesses) => emit(
+        POIState.succes(
+          businesses: businesses,
+          isFetching: false,
+          failure: none(),
+        ),
+      ),
+    );
   }
 
   void _fetchBusinesses(FilterDTO filter, int size) async {
     emit(state.copyWith(isFetching: true));
 
-    try {
-      final result =
-          await _businessRepo.getBusinesses(filter, fetchItemLimit, size);
+    final failureOrBusinesses =
+        await _businessRepo.getBusinesses(filter, fetchItemLimit, size);
 
-      emit(
+    failureOrBusinesses.fold(
+      (failure) => emit(
+        state.copyWith(
+          isFetching: false,
+          failure: some(failure),
+        ),
+      ),
+      (businesses) => emit(
         POIState.succes(
-          businesses: state.businesses..addAll(result),
+          businesses: state.businesses..addAll(businesses),
           isFetching: false,
           failure: none(),
         ),
-      );
-    } catch (GetBusinessesRequestFailure) {
-      emit(
-        state.copyWith(
-          isFetching: false,
-          failure: optionOf(ServerFailure.serverError()),
-        ),
-      );
-    }
+      ),
+    );
   }
 }

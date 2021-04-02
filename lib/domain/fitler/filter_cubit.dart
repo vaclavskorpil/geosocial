@@ -24,9 +24,18 @@ class FilterCubit extends Cubit<FilterState> {
   FilterCubit(this._filterRepo, this._locationService)
       : locationTextEditingController = TextEditingController(),
         filterTextEditingController = TextEditingController(),
-        super(FilterState.succes(filter: _filterRepo.currentFilter)) {
+        super(FilterState.succes(
+            filter: _filterRepo.currentFilter, isValid: true)) {
     locationTextEditingController.text = _filterRepo.currentFilter.location;
     filterTextEditingController.text = _filterRepo.currentFilter.filterQuery;
+
+    // listen to text changes, if text is not empty
+    // emit valid = true
+    locationTextEditingController.addListener(() {
+      if (locationTextEditingController.text.isNotEmpty) {
+        emit(state.copyWith(isValid: true));
+      }
+    });
   }
 
   void changeRadius(double newRadius) async {
@@ -76,14 +85,31 @@ class FilterCubit extends Cubit<FilterState> {
 
   void useMyLocation(bool useLocation) async {
     if (useLocation) {
+      //check for permitions
       var canUseLocation = await _locationService.hasPermissions();
-      emit(state.copyWith(filter: state.filter.copyWith(useMyLocation: canUseLocation)));
+      emit(state.copyWith(
+          filter: state.filter.copyWith(
+        useMyLocation: canUseLocation,
+      )));
+
+      emit(state.copyWith(isValid: _validateLocation()));
     } else {
-      emit(state.copyWith(filter: state.filter.copyWith(useMyLocation: false)));
+      emit(
+        state.copyWith(
+          filter: state.filter.copyWith(useMyLocation: false),
+        ),
+      );
     }
   }
 
   void applyFilter() async {
+    // validate if text is not empty and useMyLocation is false
+
+    if (!_validateLocation()) {
+      emit(state.copyWith(isValid: false));
+      return;
+    }
+
     final filter = state.filter.copyWith(
       location: locationTextEditingController.text,
       filterQuery: filterTextEditingController.text,
@@ -92,5 +118,11 @@ class FilterCubit extends Cubit<FilterState> {
     _filterRepo.saveFilter(filter);
     print("FIlter applied ");
     emit(state.copyWith(failure: none(), applyFilter: true));
+  }
+
+  //returns true if is valid
+  bool _validateLocation() {
+    return locationTextEditingController.text.isNotEmpty ||
+        state.filter.useMyLocation;
   }
 }

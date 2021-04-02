@@ -24,8 +24,10 @@ class HomePage extends StatelessWidget {
 
                   return Visibility(
                     visible: isLoading,
-                    child: CircularProgressIndicator(
-                      key: Key("Circural_progress_indicatior"),
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        key: Key("Circural_progress_indicatior"),
+                      ),
                     ),
                   );
                 },

@@ -1,18 +1,14 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:geosocial/common/constants/constatns.dart';
 import 'package:geosocial/common/constants/dimens.dart';
-import 'package:geosocial/data_layer/entities/business.dart';
-import 'package:geosocial/presentation/detail/review_list.dart';
-import 'package:geosocial/presentation/detail/yelp_rating.dart';
-import 'package:geosocial/presentation/widgets/custom_network_image.dart';
-import 'package:geosocial/presentation/widgets/yelp_logo.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-const double textHeight = 20;
+import 'package:geosocial/presentation/detail/yelp_rating.dart';
+import 'package:geosocial/presentation/widgets/yelp_logo.dart';
+
+const double textHeight = 14;
 const double textTinyHeight = 12;
-const double titleHeight = 35;
+const double titleHeight = 32;
 
 const double adressWidth = 120;
 const double titleWidth = 250;
@@ -54,7 +50,7 @@ class _DetailSkeletonBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-          left: Dimens.paddingMedium, right: Dimens.paddingMedium),
+          left: Dimens.paddingDefault, right: Dimens.paddingDefault),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,9 +195,9 @@ class _AdressSkeleton extends StatelessWidget {
           style: Theme.of(context).textTheme.headline2,
         ),
         adressContainer,
-        SizedBox(height: 4),
+        SizedBox(height: 3),
         adressContainer,
-        SizedBox(height: 4),
+        SizedBox(height: 3),
         adressContainer
       ],
     );
@@ -324,7 +320,7 @@ class _PriceLevelSkeleton extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Categories",
+          "Price level",
           style: Theme.of(context).textTheme.headline2,
         ),
         Text(

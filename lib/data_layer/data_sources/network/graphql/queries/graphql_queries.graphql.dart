@@ -25,24 +25,6 @@ class SearchBusinesses$Query$Businesses$Business$Category with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
-class SearchBusinesses$Query$Businesses$Business$Location with EquatableMixin {
-  SearchBusinesses$Query$Businesses$Business$Location();
-
-  factory SearchBusinesses$Query$Businesses$Business$Location.fromJson(
-          Map<String, dynamic> json) =>
-      _$SearchBusinesses$Query$Businesses$Business$LocationFromJson(json);
-
-  String city;
-
-  String address1;
-
-  @override
-  List<Object> get props => [city, address1];
-  Map<String, dynamic> toJson() =>
-      _$SearchBusinesses$Query$Businesses$Business$LocationToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
 class SearchBusinesses$Query$Businesses$Business$Coordinates
     with EquatableMixin {
   SearchBusinesses$Query$Businesses$Business$Coordinates();
@@ -62,23 +44,6 @@ class SearchBusinesses$Query$Businesses$Business$Coordinates
 }
 
 @JsonSerializable(explicitToJson: true)
-class SearchBusinesses$Query$Businesses$Business$Hours with EquatableMixin {
-  SearchBusinesses$Query$Businesses$Business$Hours();
-
-  factory SearchBusinesses$Query$Businesses$Business$Hours.fromJson(
-          Map<String, dynamic> json) =>
-      _$SearchBusinesses$Query$Businesses$Business$HoursFromJson(json);
-
-  @JsonKey(name: 'is_open_now')
-  bool isOpenNow;
-
-  @override
-  List<Object> get props => [isOpenNow];
-  Map<String, dynamic> toJson() =>
-      _$SearchBusinesses$Query$Businesses$Business$HoursToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
 class SearchBusinesses$Query$Businesses$Business with EquatableMixin {
   SearchBusinesses$Query$Businesses$Business();
 
@@ -90,38 +55,19 @@ class SearchBusinesses$Query$Businesses$Business with EquatableMixin {
 
   String name;
 
-  String url;
-
   String price;
 
   double rating;
 
-  double distance;
-
   List<SearchBusinesses$Query$Businesses$Business$Category> categories;
-
-  SearchBusinesses$Query$Businesses$Business$Location location;
 
   SearchBusinesses$Query$Businesses$Business$Coordinates coordinates;
 
   List<String> photos;
 
-  List<SearchBusinesses$Query$Businesses$Business$Hours> hours;
-
   @override
-  List<Object> get props => [
-        id,
-        name,
-        url,
-        price,
-        rating,
-        distance,
-        categories,
-        location,
-        coordinates,
-        photos,
-        hours
-      ];
+  List<Object> get props =>
+      [id, name, price, rating, categories, coordinates, photos];
   Map<String, dynamic> toJson() =>
       _$SearchBusinesses$Query$Businesses$BusinessToJson(this);
 }
@@ -556,12 +502,6 @@ class SearchBusinessesQuery
                           directives: [],
                           selectionSet: null),
                       FieldNode(
-                          name: NameNode(value: 'url'),
-                          alias: null,
-                          arguments: [],
-                          directives: [],
-                          selectionSet: null),
-                      FieldNode(
                           name: NameNode(value: 'price'),
                           alias: null,
                           arguments: [],
@@ -569,12 +509,6 @@ class SearchBusinessesQuery
                           selectionSet: null),
                       FieldNode(
                           name: NameNode(value: 'rating'),
-                          alias: null,
-                          arguments: [],
-                          directives: [],
-                          selectionSet: null),
-                      FieldNode(
-                          name: NameNode(value: 'distance'),
                           alias: null,
                           arguments: [],
                           directives: [],
@@ -593,25 +527,6 @@ class SearchBusinessesQuery
                                 selectionSet: null),
                             FieldNode(
                                 name: NameNode(value: 'alias'),
-                                alias: null,
-                                arguments: [],
-                                directives: [],
-                                selectionSet: null)
-                          ])),
-                      FieldNode(
-                          name: NameNode(value: 'location'),
-                          alias: null,
-                          arguments: [],
-                          directives: [],
-                          selectionSet: SelectionSetNode(selections: [
-                            FieldNode(
-                                name: NameNode(value: 'city'),
-                                alias: null,
-                                arguments: [],
-                                directives: [],
-                                selectionSet: null),
-                            FieldNode(
-                                name: NameNode(value: 'address1'),
                                 alias: null,
                                 arguments: [],
                                 directives: [],
@@ -641,20 +556,7 @@ class SearchBusinessesQuery
                           alias: null,
                           arguments: [],
                           directives: [],
-                          selectionSet: null),
-                      FieldNode(
-                          name: NameNode(value: 'hours'),
-                          alias: null,
-                          arguments: [],
-                          directives: [],
-                          selectionSet: SelectionSetNode(selections: [
-                            FieldNode(
-                                name: NameNode(value: 'is_open_now'),
-                                alias: null,
-                                arguments: [],
-                                directives: [],
-                                selectionSet: null)
-                          ]))
+                          selectionSet: null)
                     ]))
               ]))
         ]))

@@ -24,27 +24,17 @@ query SearchBusinesses(
     business {
       id
       name
-      url
       price
       rating
-      distance
       categories {
         title
         alias
-      }
-      location {
-        city
-        address1
       }
       coordinates {
         latitude
         longitude
       }
-
       photos
-      hours {
-        is_open_now
-      }
     }
   }
 }

@@ -1,35 +1,19 @@
 import 'package:dio/dio.dart';
 import 'package:dio/native_imp.dart';
 import 'package:geosocial/common/constants/constatns.dart';
-
-
-import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+import 'toket_interceptor.dart';
 
 class CustomDio extends DioForNative implements Dio {
-  
   static Future<Dio> createDio() async {
     final Dio dio = Dio();
     dio.options.baseUrl = Constants.yelpApiUri;
-    dio..interceptors.addAll([PrettyDioLogger(), TokenInterceptor(dio: dio)]);
+    dio
+      ..interceptors.addAll([
+        PrettyDioLogger(),
+        TokenInterceptor(),
+      ]);
     return dio;
-  }
-}
-
-class TokenInterceptor extends InterceptorsWrapper {
-  final Dio dio;
-
-  TokenInterceptor({this.dio});
-
-  @override
-  Future onRequest(RequestOptions options) async {
-    options.headers["Authorization"] = "Bearer ${Constants.apiKey}";
-    return options;
-  }
-
-  @override
-  Future onError(DioError error) async {
-    return super.onError(error);
   }
 }

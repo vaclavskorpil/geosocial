@@ -15,7 +15,7 @@ class _$MapStateTearOff {
 
 // ignore: unused_element
   _Sucess succes(List<Business> businesses, LatLng cameraPosition,
-      bool isLoading, Option<Failure> failure) {
+      bool isLoading, Option<ServerFailure> failure) {
     return _Sucess(
       businesses,
       cameraPosition,
@@ -34,18 +34,18 @@ mixin _$MapState {
   List<Business> get businesses;
   LatLng get cameraPosition;
   bool get isLoading;
-  Option<Failure> get failure;
+  Option<ServerFailure> get failure;
 
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required
         TResult succes(List<Business> businesses, LatLng cameraPosition,
-            bool isLoading, Option<Failure> failure),
+            bool isLoading, Option<ServerFailure> failure),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult succes(List<Business> businesses, LatLng cameraPosition,
-        bool isLoading, Option<Failure> failure),
+        bool isLoading, Option<ServerFailure> failure),
     @required TResult orElse(),
   });
   @optionalTypeArgs
@@ -70,7 +70,7 @@ abstract class $MapStateCopyWith<$Res> {
       {List<Business> businesses,
       LatLng cameraPosition,
       bool isLoading,
-      Option<Failure> failure});
+      Option<ServerFailure> failure});
 }
 
 /// @nodoc
@@ -96,7 +96,9 @@ class _$MapStateCopyWithImpl<$Res> implements $MapStateCopyWith<$Res> {
           ? _value.cameraPosition
           : cameraPosition as LatLng,
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
-      failure: failure == freezed ? _value.failure : failure as Option<Failure>,
+      failure: failure == freezed
+          ? _value.failure
+          : failure as Option<ServerFailure>,
     ));
   }
 }
@@ -110,7 +112,7 @@ abstract class _$SucessCopyWith<$Res> implements $MapStateCopyWith<$Res> {
       {List<Business> businesses,
       LatLng cameraPosition,
       bool isLoading,
-      Option<Failure> failure});
+      Option<ServerFailure> failure});
 }
 
 /// @nodoc
@@ -135,7 +137,7 @@ class __$SucessCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
           ? _value.cameraPosition
           : cameraPosition as LatLng,
       isLoading == freezed ? _value.isLoading : isLoading as bool,
-      failure == freezed ? _value.failure : failure as Option<Failure>,
+      failure == freezed ? _value.failure : failure as Option<ServerFailure>,
     ));
   }
 }
@@ -156,7 +158,7 @@ class _$_Sucess implements _Sucess {
   @override
   final bool isLoading;
   @override
-  final Option<Failure> failure;
+  final Option<ServerFailure> failure;
 
   @override
   String toString() {
@@ -198,7 +200,7 @@ class _$_Sucess implements _Sucess {
   TResult when<TResult extends Object>({
     @required
         TResult succes(List<Business> businesses, LatLng cameraPosition,
-            bool isLoading, Option<Failure> failure),
+            bool isLoading, Option<ServerFailure> failure),
   }) {
     assert(succes != null);
     return succes(businesses, cameraPosition, isLoading, failure);
@@ -208,7 +210,7 @@ class _$_Sucess implements _Sucess {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult succes(List<Business> businesses, LatLng cameraPosition,
-        bool isLoading, Option<Failure> failure),
+        bool isLoading, Option<ServerFailure> failure),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -243,7 +245,7 @@ class _$_Sucess implements _Sucess {
 
 abstract class _Sucess implements MapState {
   const factory _Sucess(List<Business> businesses, LatLng cameraPosition,
-      bool isLoading, Option<Failure> failure) = _$_Sucess;
+      bool isLoading, Option<ServerFailure> failure) = _$_Sucess;
 
   @override
   List<Business> get businesses;
@@ -252,7 +254,7 @@ abstract class _Sucess implements MapState {
   @override
   bool get isLoading;
   @override
-  Option<Failure> get failure;
+  Option<ServerFailure> get failure;
   @override
   @JsonKey(ignore: true)
   _$SucessCopyWith<_Sucess> get copyWith;

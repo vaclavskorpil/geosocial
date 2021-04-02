@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geosocial/common/constants/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final geosocialTheme = ThemeData(
@@ -6,6 +7,11 @@ final geosocialTheme = ThemeData(
   visualDensity: VisualDensity.adaptivePlatformDensity,
   fontFamily: GoogleFonts.roboto().fontFamily,
   textTheme: const TextTheme(
+      button: TextStyle(
+          fontSize: 15,
+          letterSpacing: 1.1,
+          fontWeight: FontWeight.w500,
+          color: Colors.black),
       headline1: TextStyle(
           fontSize: 26, fontWeight: FontWeight.bold, color: Colors.black),
       headline2: TextStyle(

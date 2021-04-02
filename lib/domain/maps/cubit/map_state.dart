@@ -6,7 +6,7 @@ abstract class MapState with _$MapState {
     List<Business> businesses,
     LatLng cameraPosition,
     bool isLoading,
-    Option<Failure> failure,
+    Option<ServerFailure> failure,
   ) = _Sucess;
 
   factory MapState.initial() => MapState.succes(

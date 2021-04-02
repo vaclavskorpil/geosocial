@@ -22,6 +22,11 @@ class _$ServerFailureTearOff {
   _NoInternetConnection noInternetConnection() {
     return const _NoInternetConnection();
   }
+
+// ignore: unused_element
+  _NoPoiFound noPoiFound() {
+    return const _NoPoiFound();
+  }
 }
 
 /// @nodoc
@@ -34,22 +39,26 @@ mixin _$ServerFailure {
   TResult when<TResult extends Object>({
     @required TResult serverError(),
     @required TResult noInternetConnection(),
+    @required TResult noPoiFound(),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
     TResult serverError(),
     TResult noInternetConnection(),
+    TResult noPoiFound(),
     @required TResult orElse(),
   });
   @optionalTypeArgs
   TResult map<TResult extends Object>({
     @required TResult serverError(_ServerError value),
     @required TResult noInternetConnection(_NoInternetConnection value),
+    @required TResult noPoiFound(_NoPoiFound value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
     TResult serverError(_ServerError value),
     TResult noInternetConnection(_NoInternetConnection value),
+    TResult noPoiFound(_NoPoiFound value),
     @required TResult orElse(),
   });
 }
@@ -111,9 +120,11 @@ class _$_ServerError implements _ServerError {
   TResult when<TResult extends Object>({
     @required TResult serverError(),
     @required TResult noInternetConnection(),
+    @required TResult noPoiFound(),
   }) {
     assert(serverError != null);
     assert(noInternetConnection != null);
+    assert(noPoiFound != null);
     return serverError();
   }
 
@@ -122,6 +133,7 @@ class _$_ServerError implements _ServerError {
   TResult maybeWhen<TResult extends Object>({
     TResult serverError(),
     TResult noInternetConnection(),
+    TResult noPoiFound(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -136,9 +148,11 @@ class _$_ServerError implements _ServerError {
   TResult map<TResult extends Object>({
     @required TResult serverError(_ServerError value),
     @required TResult noInternetConnection(_NoInternetConnection value),
+    @required TResult noPoiFound(_NoPoiFound value),
   }) {
     assert(serverError != null);
     assert(noInternetConnection != null);
+    assert(noPoiFound != null);
     return serverError(this);
   }
 
@@ -147,6 +161,7 @@ class _$_ServerError implements _ServerError {
   TResult maybeMap<TResult extends Object>({
     TResult serverError(_ServerError value),
     TResult noInternetConnection(_NoInternetConnection value),
+    TResult noPoiFound(_NoPoiFound value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -202,9 +217,11 @@ class _$_NoInternetConnection implements _NoInternetConnection {
   TResult when<TResult extends Object>({
     @required TResult serverError(),
     @required TResult noInternetConnection(),
+    @required TResult noPoiFound(),
   }) {
     assert(serverError != null);
     assert(noInternetConnection != null);
+    assert(noPoiFound != null);
     return noInternetConnection();
   }
 
@@ -213,6 +230,7 @@ class _$_NoInternetConnection implements _NoInternetConnection {
   TResult maybeWhen<TResult extends Object>({
     TResult serverError(),
     TResult noInternetConnection(),
+    TResult noPoiFound(),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -227,9 +245,11 @@ class _$_NoInternetConnection implements _NoInternetConnection {
   TResult map<TResult extends Object>({
     @required TResult serverError(_ServerError value),
     @required TResult noInternetConnection(_NoInternetConnection value),
+    @required TResult noPoiFound(_NoPoiFound value),
   }) {
     assert(serverError != null);
     assert(noInternetConnection != null);
+    assert(noPoiFound != null);
     return noInternetConnection(this);
   }
 
@@ -238,6 +258,7 @@ class _$_NoInternetConnection implements _NoInternetConnection {
   TResult maybeMap<TResult extends Object>({
     TResult serverError(_ServerError value),
     TResult noInternetConnection(_NoInternetConnection value),
+    TResult noPoiFound(_NoPoiFound value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -250,4 +271,100 @@ class _$_NoInternetConnection implements _NoInternetConnection {
 
 abstract class _NoInternetConnection implements ServerFailure {
   const factory _NoInternetConnection() = _$_NoInternetConnection;
+}
+
+/// @nodoc
+abstract class _$NoPoiFoundCopyWith<$Res> {
+  factory _$NoPoiFoundCopyWith(
+          _NoPoiFound value, $Res Function(_NoPoiFound) then) =
+      __$NoPoiFoundCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$NoPoiFoundCopyWithImpl<$Res> extends _$ServerFailureCopyWithImpl<$Res>
+    implements _$NoPoiFoundCopyWith<$Res> {
+  __$NoPoiFoundCopyWithImpl(
+      _NoPoiFound _value, $Res Function(_NoPoiFound) _then)
+      : super(_value, (v) => _then(v as _NoPoiFound));
+
+  @override
+  _NoPoiFound get _value => super._value as _NoPoiFound;
+}
+
+/// @nodoc
+class _$_NoPoiFound implements _NoPoiFound {
+  const _$_NoPoiFound();
+
+  @override
+  String toString() {
+    return 'ServerFailure.noPoiFound()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _NoPoiFound);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult serverError(),
+    @required TResult noInternetConnection(),
+    @required TResult noPoiFound(),
+  }) {
+    assert(serverError != null);
+    assert(noInternetConnection != null);
+    assert(noPoiFound != null);
+    return noPoiFound();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult serverError(),
+    TResult noInternetConnection(),
+    TResult noPoiFound(),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (noPoiFound != null) {
+      return noPoiFound();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult serverError(_ServerError value),
+    @required TResult noInternetConnection(_NoInternetConnection value),
+    @required TResult noPoiFound(_NoPoiFound value),
+  }) {
+    assert(serverError != null);
+    assert(noInternetConnection != null);
+    assert(noPoiFound != null);
+    return noPoiFound(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult serverError(_ServerError value),
+    TResult noInternetConnection(_NoInternetConnection value),
+    TResult noPoiFound(_NoPoiFound value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (noPoiFound != null) {
+      return noPoiFound(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _NoPoiFound implements ServerFailure {
+  const factory _NoPoiFound() = _$_NoPoiFound;
 }

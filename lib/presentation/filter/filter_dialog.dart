@@ -8,34 +8,47 @@ import 'package:geosocial/domain/fitler/filter_cubit.dart';
 import 'package:geosocial/domain/poi/poi_cubit.dart';
 
 import 'package:geosocial/presentation/filter/category_card.dart';
+import 'package:geosocial/presentation/styled_widgets/styled_outlined_button.dart';
 import 'package:geosocial/presentation/styled_widgets/styled_snackbar.dart';
+import 'package:geosocial/presentation/styled_widgets/styled_textfield.dart';
 
 import 'package:geosocial/presentation/theme/my_colors.dart';
+import 'package:vibration/vibration.dart';
 
 class FilterDialog extends StatelessWidget {
   final inputFieldPadding = const EdgeInsets.fromLTRB(
-      0, Dimens.paddingMedium, 0, Dimens.paddingMedium);
+      0, Dimens.paddingDefault, 0, Dimens.paddingDefault);
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
       child: BlocProvider<FilterCubit>(
         create: (context) => injector<FilterCubit>(),
-        child: BlocListener<FilterCubit, FilterState>(
-          listenWhen: (_, current) {
-            return current.failure.isSome() || current.applyFilter;
-          },
-          listener: (context, state) {
-            if (state.failure.isSome()) {
-              // TODO properly handle state
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(styledSnackBar("Something went wrong."));
-            } else if (state.applyFilter) {
-              //filter was sucesflully aplied, fetch new businesses
-              context.read<POICubit>()..fetchNewBusinesses();
-              Navigator.pop(context);
-            }
-          },
+        child: MultiBlocListener(
+          listeners: [
+            BlocListener<FilterCubit, FilterState>(listenWhen: (_, current) {
+              return current.failure.isSome() || current.applyFilter;
+            }, listener: (context, state) {
+              if (state.failure.isSome()) {
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(styledSnackBar("Something went wrong."));
+              } else if (state.applyFilter) {
+                //filter was sucesflully aplied, fetch new businesses
+                context.read<POICubit>()..fetchNewBusinesses();
+                Navigator.pop(context);
+              }
+            }),
+            BlocListener<FilterCubit, FilterState>(
+              listenWhen: (old, current) => old.isValid != current.isValid,
+              listener: (context, state) async {
+                if (!state.isValid) {
+                  if (await Vibration.hasVibrator()) {
+                    Vibration.vibrate(duration: 150);
+                  }
+                }
+              },
+            )
+          ],
           child: SingleChildScrollView(
             child: Container(
               decoration: BoxDecoration(
@@ -46,15 +59,13 @@ class FilterDialog extends StatelessWidget {
                 padding: const EdgeInsets.all(Dimens.paddingBig),
                 child: Column(
                   children: [
-                    LocationInput(
-                      inputFieldPadding: inputFieldPadding,
-                    ),
-                    FilterTermInput(inputFieldPadding: inputFieldPadding),
+                    LocationInput(),
+                    FilterTermInput(),
                     RadiusSlider(),
                     PriceLevel(),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: Dimens.paddingDefault),
                     Categories(),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: Dimens.paddingDefault),
                     ButtonRow()
                   ],
                 ),
@@ -70,54 +81,75 @@ class FilterDialog extends StatelessWidget {
 class LocationInput extends StatelessWidget {
   const LocationInput({
     Key key,
-    @required this.inputFieldPadding,
   }) : super(key: key);
-
-  final EdgeInsets inputFieldPadding;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: inputFieldPadding,
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Filter"),
-                BlocBuilder<FilterCubit, FilterState>(
-                  buildWhen: (oldState, newState) =>
-                      oldState.filter.location != newState.filter.location,
-                  builder: (context, state) {
-                    //is builded when location changed
-
-                    return TextField(
-                      controller: context
+    return Stack(
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: Builder(
+                builder: (context) {
+                  final isError = context
+                      .select((FilterCubit cubit) => !cubit.state.isValid);
+                  final isEnabled = context.select(
+                      (FilterCubit cubit) => !cubit.state.filter.useMyLocation);
+                  return Container(
+                    // height must be specified to prevent inputField wrom jumping up
+                    // when error message should be shown
+                    height: 62,
+                    child: StyledTextField(
+                      key: Key("location_text_input"),
+                      enabled: isEnabled,
+                      isError: isError,
+                      contoller: context
                           .read<FilterCubit>()
                           .locationTextEditingController,
-                    );
-                  },
-                ),
-              ],
+                      label: "Location",
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
-          const SizedBox(width: 10),
-          Builder(
-            builder: (context) {
-              var isLocationSelected = context.select(
-                  (FilterCubit cubit) => cubit.state.filter.useMyLocation);
-              //todo remve checkbox and put here togleable button
-              return Checkbox(
-                  value: isLocationSelected,
-                  onChanged: (value) {
-                    context.read<FilterCubit>()..useMyLocation(value);
-                  });
-            },
-          ),
-        ],
-      ),
+            const SizedBox(width: 10),
+            Builder(
+              builder: (context) {
+                var isLocationSelected = context.select(
+                    (FilterCubit cubit) => cubit.state.filter.useMyLocation);
+                //todo remve checkbox and put here togleable button
+                return Checkbox(
+                    value: isLocationSelected,
+                    onChanged: (value) {
+                      context.read<FilterCubit>()..useMyLocation(value);
+                    });
+              },
+            ),
+          ],
+        ),
+        Positioned(
+          left: 0,
+          bottom: 5,
+          child: BlocBuilder<FilterCubit, FilterState>(
+              buildWhen: (old, current) => old.isValid != current.isValid,
+              builder: (context, state) {
+                return AnimatedSwitcher(
+                  duration: Duration(milliseconds: 250),
+                  child: state.isValid
+                      ? Container()
+                      : Text(
+                          "You must specify location or use your location",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1
+                              .copyWith(color: Colors.red),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                );
+              }),
+        )
+      ],
     );
   }
 }
@@ -125,32 +157,14 @@ class LocationInput extends StatelessWidget {
 class FilterTermInput extends StatelessWidget {
   const FilterTermInput({
     Key key,
-    @required this.inputFieldPadding,
   }) : super(key: key);
-
-  final EdgeInsets inputFieldPadding;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: inputFieldPadding,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text("Filter"),
-          Builder(
-            builder: (context) {
-              final searchTerm = context.select(
-                  (FilterCubit cubit) => cubit.state.filter.filterQuery);
-              return TextField(
-                controller:
-                    context.read<FilterCubit>().filterTextEditingController,
-              );
-            },
-          ),
-        ],
-      ),
-    );
+    return StyledTextField(
+        enabled: true,
+        label: "Search term",
+        contoller: context.read<FilterCubit>().filterTextEditingController);
   }
 }
 
@@ -164,17 +178,28 @@ class ButtonRow extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-            child: OutlinedButton(
-          onPressed: () => Navigator.of(context).pop(),
-          child: Text("Cancel"),
-        )),
+          child: OutlinedButtonRed(
+            label: "Cancel",
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ),
         const SizedBox(width: 12),
         Expanded(
-            child: OutlinedButton(
-          onPressed: () {
-            context.read<FilterCubit>()..applyFilter();
-          },
-          child: Text("Apply filter"),
+            child: BlocBuilder<FilterCubit, FilterState>(
+          buildWhen: (oldstate, newstate) =>
+              oldstate.isValid != newstate.isValid,
+          builder: (context, state) => OutlinedButtonBlue(
+            //if state is not valid, null is passed as
+            //[onPressed] value. This will disable button
+            onPressed: state.isValid
+                ? () {
+                    context.read<FilterCubit>()..applyFilter();
+                  }
+                : null,
+            label: "Apply filter",
+          ),
         ))
       ],
     );
@@ -184,24 +209,36 @@ class ButtonRow extends StatelessWidget {
 class PriceLevel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) {
-        final priceRange = context.select(
-            (FilterCubit cubit) => cubit.state.filter.priceLevelRangeValue());
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Text(
+          "Price level",
+          style: Theme.of(context).textTheme.headline3,
+        ),
+        Expanded(
+          child: Builder(
+            builder: (context) {
+              final priceRange = context.select((FilterCubit cubit) =>
+                  cubit.state.filter.priceLevelRangeValue());
 
-        return RangeSlider(
-            max: 4,
-            min: 1,
-            divisions: 3,
-            labels: RangeLabels(
-              _priceLevelToText(priceRange.start),
-              _priceLevelToText(priceRange.end),
-            ),
-            values: priceRange,
-            onChanged: (priceLevel) {
-              context.read<FilterCubit>()..changePriceLevel(priceLevel);
-            });
-      },
+              return RangeSlider(
+                  max: 4,
+                  min: 1,
+                  divisions: 3,
+                  labels: RangeLabels(
+                    _priceLevelToText(priceRange.start),
+                    _priceLevelToText(priceRange.end),
+                  ),
+                  values: priceRange,
+                  onChanged: (priceLevel) {
+                    context.read<FilterCubit>()..changePriceLevel(priceLevel);
+                  });
+            },
+          ),
+        ),
+      ],
     );
   }
 
@@ -297,6 +334,7 @@ class RadiusSlider extends StatelessWidget {
             Text(
               "Radius",
               textAlign: TextAlign.start,
+              style: Theme.of(context).textTheme.headline3,
             ),
             Builder(builder: (context) {
               final radius = context
@@ -305,6 +343,12 @@ class RadiusSlider extends StatelessWidget {
               return Text(
                 "${radius.ceil()}m",
                 textAlign: TextAlign.start,
+                style: Theme.of(context).textTheme.headline3.copyWith(
+                      color:
+                          Color.lerp(Colors.grey, Colors.blue, radius / 20000),
+                      fontWeight: FontWeight.lerp(
+                          FontWeight.w300, FontWeight.w700, radius / 20000),
+                    ),
               );
             }),
           ],

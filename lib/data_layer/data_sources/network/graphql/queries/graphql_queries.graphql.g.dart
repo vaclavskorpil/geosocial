@@ -22,22 +22,6 @@ Map<String, dynamic>
           'alias': instance.alias,
         };
 
-SearchBusinesses$Query$Businesses$Business$Location
-    _$SearchBusinesses$Query$Businesses$Business$LocationFromJson(
-        Map<String, dynamic> json) {
-  return SearchBusinesses$Query$Businesses$Business$Location()
-    ..city = json['city'] as String
-    ..address1 = json['address1'] as String;
-}
-
-Map<String, dynamic>
-    _$SearchBusinesses$Query$Businesses$Business$LocationToJson(
-            SearchBusinesses$Query$Businesses$Business$Location instance) =>
-        <String, dynamic>{
-          'city': instance.city,
-          'address1': instance.address1,
-        };
-
 SearchBusinesses$Query$Businesses$Business$Coordinates
     _$SearchBusinesses$Query$Businesses$Business$CoordinatesFromJson(
         Map<String, dynamic> json) {
@@ -54,50 +38,25 @@ Map<String, dynamic>
           'longitude': instance.longitude,
         };
 
-SearchBusinesses$Query$Businesses$Business$Hours
-    _$SearchBusinesses$Query$Businesses$Business$HoursFromJson(
-        Map<String, dynamic> json) {
-  return SearchBusinesses$Query$Businesses$Business$Hours()
-    ..isOpenNow = json['is_open_now'] as bool;
-}
-
-Map<String, dynamic> _$SearchBusinesses$Query$Businesses$Business$HoursToJson(
-        SearchBusinesses$Query$Businesses$Business$Hours instance) =>
-    <String, dynamic>{
-      'is_open_now': instance.isOpenNow,
-    };
-
 SearchBusinesses$Query$Businesses$Business
     _$SearchBusinesses$Query$Businesses$BusinessFromJson(
         Map<String, dynamic> json) {
   return SearchBusinesses$Query$Businesses$Business()
     ..id = json['id'] as String
     ..name = json['name'] as String
-    ..url = json['url'] as String
     ..price = json['price'] as String
     ..rating = (json['rating'] as num)?.toDouble()
-    ..distance = (json['distance'] as num)?.toDouble()
     ..categories = (json['categories'] as List)
         ?.map((e) => e == null
             ? null
             : SearchBusinesses$Query$Businesses$Business$Category.fromJson(
                 e as Map<String, dynamic>))
         ?.toList()
-    ..location = json['location'] == null
-        ? null
-        : SearchBusinesses$Query$Businesses$Business$Location.fromJson(
-            json['location'] as Map<String, dynamic>)
     ..coordinates = json['coordinates'] == null
         ? null
         : SearchBusinesses$Query$Businesses$Business$Coordinates.fromJson(
             json['coordinates'] as Map<String, dynamic>)
-    ..photos = (json['photos'] as List)?.map((e) => e as String)?.toList()
-    ..hours = (json['hours'] as List)
-        ?.map((e) => e == null
-            ? null
-            : SearchBusinesses$Query$Businesses$Business$Hours.fromJson(
-                e as Map<String, dynamic>))
-        ?.toList();
+    ..photos = (json['photos'] as List)?.map((e) => e as String)?.toList();
 }
 
 Map<String, dynamic> _$SearchBusinesses$Query$Businesses$BusinessToJson(
@@ -105,15 +64,11 @@ Map<String, dynamic> _$SearchBusinesses$Query$Businesses$BusinessToJson(
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'url': instance.url,
       'price': instance.price,
       'rating': instance.rating,
-      'distance': instance.distance,
       'categories': instance.categories?.map((e) => e?.toJson())?.toList(),
-      'location': instance.location?.toJson(),
       'coordinates': instance.coordinates?.toJson(),
       'photos': instance.photos,
-      'hours': instance.hours?.map((e) => e?.toJson())?.toList(),
     };
 
 SearchBusinesses$Query$Businesses _$SearchBusinesses$Query$BusinessesFromJson(

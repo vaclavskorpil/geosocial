@@ -43,7 +43,7 @@ class DetailBody extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       child: Padding(
         padding: const EdgeInsets.only(
-            left: Dimens.paddingMedium, right: Dimens.paddingMedium),
+            left: Dimens.paddingDefault, right: Dimens.paddingDefault),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,

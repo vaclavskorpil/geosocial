@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geosocial/data_layer/dependenci_injection/injector.dart';
@@ -12,11 +11,18 @@ import 'package:geosocial/presentation/styled_widgets/styled_snackbar.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapsPage extends StatelessWidget {
-  void _handlePoiFailure(BuildContext context, MapState state) {
+  void _handleFailure(BuildContext context, MapState state) {
     state.failure.fold(() => null, (failure) {
       final messanger = ScaffoldMessenger.of(context);
       messanger.hideCurrentSnackBar();
-      messanger.showSnackBar(styledSnackBar("No businesses found"));
+      messanger.showSnackBar(
+        styledSnackBar(
+          failure.when(
+              serverError: () => "Something went wrong. :(",
+              noInternetConnection: () => "No internetConnection",
+              noPoiFound: () => "No businesses were found. :("),
+        ),
+      );
     });
   }
 
@@ -33,7 +39,7 @@ class MapsPage extends StatelessWidget {
   }
 
   bool _hasFailure(MapState oldState, MapState newState) {
-    return newState.failure.isSome();
+    return oldState.failure.isSome() != newState.failure.isSome();
   }
 
   Set<Marker> _createMarkers(BuildContext context, List<Business> businesses) {
@@ -42,16 +48,6 @@ class MapsPage extends StatelessWidget {
           (business) => CustomMarker.createMarker(
             business: business,
             onTap: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) =>
-              //         BusinessDetailPage(businessId: business.id),
-              //   ),
-              // );
-
-              // ScaffoldMessenger.of(context)
-              //     .showSnackBar(businessSnackBar(business, context));
-
               context.read<SelectedPOICubit>().selectPoi(business);
             },
           ),
@@ -73,7 +69,7 @@ class MapsPage extends StatelessWidget {
           ],
           child: BlocListener<MapCubit, MapState>(
             listenWhen: _hasFailure,
-            listener: _handlePoiFailure,
+            listener: _handleFailure,
             child: Stack(
               children: [
                 BlocConsumer<MapCubit, MapState>(

@@ -7,4 +7,5 @@ part 'server_failure.freezed.dart';
 abstract class ServerFailure extends Failure with _$ServerFailure {
   const factory ServerFailure.serverError() = _ServerError;
   const factory ServerFailure.noInternetConnection() = _NoInternetConnection;
+  const factory ServerFailure.noPoiFound() = _NoPoiFound;
 }

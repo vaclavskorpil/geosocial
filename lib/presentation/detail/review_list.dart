@@ -66,7 +66,7 @@ class _ReviewTileBody extends StatelessWidget {
         if (await canLaunch(review.url)) launch(review.url);
       },
       child: Padding(
-        padding: const EdgeInsets.all(Dimens.paddingMedium),
+        padding: const EdgeInsets.all(Dimens.paddingDefault),
         child: Column(
           children: [
             _ImageAndName(user: review.user),
@@ -101,7 +101,7 @@ class _ImageAndName extends StatelessWidget {
             height: 20,
           ),
         ),
-        SizedBox(width: Dimens.paddingMedium),
+        SizedBox(width: Dimens.paddingDefault),
         Text(
           user.name,
           style: Theme.of(context).textTheme.headline2,

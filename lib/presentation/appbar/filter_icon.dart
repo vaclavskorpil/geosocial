@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geosocial/common/constants/dimens.dart';
 import 'package:geosocial/domain/poi/poi_cubit.dart';
 
-import 'package:geosocial/presentation/common/custom_icons_icons.dart';
+import 'package:geosocial/presentation/theme/custom_icons_icons.dart';
 import 'package:geosocial/presentation/filter/filter_dialog.dart';
 
 class FilterIcon extends StatelessWidget {

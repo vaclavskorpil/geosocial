@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geosocial/common/failures/server_failure.dart';
 import 'package:geosocial/data_layer/dependenci_injection/injector.dart';
-import 'package:geosocial/data_layer/entities/business.dart';
 import 'package:geosocial/domain/detail/cubit/detail_cubit.dart';
 import 'package:geosocial/presentation/detail/business_detail_skeleton.dart';
 import 'package:shimmer/shimmer.dart';
@@ -34,7 +33,7 @@ class BusinessDetailPage extends StatelessWidget {
               child: BlocBuilder<DetailCubit, DetailState>(
                 builder: (context, state) {
                   return AnimatedSwitcher(
-                    duration: Duration(milliseconds: 300),
+                    duration: Duration(milliseconds: 600),
                     child: state.when(
                       detailLoading: () => Shimmer.fromColors(
                           baseColor: Colors.grey[300],

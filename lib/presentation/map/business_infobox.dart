@@ -34,11 +34,11 @@ class BusinessInfoBox extends StatelessWidget {
         child: Align(
           alignment: Alignment.bottomCenter,
           child: Padding(
-            padding: EdgeInsets.all(Dimens.paddingMedium),
-            child: Material(
+            padding: EdgeInsets.all(Dimens.paddingDefault),
+            child: Material(            
               borderRadius: BorderRadius.circular(Dimens.cornerRadiusDefault),
               child: Padding(
-                padding: const EdgeInsets.all(Dimens.paddingMedium),
+                padding: const EdgeInsets.all(Dimens.paddingDefault),
                 child: Builder(
                   builder: (context) {
                     var business = context.select((SelectedPOICubit cubit) =>
