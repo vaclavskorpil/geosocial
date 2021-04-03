@@ -3,37 +3,43 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geosocial/common/constants/dimens.dart';
 import 'package:geosocial/data_layer/entities/category.dart';
 import 'package:geosocial/domain/fitler/filter_cubit.dart';
-
-import 'neoumorphic_toggle_button.dart';
+import 'package:geosocial/presentation/styled_widgets/styled_togleable_card.dart';
 
 class CategoryCard extends StatelessWidget {
-  final _size = 67.0;
-  final Category _category;
-  final IconData _icon;
+  final _size = 60.0;
+  final Category category;
+  final IconData icon;
   final key = UniqueKey();
-  CategoryCard(this._category, this._icon);
+  CategoryCard({
+    @required this.category,
+    @required this.icon,
+  });
+
+  Widget content({double animation, Color color}) {
+    return TextAndIcon(
+      color: color,
+      animation: animation,
+      icon: icon,
+      text: category.title,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) {
-        final isToggled = context.select((FilterCubit cubit) =>
-            cubit.state.filter.categories.contains(_category));
-        return NeumorphicToggleButton(
-          key: key,
+    return BlocBuilder<FilterCubit, FilterState>(
+      builder: (context, state) {
+        final isToggled = state.filter.categories.contains(category);
+
+        return BlueToggleableCard(
           size: _size,
-          content: (double elevation, double negativeElevation) => TextAndIcon(
-              icon: _icon,
-              shadowBlurAnimation: elevation,
-              innerShadowAnimation: negativeElevation,
-              category: _category),
-          toggled: isToggled,
+          content: content,
+          isToggled: isToggled,
           onPressed: (isToggled) {
             var filterCubit = context.read<FilterCubit>();
             if (isToggled) {
-              filterCubit.removeCategory(_category);
+              filterCubit.removeCategory(category);
             } else {
-              filterCubit.addCategory(_category);
+              filterCubit.addCategory(category);
             }
           },
         );
@@ -45,20 +51,16 @@ class CategoryCard extends StatelessWidget {
 class TextAndIcon extends StatelessWidget {
   const TextAndIcon({
     Key key,
-    @required IconData icon,
-    @required double shadowBlurAnimation,
-    @required double innerShadowAnimation,
-    @required Category category,
-  })  : _icon = icon,
-        _shadowBlurAnimation = shadowBlurAnimation,
-        _innerShadowAnimation = innerShadowAnimation,
-        _category = category,
-        super(key: key);
+    @required  this.icon,
+    @required  this.animation,
+    @required  this.color,
+    @required  this.text,
+  }) : super(key: key);
 
-  final IconData _icon;
-  final double _shadowBlurAnimation;
-  final double _innerShadowAnimation;
-  final Category _category;
+  final IconData icon;
+  final double animation;
+  final Color color;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -66,22 +68,19 @@ class TextAndIcon extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(
-          _icon,
-          size: Dimens.iconSizeNormal +
-              2 * _shadowBlurAnimation -
-              2 * _innerShadowAnimation,
+          icon,
+          size: Dimens.iconSizeSmall + animation * 7,
+          color: color,
         ),
         Padding(
           padding: const EdgeInsets.all(4.0),
           child: Text(
-            _category.title,
+            text,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
-              fontSize: Dimens.textFontSizeSmall +
-                  _shadowBlurAnimation -
-                  _innerShadowAnimation,
-            ),
+                fontSize: Dimens.textFontSizeSmall + animation * 3,
+                color: color),
           ),
         ),
       ],

@@ -43,7 +43,7 @@ abstract class FilterDTO with _$FilterDTO {
   String categoriesString() {
     var result = "";
     categories.forEach((element) {
-      result = "$result, ${element.title}";
+      result = "$result, ${element.alias}";
     });
     return result;
   }

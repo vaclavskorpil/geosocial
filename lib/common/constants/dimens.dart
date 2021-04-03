@@ -1,4 +1,3 @@
-
 class Dimens {
   Dimens._();
 
@@ -13,9 +12,9 @@ class Dimens {
   static const inputFieldHeight = 40.0;
   static const inputFieldTrailingIconPaddingRight = 40.0;
 
-  static const iconSizeSmall = 16.0;
+  static const iconSizeSmall = 18.0;
   static const iconSizeNormal = 24.0;
 
   static const textFontSizeNormal = 16.0;
-  static const textFontSizeSmall = 12.0;
+  static const textFontSizeSmall = 10.0;
 }

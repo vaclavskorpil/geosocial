@@ -8,20 +8,21 @@ import 'package:geosocial/domain/fitler/filter_cubit.dart';
 import 'package:geosocial/domain/poi/poi_cubit.dart';
 
 import 'package:geosocial/presentation/filter/category_card.dart';
+import 'package:geosocial/presentation/filter/use_my_location.dart';
 import 'package:geosocial/presentation/styled_widgets/styled_outlined_button.dart';
 import 'package:geosocial/presentation/styled_widgets/styled_snackbar.dart';
 import 'package:geosocial/presentation/styled_widgets/styled_textfield.dart';
 
 import 'package:geosocial/presentation/theme/my_colors.dart';
 import 'package:vibration/vibration.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FilterDialog extends StatelessWidget {
-  final inputFieldPadding = const EdgeInsets.fromLTRB(
-      0, Dimens.paddingDefault, 0, Dimens.paddingDefault);
-
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      clipBehavior: Clip.none,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: BlocProvider<FilterCubit>(
         create: (context) => injector<FilterCubit>(),
         child: MultiBlocListener(
@@ -88,6 +89,7 @@ class LocationInput extends StatelessWidget {
     return Stack(
       children: [
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               child: Builder(
@@ -114,18 +116,7 @@ class LocationInput extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 10),
-            Builder(
-              builder: (context) {
-                var isLocationSelected = context.select(
-                    (FilterCubit cubit) => cubit.state.filter.useMyLocation);
-                //todo remve checkbox and put here togleable button
-                return Checkbox(
-                    value: isLocationSelected,
-                    onChanged: (value) {
-                      context.read<FilterCubit>()..useMyLocation(value);
-                    });
-              },
-            ),
+            UseMyLocationCard(),
           ],
         ),
         Positioned(
@@ -261,58 +252,58 @@ class Categories extends StatelessWidget {
     return Column(
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             CategoryCard(
-              Category("Restaurace", "rest"),
-              Icons.restaurant,
+              category: Category("Burgers", "burgers"),
+              icon: FontAwesomeIcons.hamburger,
             ),
             CategoryCard(
-              Category("Drink", "rest"),
-              Icons.local_drink,
+              category: Category("Coffee", "coffee"),
+              icon: FontAwesomeIcons.coffee,
             ),
             CategoryCard(
-              Category("Víno", "rest"),
-              Icons.restaurant,
+              category: Category("Desserts", "deserts"),
+              icon: FontAwesomeIcons.birthdayCake,
             ),
           ],
         ),
         const SizedBox(height: 10),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //   children: [
-        //     CategoryCard(
-        //       Category("Restaurace", "rest"),
-        //       Icons.restaurant,
-        //     ),
-        //     CategoryCard(
-        //       Category("Drink", "rest"),
-        //       Icons.local_drink,
-        //     ),
-        //     CategoryCard(
-        //       Category("Víno", "rest"),
-        //       Icons.restaurant,
-        //     ),
-        //   ],
-        // ),
-        // const SizedBox(height: 10),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //   children: [
-        //     CategoryCard(
-        //       Category("Restaurace", "rest"),
-        //       Icons.restaurant,
-        //     ),
-        //     CategoryCard(
-        //       Category("Drink", "rest"),
-        //       Icons.local_drink,
-        //     ),
-        //     CategoryCard(
-        //       Category("Víno", "rest"),
-        //       Icons.restaurant,
-        //     ),
-        //   ],
-        // )
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            CategoryCard(
+              category: Category("Ice cream", "icecream"),
+              icon: FontAwesomeIcons.iceCream,
+            ),
+            CategoryCard(
+              category: Category("Bars", "bars"),
+              icon: FontAwesomeIcons.cocktail,
+            ),
+            CategoryCard(
+              category: Category("Wine bars", "winebars"),
+              icon: FontAwesomeIcons.wineGlassAlt,
+            ),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            CategoryCard(
+              category: Category("Restaurants", "restaurants"),
+              icon: Icons.restaurant,
+            ),
+            CategoryCard(
+              category: Category("Beer", "beergarden"),
+              icon: FontAwesomeIcons.beer,
+            ),
+            CategoryCard(
+              category: Category("Vegan", "vegan"),
+              icon: FontAwesomeIcons.leaf,
+            ),
+          ],
+        ),
       ],
     );
   }

@@ -13,6 +13,7 @@ class HomePage extends StatelessWidget {
       child: BlocProvider<POICubit>(
         create: (context) => injector<POICubit>(),
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
           appBar: MyAppbar(),
           body: Stack(
             children: [

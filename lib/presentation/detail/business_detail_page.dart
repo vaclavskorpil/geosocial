@@ -15,6 +15,7 @@ class BusinessDetailPage extends StatelessWidget {
 
   Widget _handleServerFailure(ServerFailure failure) {
     final text = failure.when(
+      noPoiFound: () => "",
       serverError: () => "Opps. Somthing went wrong",
       noInternetConnection: () => "You do not have internet connection",
     );

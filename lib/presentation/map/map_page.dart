@@ -71,6 +71,7 @@ class MapsPage extends StatelessWidget {
             listenWhen: _hasFailure,
             listener: _handleFailure,
             child: Stack(
+            
               children: [
                 BlocConsumer<MapCubit, MapState>(
                     listenWhen: _cameraPositionChanged,
@@ -78,6 +79,7 @@ class MapsPage extends StatelessWidget {
                     buildWhen: (_, newState) => !newState.isLoading,
                     builder: (context, state) {
                       return GoogleMap(
+                      
                         mapType: MapType.normal,
                         initialCameraPosition: CameraPosition(
                           target: state.cameraPosition,
