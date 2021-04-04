@@ -7,33 +7,34 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:geosocial/common/failures/server_failure.dart';
 import 'package:geosocial/data_layer/entities/business.dart';
 import 'package:geosocial/data_layer/services/location_service/location_service.dart';
+
+import 'package:geosocial/domain/maps/selected_poi/cubit/selected_poi_cubit.dart';
 import 'package:geosocial/domain/poi/poi_cubit.dart';
+import 'package:geosocial/presentation/map/custom_marker.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:injectable/injectable.dart';
 
 part 'map_state.dart';
 part 'map_cubit.freezed.dart';
 
+@lazySingleton
 class MapCubit extends Cubit<MapState> {
   final defaultLatLng = LatLng(50.073658, 14.418540);
 
   GoogleMapController mapController;
   LocationService _locationService;
+  SelectedPOICubit _selectedPOICubit;
+
   POICubit _poiCubit;
 
-  MapCubit(this._poiCubit, this._locationService) : super(MapState.initial()) {
+  MapCubit(
+    this._poiCubit,
+    this._locationService,
+    this._selectedPOICubit,
+  ) : super(MapState.initial()) {
     // listen to poi cubit and when event is emmited,
     // transform it to map state and emit this state
     _poiCubit.stream.listen(_transformPoiStateToMapState);
-  }
-
-  //Initialize map position to last known location
-  static Future<MapCubit> createMapCubit(
-    POICubit poiCubit,
-    LocationService locationService,
-  ) async {
-    MapCubit cubit = MapCubit(poiCubit, locationService);
-    cubit._initMapToMyLastKnownPostion();
-    return cubit;
   }
 
   void initMapController(GoogleMapController controller) {
@@ -43,14 +44,18 @@ class MapCubit extends Cubit<MapState> {
 
   ///transforms businesses to set of markers
   ///counts location of camera
-  void _transformPoiStateToMapState(POIState poiState) {
+  void _transformPoiStateToMapState(POIState poiState) async {
+    // hide info box card if it is not hiden already
+
+    _selectedPOICubit.hide();
+
     if (poiState.isFetching) {
       emit(state.copyWith(isLoading: true, failure: none()));
       return;
     }
 
     poiState.failure.fold(
-      () {
+      () async {
         //if no businesses were found, emit POIFailure and return
         if (poiState.businesses.isEmpty) {
           emit(state.copyWith(
@@ -59,11 +64,13 @@ class MapCubit extends Cubit<MapState> {
         }
 
         // set camera location to centroid of all returnet pois
-        var location = _locationService.getCentroid(poiState.businesses
+        var mapBounds = _locationService.getMapBounds(poiState.businesses
             .map((business) => business.coordinates.getLatLng())
-            .toSet());
+            .toList());
 
-        emit(MapState.succes(poiState.businesses, location, false, none()));
+        var markers = await _createMarkers(poiState.businesses);
+
+        emit(MapState.succes(markers, mapBounds, false, none()));
       },
       // if there is failure just pass it along
       (failure) => emit(
@@ -75,13 +82,21 @@ class MapCubit extends Cubit<MapState> {
     );
   }
 
-  Future<void> _initMapToMyLastKnownPostion() async {
-    final positionOrFailure = await _locationService.getLastKnownPosition();
-    final position = positionOrFailure.fold(
-      (failure) => defaultLatLng,
-      (position) => position,
+  Future<Set<Marker>> _createMarkers(List<Business> businesses) async {
+    final markers = await Future.wait(
+      businesses.map(
+        (poi) async {
+          final marker = await CustomMarker.createMarker(
+            business: poi,
+            onTap: () {
+              _selectedPOICubit.selectPoi(poi);
+            },
+          );
+          return marker;
+        },
+      ),
     );
 
-    emit(state.copyWith(cameraPosition: position));
+    return markers.toSet();
   }
 }

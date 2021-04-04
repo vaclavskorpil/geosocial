@@ -1,15 +1,13 @@
-import 'package:auto_route/auto_route_annotations.dart';
+
 import 'package:flutter/material.dart';
 import 'package:geosocial/common/constants/dimens.dart';
 import 'package:geosocial/data_layer/entities/business.dart';
 import 'package:geosocial/domain/maps/selected_poi/cubit/selected_poi_cubit.dart';
-import 'package:geosocial/presentation/detail/business_detail.dart';
 import 'package:geosocial/presentation/detail/business_detail_page.dart';
 import 'package:geosocial/presentation/detail/yelp_rating.dart';
 import 'package:geosocial/presentation/widgets/custom_network_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geosocial/presentation/widgets/yelp_logo.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class BusinessInfoBox extends StatelessWidget {
   void _navigateToDetail(Business business, BuildContext context) {

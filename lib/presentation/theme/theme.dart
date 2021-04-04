@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:geosocial/common/constants/dimens.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final geosocialTheme = ThemeData(

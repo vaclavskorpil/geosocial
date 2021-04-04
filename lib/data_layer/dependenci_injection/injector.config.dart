@@ -16,6 +16,7 @@ import '../repository/filter_repository.dart';
 import '../data_sources/network/graphql/graphql_client.dart';
 import '../services/location_service/location_service.dart';
 import '../../domain/maps/cubit/map_cubit.dart';
+import '../../domain/maps/my_location/cubit/my_location_cubit.dart';
 import '../services/internet_connection.dart';
 import '../../domain/poi/poi_cubit.dart';
 import 'modules.dart';
@@ -39,8 +40,10 @@ Future<GetIt> $initGetIt(
   gh.lazySingleton<FilterRepository>(() => resolvedFilterRepository);
   gh.lazySingleton<GraphQLService>(() => GraphQLService.createGQLService());
   gh.lazySingleton<LocationService>(() => LocationServiceImp());
+  gh.lazySingleton<MyLocationCubit>(
+      () => MyLocationCubit(get<LocationService>()));
   gh.lazySingleton<NetworkService>(() => NetworkServiceImpl());
-  gh.factory<SelectedPOICubit>(() => SelectedPOICubit());
+  gh.lazySingleton<SelectedPOICubit>(() => SelectedPOICubit());
   gh.lazySingleton<BusinessRepository>(() => BusinessRepositoryImpl(
         get<GraphQLService>(),
         get<LocationService>(),
@@ -51,9 +54,11 @@ Future<GetIt> $initGetIt(
       () => FilterCubit(get<FilterRepository>(), get<LocationService>()));
   gh.lazySingleton<POICubit>(
       () => POICubit(get<BusinessRepository>(), get<FilterRepository>()));
-  final resolvedMapCubit =
-      await registerModule.mapCubit(get<POICubit>(), get<LocationService>());
-  gh.lazySingleton<MapCubit>(() => resolvedMapCubit);
+  gh.lazySingleton<MapCubit>(() => MapCubit(
+        get<POICubit>(),
+        get<LocationService>(),
+        get<SelectedPOICubit>(),
+      ));
   return get;
 }
 

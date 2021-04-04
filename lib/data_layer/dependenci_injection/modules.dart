@@ -16,12 +16,6 @@ abstract class RegisterModule {
 
   @preResolve
   @lazySingleton
-  Future<MapCubit> mapCubit(
-          POICubit poiCubit, LocationService locationService) =>
-      MapCubit.createMapCubit(poiCubit, locationService);
-
-  @preResolve
-  @lazySingleton
   Future<FilterRepository> filterRepository(AppStorage appStorage) =>
       FilterRepositoryImpl.createFilterRepository(appStorage);
 }

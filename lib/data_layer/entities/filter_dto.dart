@@ -22,7 +22,7 @@ abstract class FilterDTO with _$FilterDTO {
   ) = _FilterDto;
 
   factory FilterDTO.empty() =>
-      FilterDTO("Pardubice", "", 250, [1, 2, 3, 4], [], false);
+      FilterDTO("", "", 1500, [1, 2, 3, 4], [], false);
 
   static List<int> rangeToList(RangeValues range) {
     final result = <int>[];
@@ -41,24 +41,10 @@ abstract class FilterDTO with _$FilterDTO {
   }
 
   String categoriesString() {
-    var result = "";
-    categories.forEach((element) {
-      result = "$result, ${element.alias}";
-    });
-    return result;
+    return categories.map((e) => e.alias).join(",");
   }
 
   String priceLevelToString() {
-    var sb = StringBuffer();
-    for (int i = 0; i < priceLevel.length; i++) {
-      sb.write(priceLevel[i].toString());
-
-      if (i != priceLevel.length - 1) {
-        sb.write(",");
-      }
-    }
-
-    print("Prices result ${sb.toString()}");
-    return sb.toString();
+    return priceLevel.join(",");
   }
 }

@@ -3,17 +3,16 @@ part of 'map_cubit.dart';
 @freezed
 abstract class MapState with _$MapState {
   const factory MapState.succes(
-    List<Business> businesses,
-    LatLng cameraPosition,
+    Set<Marker> markers,
+    LatLngBounds cameraBounds,
     bool isLoading,
     Option<ServerFailure> failure,
   ) = _Sucess;
 
   factory MapState.initial() => MapState.succes(
-        [],
-        const LatLng(0, 0),
+        Set(),
+        LatLngBounds(southwest: LatLng(0, 0), northeast: LatLng(1, 1)),
         true,
         none(),
-     
       );
 }

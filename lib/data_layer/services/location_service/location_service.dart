@@ -1,4 +1,3 @@
-
 import 'package:geosocial/data_layer/services/location_service/location_failure.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
@@ -18,6 +17,8 @@ abstract class LocationService {
   Future<bool> hasPermissions();
 
   Future<Either<LocationFailure, LatLng>> getLastKnownPosition();
+
+  LatLngBounds getMapBounds(List<LatLng> positions);
 }
 
 @LazySingleton(as: LocationService)
@@ -109,5 +110,22 @@ class LocationServiceImp extends LocationService {
     final hasPermisions = await _checkPermissions();
 
     return hasPermisions.isNone();
+  }
+
+  @override
+  LatLngBounds getMapBounds(List<LatLng> positions) {
+    final southwestLat = positions.map((p) => p.latitude).reduce(
+        (value, element) => value < element ? value : element); // smallest
+    final southwestLon = positions
+        .map((p) => p.longitude)
+        .reduce((value, element) => value < element ? value : element);
+    final northeastLat = positions.map((p) => p.latitude).reduce(
+        (value, element) => value > element ? value : element); // biggest
+    final northeastLon = positions
+        .map((p) => p.longitude)
+        .reduce((value, element) => value > element ? value : element);
+    return LatLngBounds(
+        southwest: LatLng(southwestLat, southwestLon),
+        northeast: LatLng(northeastLat, northeastLon));
   }
 }

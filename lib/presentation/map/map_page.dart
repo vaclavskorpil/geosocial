@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geosocial/data_layer/dependenci_injection/injector.dart';
-import 'package:geosocial/data_layer/entities/business.dart';
+
 import 'package:geosocial/domain/maps/cubit/map_cubit.dart';
+import 'package:geosocial/domain/maps/my_location/cubit/my_location_cubit.dart';
 import 'package:geosocial/domain/maps/selected_poi/cubit/selected_poi_cubit.dart';
 import 'package:geosocial/presentation/map/business_infobox.dart';
-import 'package:geosocial/presentation/map/custom_marker.dart';
+import 'package:geosocial/presentation/map/filter_floating_action_button.dart';
+import 'package:geosocial/presentation/map/my_location_floating_action_button.dart';
+
 import 'package:geosocial/presentation/styled_widgets/styled_snackbar.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -26,39 +29,25 @@ class MapsPage extends StatelessWidget {
     });
   }
 
-  void _moveCamera(BuildContext context, MapState state) {
-    context.read<MapCubit>().mapController.moveCamera(
-          CameraUpdate.newLatLng(
-            state.cameraPosition,
-          ),
+  void _moveCameraToBounds(BuildContext context, MapState state) {
+    context.read<MapCubit>().mapController.animateCamera(
+          CameraUpdate.newLatLngBounds(state.cameraBounds, 50),
         );
   }
 
   bool _cameraPositionChanged(MapState oldState, MapState newState) {
-    return oldState.cameraPosition != newState.cameraPosition;
+    return oldState.cameraBounds != newState.cameraBounds;
   }
 
   bool _hasFailure(MapState oldState, MapState newState) {
     return oldState.failure.isSome() != newState.failure.isSome();
   }
 
-  Set<Marker> _createMarkers(BuildContext context, List<Business> businesses) {
-    return businesses
-        .map(
-          (business) => CustomMarker.createMarker(
-            business: business,
-            onTap: () {
-              context.read<SelectedPOICubit>().selectPoi(business);
-            },
-          ),
-        )
-        .toSet();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Builder(builder: (context) {
-      return MultiBlocProvider(
+    return Builder(
+      builder: (context) {
+        return MultiBlocProvider(
           providers: [
             BlocProvider<MapCubit>(
               create: (context) => injector<MapCubit>(),
@@ -66,27 +55,58 @@ class MapsPage extends StatelessWidget {
             BlocProvider<SelectedPOICubit>(
               create: (context) => injector<SelectedPOICubit>(),
             ),
+            BlocProvider<MyLocationCubit>(
+              create: (context) => injector<MyLocationCubit>()..goToMyLocaion(),
+            ),
           ],
-          child: BlocListener<MapCubit, MapState>(
-            listenWhen: _hasFailure,
-            listener: _handleFailure,
+          child: MultiBlocListener(
+            listeners: [
+              BlocListener<MapCubit, MapState>(
+                listenWhen: _hasFailure,
+                listener: _handleFailure,
+              ),
+              BlocListener<MapCubit, MapState>(
+                listenWhen: _cameraPositionChanged,
+                listener: _moveCameraToBounds,
+              ),
+              BlocListener<MyLocationCubit, MyLocationState>(
+                listener: (context, state) {
+                  state.failure.fold(
+                    () {
+                      context.read<MapCubit>().mapController.animateCamera(
+                          CameraUpdate.newLatLng(state.myLocation));
+                    },
+                    (failure) {
+                      final messanger = ScaffoldMessenger.of(context);
+                      messanger.hideCurrentSnackBar();
+                      messanger.showSnackBar(
+                        styledSnackBar(
+                          failure.when(
+                              permissionsNotGranted: () =>
+                                  "You dont have permissions.",
+                              serviceNotEnabled: () =>
+                                  "Location service is not enabled."),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ],
             child: Stack(
-            
               children: [
-                BlocConsumer<MapCubit, MapState>(
-                    listenWhen: _cameraPositionChanged,
-                    listener: _moveCamera,
+                BlocBuilder<MapCubit, MapState>(
                     buildWhen: (_, newState) => !newState.isLoading,
                     builder: (context, state) {
                       return GoogleMap(
-                      
-                        mapType: MapType.normal,
+                        mapType: MapType.terrain,
+                        myLocationEnabled: true,
+                        myLocationButtonEnabled: false,
                         initialCameraPosition: CameraPosition(
-                          target: state.cameraPosition,
+                          target: LatLng(0, 0),
                           zoom: 13,
                         ),
-                        //onMapCreated: _onMapCreated,
-                        markers: _createMarkers(context, state.businesses),
+                        markers: state.markers,
                         onMapCreated: (controller) => context
                             .read<MapCubit>()
                             .initMapController(controller),
@@ -95,10 +115,23 @@ class MapsPage extends StatelessWidget {
                         },
                       );
                     }),
+                Positioned(
+                  top: 16,
+                  right: 16,
+                  child: Column(
+                    children: [
+                      const FilterFloationActionButton(),
+                      const SizedBox(height: 8),
+                      const MyLocationFloationActionButton()
+                    ],
+                  ),
+                ),
                 BusinessInfoBox()
               ],
             ),
-          ));
-    });
+          ),
+        );
+      },
+    );
   }
 }

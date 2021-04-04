@@ -8,6 +8,7 @@ import 'package:geosocial/domain/fitler/filter_cubit.dart';
 import 'package:geosocial/domain/poi/poi_cubit.dart';
 
 import 'package:geosocial/presentation/filter/category_card.dart';
+import 'package:geosocial/presentation/filter/supported_categories.dart';
 import 'package:geosocial/presentation/filter/use_my_location.dart';
 import 'package:geosocial/presentation/styled_widgets/styled_outlined_button.dart';
 import 'package:geosocial/presentation/styled_widgets/styled_snackbar.dart';
@@ -254,54 +255,27 @@ class Categories extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            CategoryCard(
-              category: Category("Burgers", "burgers"),
-              icon: FontAwesomeIcons.hamburger,
-            ),
-            CategoryCard(
-              category: Category("Coffee", "coffee"),
-              icon: FontAwesomeIcons.coffee,
-            ),
-            CategoryCard(
-              category: Category("Desserts", "deserts"),
-              icon: FontAwesomeIcons.birthdayCake,
-            ),
+            CategoryCard(supportedCategory: SupportedCategories.burgers),
+            CategoryCard(supportedCategory: SupportedCategories.coffee),
+            CategoryCard(supportedCategory: SupportedCategories.desserts),
           ],
         ),
         const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            CategoryCard(
-              category: Category("Ice cream", "icecream"),
-              icon: FontAwesomeIcons.iceCream,
-            ),
-            CategoryCard(
-              category: Category("Bars", "bars"),
-              icon: FontAwesomeIcons.cocktail,
-            ),
-            CategoryCard(
-              category: Category("Wine bars", "winebars"),
-              icon: FontAwesomeIcons.wineGlassAlt,
-            ),
+            CategoryCard(supportedCategory: SupportedCategories.iceCream),
+            CategoryCard(supportedCategory: SupportedCategories.bars),
+            CategoryCard(supportedCategory: SupportedCategories.wineBars),
           ],
         ),
         const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            CategoryCard(
-              category: Category("Restaurants", "restaurants"),
-              icon: Icons.restaurant,
-            ),
-            CategoryCard(
-              category: Category("Beer", "beergarden"),
-              icon: FontAwesomeIcons.beer,
-            ),
-            CategoryCard(
-              category: Category("Vegan", "vegan"),
-              icon: FontAwesomeIcons.leaf,
-            ),
+            CategoryCard(supportedCategory: SupportedCategories.pizza),
+            CategoryCard(supportedCategory: SupportedCategories.beer),
+            CategoryCard(supportedCategory: SupportedCategories.vegan),
           ],
         ),
       ],

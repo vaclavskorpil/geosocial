@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geosocial/common/constants/dimens.dart';
@@ -9,11 +10,15 @@ class CategoryCard extends StatelessWidget {
   final _size = 60.0;
   final Category category;
   final IconData icon;
-  final key = UniqueKey();
+
+  final Tuple3<Category, IconData,Color> supportedCategory;
+
   CategoryCard({
-    @required this.category,
-    @required this.icon,
-  });
+    Key key,
+    @required this.supportedCategory,
+  })  : category = supportedCategory.value1,
+        icon = supportedCategory.value2,
+        super(key: key);
 
   Widget content({double animation, Color color}) {
     return TextAndIcon(
@@ -51,10 +56,10 @@ class CategoryCard extends StatelessWidget {
 class TextAndIcon extends StatelessWidget {
   const TextAndIcon({
     Key key,
-    @required  this.icon,
-    @required  this.animation,
-    @required  this.color,
-    @required  this.text,
+    @required this.icon,
+    @required this.animation,
+    @required this.color,
+    @required this.text,
   }) : super(key: key);
 
   final IconData icon;

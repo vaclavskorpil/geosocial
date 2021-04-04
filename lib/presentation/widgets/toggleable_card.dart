@@ -1,8 +1,5 @@
-import 'dart:isolate';
 
 import 'package:flutter/material.dart';
-import 'package:geosocial/common/constants/dimens.dart';
-import 'package:geosocial/presentation/theme/my_colors.dart';
 
 typedef Widget AnimatedCardContent({
   @required double animation,

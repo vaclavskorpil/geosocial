@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:geosocial/data_layer/dependenci_injection/injector.dart';
 import 'package:geosocial/domain/poi/poi_cubit.dart';
-import 'package:geosocial/presentation/appbar/my_appbar.dart';
+import 'package:geosocial/presentation/filter/filter_dialog.dart';
 import 'package:geosocial/presentation/map/map_page.dart';
+import 'package:geosocial/presentation/theme/custom_icons_icons.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -14,7 +15,6 @@ class HomePage extends StatelessWidget {
         create: (context) => injector<POICubit>(),
         child: Scaffold(
           resizeToAvoidBottomInset: false,
-          appBar: MyAppbar(),
           body: Stack(
             children: [
               MapsPage(),
@@ -40,3 +40,5 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+

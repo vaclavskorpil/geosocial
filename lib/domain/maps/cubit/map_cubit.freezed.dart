@@ -14,11 +14,11 @@ class _$MapStateTearOff {
   const _$MapStateTearOff();
 
 // ignore: unused_element
-  _Sucess succes(List<Business> businesses, LatLng cameraPosition,
-      bool isLoading, Option<ServerFailure> failure) {
+  _Sucess succes(Set<Marker> markers, LatLngBounds cameraBounds, bool isLoading,
+      Option<ServerFailure> failure) {
     return _Sucess(
-      businesses,
-      cameraPosition,
+      markers,
+      cameraBounds,
       isLoading,
       failure,
     );
@@ -31,20 +31,20 @@ const $MapState = _$MapStateTearOff();
 
 /// @nodoc
 mixin _$MapState {
-  List<Business> get businesses;
-  LatLng get cameraPosition;
+  Set<Marker> get markers;
+  LatLngBounds get cameraBounds;
   bool get isLoading;
   Option<ServerFailure> get failure;
 
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required
-        TResult succes(List<Business> businesses, LatLng cameraPosition,
+        TResult succes(Set<Marker> markers, LatLngBounds cameraBounds,
             bool isLoading, Option<ServerFailure> failure),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult succes(List<Business> businesses, LatLng cameraPosition,
+    TResult succes(Set<Marker> markers, LatLngBounds cameraBounds,
         bool isLoading, Option<ServerFailure> failure),
     @required TResult orElse(),
   });
@@ -67,8 +67,8 @@ abstract class $MapStateCopyWith<$Res> {
   factory $MapStateCopyWith(MapState value, $Res Function(MapState) then) =
       _$MapStateCopyWithImpl<$Res>;
   $Res call(
-      {List<Business> businesses,
-      LatLng cameraPosition,
+      {Set<Marker> markers,
+      LatLngBounds cameraBounds,
       bool isLoading,
       Option<ServerFailure> failure});
 }
@@ -83,18 +83,16 @@ class _$MapStateCopyWithImpl<$Res> implements $MapStateCopyWith<$Res> {
 
   @override
   $Res call({
-    Object businesses = freezed,
-    Object cameraPosition = freezed,
+    Object markers = freezed,
+    Object cameraBounds = freezed,
     Object isLoading = freezed,
     Object failure = freezed,
   }) {
     return _then(_value.copyWith(
-      businesses: businesses == freezed
-          ? _value.businesses
-          : businesses as List<Business>,
-      cameraPosition: cameraPosition == freezed
-          ? _value.cameraPosition
-          : cameraPosition as LatLng,
+      markers: markers == freezed ? _value.markers : markers as Set<Marker>,
+      cameraBounds: cameraBounds == freezed
+          ? _value.cameraBounds
+          : cameraBounds as LatLngBounds,
       isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
       failure: failure == freezed
           ? _value.failure
@@ -109,8 +107,8 @@ abstract class _$SucessCopyWith<$Res> implements $MapStateCopyWith<$Res> {
       __$SucessCopyWithImpl<$Res>;
   @override
   $Res call(
-      {List<Business> businesses,
-      LatLng cameraPosition,
+      {Set<Marker> markers,
+      LatLngBounds cameraBounds,
       bool isLoading,
       Option<ServerFailure> failure});
 }
@@ -126,16 +124,16 @@ class __$SucessCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object businesses = freezed,
-    Object cameraPosition = freezed,
+    Object markers = freezed,
+    Object cameraBounds = freezed,
     Object isLoading = freezed,
     Object failure = freezed,
   }) {
     return _then(_Sucess(
-      businesses == freezed ? _value.businesses : businesses as List<Business>,
-      cameraPosition == freezed
-          ? _value.cameraPosition
-          : cameraPosition as LatLng,
+      markers == freezed ? _value.markers : markers as Set<Marker>,
+      cameraBounds == freezed
+          ? _value.cameraBounds
+          : cameraBounds as LatLngBounds,
       isLoading == freezed ? _value.isLoading : isLoading as bool,
       failure == freezed ? _value.failure : failure as Option<ServerFailure>,
     ));
@@ -144,17 +142,16 @@ class __$SucessCopyWithImpl<$Res> extends _$MapStateCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_Sucess implements _Sucess {
-  const _$_Sucess(
-      this.businesses, this.cameraPosition, this.isLoading, this.failure)
-      : assert(businesses != null),
-        assert(cameraPosition != null),
+  const _$_Sucess(this.markers, this.cameraBounds, this.isLoading, this.failure)
+      : assert(markers != null),
+        assert(cameraBounds != null),
         assert(isLoading != null),
         assert(failure != null);
 
   @override
-  final List<Business> businesses;
+  final Set<Marker> markers;
   @override
-  final LatLng cameraPosition;
+  final LatLngBounds cameraBounds;
   @override
   final bool isLoading;
   @override
@@ -162,19 +159,19 @@ class _$_Sucess implements _Sucess {
 
   @override
   String toString() {
-    return 'MapState.succes(businesses: $businesses, cameraPosition: $cameraPosition, isLoading: $isLoading, failure: $failure)';
+    return 'MapState.succes(markers: $markers, cameraBounds: $cameraBounds, isLoading: $isLoading, failure: $failure)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Sucess &&
-            (identical(other.businesses, businesses) ||
+            (identical(other.markers, markers) ||
                 const DeepCollectionEquality()
-                    .equals(other.businesses, businesses)) &&
-            (identical(other.cameraPosition, cameraPosition) ||
+                    .equals(other.markers, markers)) &&
+            (identical(other.cameraBounds, cameraBounds) ||
                 const DeepCollectionEquality()
-                    .equals(other.cameraPosition, cameraPosition)) &&
+                    .equals(other.cameraBounds, cameraBounds)) &&
             (identical(other.isLoading, isLoading) ||
                 const DeepCollectionEquality()
                     .equals(other.isLoading, isLoading)) &&
@@ -185,8 +182,8 @@ class _$_Sucess implements _Sucess {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(businesses) ^
-      const DeepCollectionEquality().hash(cameraPosition) ^
+      const DeepCollectionEquality().hash(markers) ^
+      const DeepCollectionEquality().hash(cameraBounds) ^
       const DeepCollectionEquality().hash(isLoading) ^
       const DeepCollectionEquality().hash(failure);
 
@@ -199,23 +196,23 @@ class _$_Sucess implements _Sucess {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
     @required
-        TResult succes(List<Business> businesses, LatLng cameraPosition,
+        TResult succes(Set<Marker> markers, LatLngBounds cameraBounds,
             bool isLoading, Option<ServerFailure> failure),
   }) {
     assert(succes != null);
-    return succes(businesses, cameraPosition, isLoading, failure);
+    return succes(markers, cameraBounds, isLoading, failure);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult succes(List<Business> businesses, LatLng cameraPosition,
+    TResult succes(Set<Marker> markers, LatLngBounds cameraBounds,
         bool isLoading, Option<ServerFailure> failure),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (succes != null) {
-      return succes(businesses, cameraPosition, isLoading, failure);
+      return succes(markers, cameraBounds, isLoading, failure);
     }
     return orElse();
   }
@@ -244,13 +241,13 @@ class _$_Sucess implements _Sucess {
 }
 
 abstract class _Sucess implements MapState {
-  const factory _Sucess(List<Business> businesses, LatLng cameraPosition,
+  const factory _Sucess(Set<Marker> markers, LatLngBounds cameraBounds,
       bool isLoading, Option<ServerFailure> failure) = _$_Sucess;
 
   @override
-  List<Business> get businesses;
+  Set<Marker> get markers;
   @override
-  LatLng get cameraPosition;
+  LatLngBounds get cameraBounds;
   @override
   bool get isLoading;
   @override

@@ -36,7 +36,7 @@ class YelpRating extends StatelessWidget {
     } else {
       sb.write('5.png');
     }
-    print("ImageString ${sb.toString()}");
+
     return sb.toString();
   }
 }

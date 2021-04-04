@@ -54,18 +54,21 @@ class BusinessRepositoryImpl extends BusinessRepository {
         );
       }
 
+      print("\n\n categories ${filter.categoriesString()} \n\n");
+
       final result = await _graphQl.execute(
         SearchBusinessesQuery(
           variables: SearchBusinessesArguments(
-              location: location,
-              latitude: latitude,
-              longitude: longitude,
-              searchTerm: filter.filterQuery,
-              categories: filter.categoriesString(),
-              price: filter.priceLevelToString(),
-              radius: filter.radius,
-              limit: limit,
-              offset: offset),
+            location: location,
+            latitude: latitude,
+            longitude: longitude,
+            searchTerm: filter.filterQuery,
+            categories: filter.categoriesString(),
+            price: filter.priceLevelToString(),
+            radius: filter.radius,
+            limit: limit,
+            offset: offset,
+          ),
         ),
       );
 

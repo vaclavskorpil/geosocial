@@ -5,7 +5,6 @@ import 'package:geosocial/data_layer/entities/business.dart';
 import 'package:geosocial/data_layer/entities/filter_dto.dart';
 import 'package:geosocial/data_layer/repository/business_repository.dart';
 import 'package:geosocial/data_layer/repository/filter_repository.dart';
-import 'package:geosocial/data_layer/services/location_service/location_service.dart';
 import 'package:injectable/injectable.dart';
 import 'package:dartz/dartz.dart';
 import 'package:geosocial/common/failures/server_failure.dart';
@@ -18,8 +17,8 @@ class POICubit extends Cubit<POIState> {
   final BusinessRepository _businessRepo;
   final FilterRepository _filterRepo;
 
-  final fetchMoreTreshold = 15;
-  final fetchItemLimit = 20;
+
+  final fetchItemLimit = 50;
 
   FilterDTO get _filter => _filterRepo.currentFilter;
 
@@ -30,14 +29,14 @@ class POICubit extends Cubit<POIState> {
   }
 
   void fetchNewBusinesses() async {
-    _fetchBusinessesInitial(_filter, state.businesses.length);
+    _fetchBusinessesInitial(_filter);
   }
 
-  void _fetchBusinessesInitial(FilterDTO filter, int size) async {
+  void _fetchBusinessesInitial(FilterDTO filter) async {
     emit(state.copyWith(isFetching: true));
 
     final failureOrBusinesses =
-        await _businessRepo.getBusinesses(filter, fetchItemLimit, size);
+        await _businessRepo.getBusinesses(filter, fetchItemLimit, 0);
 
     failureOrBusinesses.fold(
       (failure) => emit(

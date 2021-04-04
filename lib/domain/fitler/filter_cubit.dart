@@ -7,7 +7,6 @@ import 'package:geosocial/data_layer/entities/category.dart';
 import 'package:geosocial/data_layer/entities/filter_dto.dart';
 import 'package:geosocial/data_layer/repository/filter_repository.dart';
 import 'package:geosocial/data_layer/services/location_service/location_service.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'package:injectable/injectable.dart';
 
@@ -116,7 +115,6 @@ class FilterCubit extends Cubit<FilterState> {
     );
 
     _filterRepo.saveFilter(filter);
-    print("FIlter applied ");
     emit(state.copyWith(failure: none(), applyFilter: true));
   }
 

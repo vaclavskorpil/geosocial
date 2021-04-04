@@ -8,18 +8,19 @@ import 'package:injectable/injectable.dart';
 part 'selected_poi_state.dart';
 part 'selected_poi_cubit.freezed.dart';
 
-@injectable
+@lazySingleton
 class SelectedPOICubit extends Cubit<SelectedPoiState> {
   SelectedPOICubit() : super(SelectedPoiState.initial());
 
+  static const infoBoxPositionHidden = -130.0;
   void selectPoi(Business poi) async {
     //if infobox is shownt and it is not current selected poi
     //hide shown poi and wait for a while to show hiding animation
-    if (state.infoboxPosition != -100 && state.selectedBusiness != poi) {
+    if (state.infoboxPosition != infoBoxPositionHidden &&
+        state.selectedBusiness != poi) {
       hide();
       await Future.delayed(Duration(milliseconds: 230));
     }
-    ;
 
     emit(
       state.copyWith(selectedBusiness: poi, infoboxPosition: 0),
@@ -27,6 +28,7 @@ class SelectedPOICubit extends Cubit<SelectedPoiState> {
   }
 
   void hide() {
-    emit(state.copyWith(infoboxPosition: -100));
+    
+      emit(state.copyWith(infoboxPosition: infoBoxPositionHidden));
   }
 }
