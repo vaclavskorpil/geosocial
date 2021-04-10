@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:geosocial/common/constants/constatns.dart';
+import 'package:whereisthefood/common/constants/constatns.dart';
 
 class TokenInterceptor extends Interceptor {
   @override

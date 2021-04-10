@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:geosocial/data_layer/entities/business.dart';
-import 'package:geosocial/presentation/filter/supported_categories.dart';
+import 'package:whereisthefood/data_layer/entities/business.dart';
+import 'package:whereisthefood/presentation/filter/supported_categories.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'cutom_bitmap_descriptor.dart';

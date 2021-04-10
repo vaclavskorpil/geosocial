@@ -1,20 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geosocial/common/constants/dimens.dart';
-import 'package:geosocial/data_layer/dependenci_injection/injector.dart';
-import 'package:geosocial/data_layer/entities/category.dart';
-import 'package:geosocial/domain/fitler/filter_cubit.dart';
-import 'package:geosocial/domain/poi/poi_cubit.dart';
+import 'package:whereisthefood/common/constants/dimens.dart';
+import 'package:whereisthefood/data_layer/dependenci_injection/injector.dart';
+import 'package:whereisthefood/data_layer/entities/category.dart';
+import 'package:whereisthefood/domain/fitler/filter_cubit.dart';
+import 'package:whereisthefood/domain/poi/poi_cubit.dart';
 
-import 'package:geosocial/presentation/filter/category_card.dart';
-import 'package:geosocial/presentation/filter/supported_categories.dart';
-import 'package:geosocial/presentation/filter/use_my_location.dart';
-import 'package:geosocial/presentation/styled_widgets/styled_outlined_button.dart';
-import 'package:geosocial/presentation/styled_widgets/styled_snackbar.dart';
-import 'package:geosocial/presentation/styled_widgets/styled_textfield.dart';
+import 'package:whereisthefood/presentation/filter/category_card.dart';
+import 'package:whereisthefood/presentation/filter/supported_categories.dart';
+import 'package:whereisthefood/presentation/filter/use_my_location.dart';
+import 'package:whereisthefood/presentation/styled_widgets/styled_outlined_button.dart';
+import 'package:whereisthefood/presentation/styled_widgets/styled_snackbar.dart';
+import 'package:whereisthefood/presentation/styled_widgets/styled_textfield.dart';
 
-import 'package:geosocial/presentation/theme/my_colors.dart';
+import 'package:whereisthefood/presentation/theme/my_colors.dart';
 import 'package:vibration/vibration.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

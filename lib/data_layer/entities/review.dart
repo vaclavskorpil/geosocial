@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:geosocial/data_layer/entities/user.dart';
+import 'package:whereisthefood/data_layer/entities/user.dart';
 
 part 'review.freezed.dart';
 part 'review.g.dart';

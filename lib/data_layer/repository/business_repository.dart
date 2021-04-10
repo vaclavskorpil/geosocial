@@ -1,10 +1,10 @@
-import 'package:geosocial/common/failures/server_failure.dart';
-import 'package:geosocial/data_layer/data_sources/network/graphql/graphql_client.dart';
-import 'package:geosocial/data_layer/data_sources/network/graphql/queries/graphql_queries.graphql.dart';
-import 'package:geosocial/data_layer/entities/business.dart';
-import 'package:geosocial/data_layer/entities/filter_dto.dart';
-import 'package:geosocial/data_layer/services/internet_connection.dart';
-import 'package:geosocial/data_layer/services/location_service/location_service.dart';
+import 'package:whereisthefood/common/failures/server_failure.dart';
+import 'package:whereisthefood/data_layer/data_sources/network/graphql/graphql_client.dart';
+import 'package:whereisthefood/data_layer/data_sources/network/graphql/queries/graphql_queries.graphql.dart';
+import 'package:whereisthefood/data_layer/entities/business.dart';
+import 'package:whereisthefood/data_layer/entities/filter_dto.dart';
+import 'package:whereisthefood/data_layer/services/internet_connection.dart';
+import 'package:whereisthefood/data_layer/services/location_service/location_service.dart';
 import 'package:injectable/injectable.dart';
 import 'package:dartz/dartz.dart';
 
@@ -54,8 +54,6 @@ class BusinessRepositoryImpl extends BusinessRepository {
         );
       }
 
-      print("\n\n categories ${filter.categoriesString()} \n\n");
-
       final result = await _graphQl.execute(
         SearchBusinessesQuery(
           variables: SearchBusinessesArguments(
@@ -73,6 +71,7 @@ class BusinessRepositoryImpl extends BusinessRepository {
       );
 
       if (result.hasException) {
+
         return left(ServerFailure.serverError());
       }
 
@@ -81,6 +80,7 @@ class BusinessRepositoryImpl extends BusinessRepository {
 
       return right(businesses);
     } catch (e) {
+      print(e.toString());
       return left(ServerFailure.serverError());
     }
   }

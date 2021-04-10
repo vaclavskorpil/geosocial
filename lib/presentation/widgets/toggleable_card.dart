@@ -89,7 +89,10 @@ class _ToggleableCardState extends State<ToggleableCard>
       vsync: this,
     );
 
+    
+
     _initAnimations();
+    
 
     isToggled ? _controller.forward() : _controller.reverse();
   }
@@ -155,14 +158,14 @@ class _ToggleableCardState extends State<ToggleableCard>
         ),
       ),
     );
-
+    
     _colorCardAnimation = ColorTween(
       begin: startColor,
       end: endColor,
     ).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: Interval(
+        curve: const Interval(
           0,
           1,
           curve: _curve,
@@ -176,12 +179,13 @@ class _ToggleableCardState extends State<ToggleableCard>
     ).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: Interval(
+        curve: const Interval(
           0.0,
           1,
           curve: _curve,
         ),
       ),
     );
+  
   }
 }

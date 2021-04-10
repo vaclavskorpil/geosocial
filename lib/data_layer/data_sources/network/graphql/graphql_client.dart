@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:geosocial/common/constants/constatns.dart';
-import 'package:geosocial/data_layer/dependenci_injection/injector.dart';
+import 'package:whereisthefood/common/constants/constatns.dart';
+import 'package:whereisthefood/data_layer/dependenci_injection/injector.dart';
 import 'package:gql_dio_link/gql_dio_link.dart';
 import 'package:injectable/injectable.dart';
 import 'package:graphql/client.dart';

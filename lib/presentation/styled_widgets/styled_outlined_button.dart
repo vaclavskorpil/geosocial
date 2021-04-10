@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:geosocial/common/constants/dimens.dart';
-import 'package:geosocial/presentation/theme/my_colors.dart';
+import 'package:whereisthefood/common/constants/dimens.dart';
+import 'package:whereisthefood/presentation/theme/my_colors.dart';
 
 class OutlinedButtonRed extends StatelessWidget {
   final Function onPressed;

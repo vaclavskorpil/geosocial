@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:geosocial/data_layer/entities/business.dart';
+import 'package:whereisthefood/data_layer/entities/business.dart';
 import 'package:injectable/injectable.dart';
 
 part 'selected_poi_state.dart';
@@ -28,7 +28,6 @@ class SelectedPOICubit extends Cubit<SelectedPoiState> {
   }
 
   void hide() {
-    
-      emit(state.copyWith(infoboxPosition: infoBoxPositionHidden));
+    emit(state.copyWith(infoboxPosition: infoBoxPositionHidden));
   }
 }

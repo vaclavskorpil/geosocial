@@ -1,8 +1,7 @@
 import 'dart:async';
 
-import 'package:geosocial/data_layer/data_sources/local_storage/app_storage.dart';
-import 'package:geosocial/data_layer/entities/filter_dto.dart';
-
+import 'package:whereisthefood/data_layer/data_sources/local_storage/app_storage.dart';
+import 'package:whereisthefood/data_layer/entities/filter_dto.dart';
 
 abstract class FilterRepository {
   FilterDTO currentFilter;

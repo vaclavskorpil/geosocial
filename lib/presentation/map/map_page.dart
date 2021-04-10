@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geosocial/data_layer/dependenci_injection/injector.dart';
+import 'package:whereisthefood/data_layer/dependenci_injection/injector.dart';
 
-import 'package:geosocial/domain/maps/cubit/map_cubit.dart';
-import 'package:geosocial/domain/maps/my_location/cubit/my_location_cubit.dart';
-import 'package:geosocial/domain/maps/selected_poi/cubit/selected_poi_cubit.dart';
-import 'package:geosocial/presentation/map/business_infobox.dart';
-import 'package:geosocial/presentation/map/filter_floating_action_button.dart';
-import 'package:geosocial/presentation/map/my_location_floating_action_button.dart';
+import 'package:whereisthefood/domain/maps/cubit/map_cubit.dart';
+import 'package:whereisthefood/domain/maps/my_location/cubit/my_location_cubit.dart';
+import 'package:whereisthefood/domain/maps/selected_poi/cubit/selected_poi_cubit.dart';
+import 'package:whereisthefood/presentation/map/business_infobox.dart';
+import 'package:whereisthefood/presentation/map/filter_floating_action_button.dart';
+import 'package:whereisthefood/presentation/map/my_location_floating_action_button.dart';
 
-import 'package:geosocial/presentation/styled_widgets/styled_snackbar.dart';
+import 'package:whereisthefood/presentation/styled_widgets/styled_snackbar.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:whereisthefood/presentation/theme/google_maps_theme.dart';
 
 class MapsPage extends StatelessWidget {
   void _handleFailure(BuildContext context, MapState state) {
@@ -99,7 +100,7 @@ class MapsPage extends StatelessWidget {
                     buildWhen: (_, newState) => !newState.isLoading,
                     builder: (context, state) {
                       return GoogleMap(
-                        mapType: MapType.terrain,
+                        mapType: MapType.normal,
                         myLocationEnabled: true,
                         myLocationButtonEnabled: false,
                         initialCameraPosition: CameraPosition(
@@ -107,9 +108,12 @@ class MapsPage extends StatelessWidget {
                           zoom: 13,
                         ),
                         markers: state.markers,
-                        onMapCreated: (controller) => context
-                            .read<MapCubit>()
-                            .initMapController(controller),
+                        onMapCreated: (controller) async  {
+                          context
+                              .read<MapCubit>()
+                              .initMapController(controller);
+                          controller.setMapStyle(googleMapsTheme);
+                        },
                         onTap: (latLng) {
                           context.read<SelectedPOICubit>().hide();
                         },

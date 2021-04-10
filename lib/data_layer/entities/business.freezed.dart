@@ -31,8 +31,8 @@ class _$BusinessTearOff {
       @nullable List<Hours> hours,
       @nullable List<Review> reviews,
       @nullable double rating,
-      @JsonKey(name: "review_count") @nullable int reviewCount,
-      @JsonKey(name: "disply_phone") @nullable String displayPhone) {
+      @JsonKey(name: 'review_count') @nullable int reviewCount,
+      @JsonKey(name: 'disply_phone') @nullable String displayPhone) {
     return _Business(
       name,
       id,
@@ -88,10 +88,10 @@ mixin _$Business {
   List<Review> get reviews;
   @nullable
   double get rating;
-  @JsonKey(name: "review_count")
+  @JsonKey(name: 'review_count')
   @nullable
   int get reviewCount;
-  @JsonKey(name: "disply_phone")
+  @JsonKey(name: 'disply_phone')
   @nullable
   String get displayPhone;
 
@@ -118,8 +118,8 @@ abstract class $BusinessCopyWith<$Res> {
       @nullable List<Hours> hours,
       @nullable List<Review> reviews,
       @nullable double rating,
-      @JsonKey(name: "review_count") @nullable int reviewCount,
-      @JsonKey(name: "disply_phone") @nullable String displayPhone});
+      @JsonKey(name: 'review_count') @nullable int reviewCount,
+      @JsonKey(name: 'disply_phone') @nullable String displayPhone});
 
   $LocationCopyWith<$Res> get location;
   $CoordinatesCopyWith<$Res> get coordinates;
@@ -217,8 +217,8 @@ abstract class _$BusinessCopyWith<$Res> implements $BusinessCopyWith<$Res> {
       @nullable List<Hours> hours,
       @nullable List<Review> reviews,
       @nullable double rating,
-      @JsonKey(name: "review_count") @nullable int reviewCount,
-      @JsonKey(name: "disply_phone") @nullable String displayPhone});
+      @JsonKey(name: 'review_count') @nullable int reviewCount,
+      @JsonKey(name: 'disply_phone') @nullable String displayPhone});
 
   @override
   $LocationCopyWith<$Res> get location;
@@ -291,8 +291,8 @@ class _$_Business extends _Business {
       @nullable this.hours,
       @nullable this.reviews,
       @nullable this.rating,
-      @JsonKey(name: "review_count") @nullable this.reviewCount,
-      @JsonKey(name: "disply_phone") @nullable this.displayPhone)
+      @JsonKey(name: 'review_count') @nullable this.reviewCount,
+      @JsonKey(name: 'disply_phone') @nullable this.displayPhone)
       : assert(name != null),
         assert(id != null),
         super._();
@@ -338,11 +338,11 @@ class _$_Business extends _Business {
   @nullable
   final double rating;
   @override
-  @JsonKey(name: "review_count")
+  @JsonKey(name: 'review_count')
   @nullable
   final int reviewCount;
   @override
-  @JsonKey(name: "disply_phone")
+  @JsonKey(name: 'disply_phone')
   @nullable
   final String displayPhone;
 
@@ -440,8 +440,8 @@ abstract class _Business extends Business {
           @nullable List<Hours> hours,
           @nullable List<Review> reviews,
           @nullable double rating,
-          @JsonKey(name: "review_count") @nullable int reviewCount,
-          @JsonKey(name: "disply_phone") @nullable String displayPhone) =
+          @JsonKey(name: 'review_count') @nullable int reviewCount,
+          @JsonKey(name: 'disply_phone') @nullable String displayPhone) =
       _$_Business;
 
   factory _Business.fromJson(Map<String, dynamic> json) = _$_Business.fromJson;
@@ -484,11 +484,11 @@ abstract class _Business extends Business {
   @nullable
   double get rating;
   @override
-  @JsonKey(name: "review_count")
+  @JsonKey(name: 'review_count')
   @nullable
   int get reviewCount;
   @override
-  @JsonKey(name: "disply_phone")
+  @JsonKey(name: 'disply_phone')
   @nullable
   String get displayPhone;
   @override

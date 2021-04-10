@@ -7,5 +7,6 @@ class StyledCircularLoading extends StatelessWidget {
     return CircularProgressIndicator(
       strokeWidth: 2,
     );
+    
   }
 }

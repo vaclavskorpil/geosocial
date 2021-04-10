@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geosocial/common/constants/dimens.dart';
-import 'package:geosocial/domain/fitler/filter_cubit.dart';
-import 'package:geosocial/presentation/styled_widgets/styled_togleable_card.dart';
+import 'package:whereisthefood/common/constants/dimens.dart';
+import 'package:whereisthefood/domain/fitler/filter_cubit.dart';
+import 'package:whereisthefood/presentation/styled_widgets/styled_togleable_card.dart';
 
 class UseMyLocationCard extends StatelessWidget {
   final _size = 30.0;

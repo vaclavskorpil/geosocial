@@ -1,13 +1,12 @@
-
 import 'package:flutter/material.dart';
-import 'package:geosocial/common/constants/dimens.dart';
-import 'package:geosocial/data_layer/entities/business.dart';
-import 'package:geosocial/domain/maps/selected_poi/cubit/selected_poi_cubit.dart';
-import 'package:geosocial/presentation/detail/business_detail_page.dart';
-import 'package:geosocial/presentation/detail/yelp_rating.dart';
-import 'package:geosocial/presentation/widgets/custom_network_image.dart';
+import 'package:whereisthefood/common/constants/dimens.dart';
+import 'package:whereisthefood/data_layer/entities/business.dart';
+import 'package:whereisthefood/domain/maps/selected_poi/cubit/selected_poi_cubit.dart';
+import 'package:whereisthefood/presentation/detail/business_detail_page.dart';
+import 'package:whereisthefood/presentation/detail/yelp_rating.dart';
+import 'package:whereisthefood/presentation/widgets/custom_network_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geosocial/presentation/widgets/yelp_logo.dart';
+import 'package:whereisthefood/presentation/widgets/yelp_logo.dart';
 
 class BusinessInfoBox extends StatelessWidget {
   void _navigateToDetail(Business business, BuildContext context) {
@@ -33,7 +32,7 @@ class BusinessInfoBox extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           child: Padding(
             padding: EdgeInsets.all(Dimens.paddingDefault),
-            child: Material(            
+            child: Material(
               borderRadius: BorderRadius.circular(Dimens.cornerRadiusDefault),
               child: Padding(
                 padding: const EdgeInsets.all(Dimens.paddingDefault),

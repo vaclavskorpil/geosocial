@@ -1,5 +1,5 @@
-import 'package:geosocial/common/constants/constatns.dart';
-import 'package:geosocial/data_layer/entities/filter_dto.dart';
+import 'package:whereisthefood/common/constants/constatns.dart';
+import 'package:whereisthefood/data_layer/entities/filter_dto.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 

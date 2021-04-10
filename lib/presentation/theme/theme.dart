@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-final geosocialTheme = ThemeData(
+final whereisthefoodTheme = ThemeData(
   primarySwatch: Colors.blue,
   visualDensity: VisualDensity.adaptivePlatformDensity,
   fontFamily: GoogleFonts.roboto().fontFamily,
@@ -20,3 +20,5 @@ final geosocialTheme = ThemeData(
           fontSize: 9, fontWeight: FontWeight.w400, color: Colors.grey),
       bodyText1: TextStyle(fontSize: 10, fontWeight: FontWeight.w400)),
 );
+
+

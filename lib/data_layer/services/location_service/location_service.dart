@@ -1,4 +1,4 @@
-import 'package:geosocial/data_layer/services/location_service/location_failure.dart';
+import 'package:whereisthefood/data_layer/services/location_service/location_failure.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:dartz/dartz.dart';

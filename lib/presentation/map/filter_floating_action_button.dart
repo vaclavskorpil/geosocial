@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geosocial/domain/poi/poi_cubit.dart';
-import 'package:geosocial/presentation/filter/filter_dialog.dart';
-import 'package:geosocial/presentation/theme/custom_icons_icons.dart';
+import 'package:whereisthefood/domain/poi/poi_cubit.dart';
+import 'package:whereisthefood/presentation/filter/filter_dialog.dart';
+import 'package:whereisthefood/presentation/theme/custom_icons_icons.dart';
 
 class FilterFloationActionButton extends StatelessWidget {
   const FilterFloationActionButton({
