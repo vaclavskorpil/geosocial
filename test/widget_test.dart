@@ -7,13 +7,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:geosocial/app.dart';
-
+import 'package:whereisthefood/app.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(GeosocialApp());
+    await tester.pumpWidget(whereisthefoodApp());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

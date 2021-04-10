@@ -1,4 +1,4 @@
-package com.example.geosocial
+package cz.skorpil.whereisthefood
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:geosocial/presentation/styled_widgets/styled_shimmer.dart';
+import 'package:whereisthefood/presentation/styled_widgets/styled_shimmer.dart';
 
 class CustomNetworkImage extends StatelessWidget {
   final String url;

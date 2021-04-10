@@ -7,6 +7,9 @@ abstract class SelectedPoiState with _$SelectedPoiState {
     double infoboxPosition,
   ) = _SelectedPoiState;
 
-  factory SelectedPoiState.initial() =>
-      SelectedPoiState(Business.empty(), -100);
+  factory SelectedPoiState.initial() => SelectedPoiState(
+      Business.empty().copyWith(photos: [
+        "https://pe-images.s3.amazonaws.com/essentials/image-quality/low-res-horse.jpg"
+      ]),
+      -100);
 }

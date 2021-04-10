@@ -4,15 +4,16 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:geosocial/common/failures/server_failure.dart';
-import 'package:geosocial/data_layer/entities/business.dart';
-import 'package:geosocial/data_layer/services/location_service/location_service.dart';
+import 'package:whereisthefood/common/failures/server_failure.dart';
+import 'package:whereisthefood/data_layer/entities/business.dart';
+import 'package:whereisthefood/data_layer/services/location_service/location_service.dart';
 
-import 'package:geosocial/domain/maps/selected_poi/cubit/selected_poi_cubit.dart';
-import 'package:geosocial/domain/poi/poi_cubit.dart';
-import 'package:geosocial/presentation/map/custom_marker.dart';
+import 'package:whereisthefood/domain/maps/selected_poi/cubit/selected_poi_cubit.dart';
+import 'package:whereisthefood/domain/poi/poi_cubit.dart';
+import 'package:whereisthefood/presentation/map/custom_marker.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:injectable/injectable.dart';
+import 'package:whereisthefood/presentation/theme/google_maps_theme.dart';
 
 part 'map_state.dart';
 part 'map_cubit.freezed.dart';

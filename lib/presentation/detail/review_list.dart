@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:geosocial/common/constants/dimens.dart';
-import 'package:geosocial/data_layer/entities/review.dart';
-import 'package:geosocial/data_layer/entities/user.dart';
-import 'package:geosocial/presentation/detail/yelp_rating.dart';
-import 'package:geosocial/presentation/widgets/custom_network_image.dart';
+import 'package:whereisthefood/common/constants/dimens.dart';
+import 'package:whereisthefood/data_layer/entities/review.dart';
+import 'package:whereisthefood/data_layer/entities/user.dart';
+import 'package:whereisthefood/presentation/detail/yelp_rating.dart';
+import 'package:whereisthefood/presentation/widgets/custom_network_image.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ReviewsList extends StatelessWidget {

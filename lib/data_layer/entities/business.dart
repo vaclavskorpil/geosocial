@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:geosocial/data_layer/entities/coordinates.dart';
-import 'package:geosocial/data_layer/entities/location.dart';
-import 'package:geosocial/data_layer/entities/review.dart';
+import 'package:whereisthefood/data_layer/entities/coordinates.dart';
+import 'package:whereisthefood/data_layer/entities/location.dart';
+import 'package:whereisthefood/data_layer/entities/review.dart';
 
 import 'category.dart';
 import 'hours.dart';

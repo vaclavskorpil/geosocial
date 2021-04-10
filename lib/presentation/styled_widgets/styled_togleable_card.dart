@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:geosocial/presentation/theme/my_colors.dart';
-import 'package:geosocial/presentation/widgets/toggleable_card.dart';
+import 'package:whereisthefood/presentation/theme/my_colors.dart';
+import 'package:whereisthefood/presentation/widgets/toggleable_card.dart';
 
 class BlueToggleableCard extends StatelessWidget {
   final double size;

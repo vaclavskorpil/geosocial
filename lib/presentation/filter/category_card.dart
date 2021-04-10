@@ -1,17 +1,17 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geosocial/common/constants/dimens.dart';
-import 'package:geosocial/data_layer/entities/category.dart';
-import 'package:geosocial/domain/fitler/filter_cubit.dart';
-import 'package:geosocial/presentation/styled_widgets/styled_togleable_card.dart';
+import 'package:whereisthefood/common/constants/dimens.dart';
+import 'package:whereisthefood/data_layer/entities/category.dart';
+import 'package:whereisthefood/domain/fitler/filter_cubit.dart';
+import 'package:whereisthefood/presentation/styled_widgets/styled_togleable_card.dart';
 
 class CategoryCard extends StatelessWidget {
   final _size = 60.0;
   final Category category;
   final IconData icon;
 
-  final Tuple3<Category, IconData,Color> supportedCategory;
+  final Tuple3<Category, IconData, Color> supportedCategory;
 
   CategoryCard({
     Key key,

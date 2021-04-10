@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:geosocial/common/failures/failure.dart';
+import 'failure.dart';
 
 part 'server_failure.freezed.dart';
 

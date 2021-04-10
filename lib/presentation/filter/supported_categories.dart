@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:geosocial/data_layer/entities/category.dart';
+import 'package:whereisthefood/data_layer/entities/category.dart';
 
 class SupportedCategories {
   SupportedCategories._();
@@ -76,7 +76,7 @@ class SupportedCategories {
 
   static const restaurant = Tuple3(
       const Category("restaurant",
-          "czech,mexican,japaneese,diners,hotdogs,filipino,international,restaurants"),
+          "czech,mexican,japaneese,diners,hotdogs,filipino,international,restaurants,inidan,mediterranean,seafood,thai,butcher,bistros"),
       Icons.restaurant,
       Colors.blue);
 
@@ -86,7 +86,7 @@ class SupportedCategories {
       Colors.orange);
 
   static const vegan = Tuple3(
-      const Category("Vegan", "vegan"), FontAwesomeIcons.leaf, Colors.green);
+      const Category("Vegan", "vegan,vegetarian"), FontAwesomeIcons.leaf, Colors.green);
 
   static const none =
       Tuple3(const Category("none", "none"), null, Colors.blueAccent);

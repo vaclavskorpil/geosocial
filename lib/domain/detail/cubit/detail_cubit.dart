@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:geosocial/common/failures/server_failure.dart';
-import 'package:geosocial/data_layer/entities/business.dart';
-import 'package:geosocial/data_layer/repository/business_repository.dart';
+import 'package:whereisthefood/common/failures/server_failure.dart';
+import 'package:whereisthefood/data_layer/entities/business.dart';
+import 'package:whereisthefood/data_layer/repository/business_repository.dart';
 import 'package:injectable/injectable.dart';
 
 part 'detail_state.dart';

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:dio/native_imp.dart';
-import 'package:geosocial/common/constants/constatns.dart';
+import 'package:whereisthefood/common/constants/constatns.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import 'toket_interceptor.dart';

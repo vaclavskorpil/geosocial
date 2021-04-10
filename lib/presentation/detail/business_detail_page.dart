@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geosocial/common/failures/server_failure.dart';
-import 'package:geosocial/data_layer/dependenci_injection/injector.dart';
-import 'package:geosocial/domain/detail/cubit/detail_cubit.dart';
-import 'package:geosocial/presentation/detail/business_detail_skeleton.dart';
+import 'package:whereisthefood/common/failures/server_failure.dart';
+import 'package:whereisthefood/data_layer/dependenci_injection/injector.dart';
+import 'package:whereisthefood/domain/detail/cubit/detail_cubit.dart';
+import 'package:whereisthefood/presentation/detail/business_detail_skeleton.dart';
 import 'package:shimmer/shimmer.dart';
 
 import 'business_detail.dart';

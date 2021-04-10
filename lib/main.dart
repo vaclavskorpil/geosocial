@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:geosocial/app.dart';
-import 'package:geosocial/common/constants/constatns.dart';
-import 'package:geosocial/data_layer/entities/category.dart';
-import 'package:geosocial/data_layer/entities/filter_dto.dart';
+import 'package:whereisthefood/app.dart';
+import 'package:whereisthefood/common/constants/constatns.dart';
+import 'package:whereisthefood/data_layer/entities/category.dart';
+import 'package:whereisthefood/data_layer/entities/filter_dto.dart';
 
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -15,7 +15,7 @@ void main() async {
   await _initHive();
   await configureDependencies();
 
-  runApp(GeosocialApp());
+  runApp(whereisthefoodApp());
 }
 
 Future<void> _initHive() async {

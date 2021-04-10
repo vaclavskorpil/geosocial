@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:geosocial/data_layer/entities/business.dart';
-import 'package:geosocial/data_layer/entities/filter_dto.dart';
-import 'package:geosocial/data_layer/repository/business_repository.dart';
-import 'package:geosocial/data_layer/repository/filter_repository.dart';
+import 'package:whereisthefood/data_layer/entities/business.dart';
+import 'package:whereisthefood/data_layer/entities/filter_dto.dart';
+import 'package:whereisthefood/data_layer/repository/business_repository.dart';
+import 'package:whereisthefood/data_layer/repository/filter_repository.dart';
 import 'package:injectable/injectable.dart';
 import 'package:dartz/dartz.dart';
-import 'package:geosocial/common/failures/server_failure.dart';
+import 'package:whereisthefood/common/failures/server_failure.dart';
 
 part 'poi_state.dart';
 part 'poi_cubit.freezed.dart';
@@ -16,7 +16,6 @@ part 'poi_cubit.freezed.dart';
 class POICubit extends Cubit<POIState> {
   final BusinessRepository _businessRepo;
   final FilterRepository _filterRepo;
-
 
   final fetchItemLimit = 50;
 

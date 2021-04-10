@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geosocial/domain/maps/my_location/cubit/my_location_cubit.dart';
+import 'package:whereisthefood/domain/maps/my_location/cubit/my_location_cubit.dart';
 
 class MyLocationFloationActionButton extends StatelessWidget {
   const MyLocationFloationActionButton({

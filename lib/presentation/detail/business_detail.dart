@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:geosocial/common/constants/constatns.dart';
-import 'package:geosocial/common/constants/dimens.dart';
-import 'package:geosocial/data_layer/entities/business.dart';
-import 'package:geosocial/presentation/detail/review_list.dart';
-import 'package:geosocial/presentation/detail/yelp_rating.dart';
-import 'package:geosocial/presentation/widgets/custom_network_image.dart';
-import 'package:geosocial/presentation/widgets/yelp_logo.dart';
+import 'package:whereisthefood/common/constants/constatns.dart';
+import 'package:whereisthefood/common/constants/dimens.dart';
+import 'package:whereisthefood/data_layer/entities/business.dart';
+import 'package:whereisthefood/presentation/detail/review_list.dart';
+import 'package:whereisthefood/presentation/detail/yelp_rating.dart';
+import 'package:whereisthefood/presentation/widgets/custom_network_image.dart';
+import 'package:whereisthefood/presentation/widgets/yelp_logo.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class BusinessDetail extends StatelessWidget {
@@ -66,7 +66,7 @@ class DetailBody extends StatelessWidget {
             PriceLevel(business: business),
             const SizedBox(height: 8),
             Categories(business: business),
-              const SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               "Reviews",
               style: Theme.of(context).textTheme.headline2,
@@ -93,7 +93,10 @@ class _RatingOpeningHoursRow extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        RatingBar(rating: business.rating, reviews: business.reviewCount),
+        RatingBar(
+            rating: business.rating,
+            reviews: business.reviewCount,
+            url: business.url),
         _OpeningHours(business: business)
       ],
     );
@@ -148,7 +151,9 @@ class Adress extends StatelessWidget {
           style: Theme.of(context).textTheme.headline2,
         ),
         InkWell(
-          onTap: () => openInGoogleMaps(business),
+          onTap: () async {
+            openInGoogleMaps(business);
+          },
           child: Text(
             business.location.formattedAddress,
             style: Theme.of(context).textTheme.headline3,
@@ -162,7 +167,9 @@ class Adress extends StatelessWidget {
     var destinationUrl =
         "${Constants.googleMapsUrl}${business.coordinates.latitude},${business.coordinates.longitude}";
 
-    if (await canLaunch(destinationUrl)) launch(destinationUrl);
+    if (await canLaunch(destinationUrl)) {
+      launch(destinationUrl);
+    }
   }
 }
 
@@ -302,7 +309,8 @@ class RatingBar extends StatelessWidget {
   final int reviews;
   final String url;
 
-  const RatingBar({@required this.rating, @required this.reviews, this.url});
+  const RatingBar(
+      {@required this.rating, @required this.reviews, @required this.url});
 
   void _onTap() async {
     if (await canLaunch(url)) launch(url);

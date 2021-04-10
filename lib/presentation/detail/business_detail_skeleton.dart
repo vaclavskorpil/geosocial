@@ -1,10 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:geosocial/common/constants/dimens.dart';
+import 'package:whereisthefood/common/constants/dimens.dart';
 
-import 'package:geosocial/presentation/detail/yelp_rating.dart';
-import 'package:geosocial/presentation/widgets/yelp_logo.dart';
+import 'package:whereisthefood/presentation/detail/yelp_rating.dart';
+import 'package:whereisthefood/presentation/widgets/yelp_logo.dart';
 
 const double textHeight = 14;
 const double textTinyHeight = 12;
