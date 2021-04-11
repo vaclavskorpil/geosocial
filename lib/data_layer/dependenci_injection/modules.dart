@@ -13,9 +13,4 @@ abstract class RegisterModule {
   @preResolve
   @lazySingleton
   Future<Dio> get dio => CustomDio.createDio();
-
-  @preResolve
-  @lazySingleton
-  Future<FilterRepository> filterRepository(AppStorage appStorage) =>
-      FilterRepositoryImpl.createFilterRepository(appStorage);
 }

@@ -7,13 +7,13 @@ import 'package:injectable/injectable.dart';
 class AppStorage {
   final _filterKey = "Filter";
 
-  Future<void> saveFilter(FilterDTO filter) async {
+  void saveFilter(FilterDTO filter)  {
     final Box box = Hive.box(Constants.filterBox);
-    await box.put(_filterKey, filter);
+    box.put(_filterKey, filter);
   }
 
 
-  Future<FilterDTO> getFilter() async {
+  FilterDTO getFilter() {
     final Box box = Hive.box(Constants.filterBox);
     return box.get(_filterKey, defaultValue: FilterDTO.empty());
   }

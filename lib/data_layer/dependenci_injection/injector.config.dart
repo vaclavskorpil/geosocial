@@ -35,9 +35,8 @@ Future<GetIt> $initGetIt(
   gh.lazySingleton<AppStorage>(() => AppStorage());
   final resolvedDio = await registerModule.dio;
   gh.lazySingleton<Dio>(() => resolvedDio);
-  final resolvedFilterRepository =
-      await registerModule.filterRepository(get<AppStorage>());
-  gh.lazySingleton<FilterRepository>(() => resolvedFilterRepository);
+  gh.lazySingleton<FilterRepository>(
+      () => FilterRepositoryImpl(get<AppStorage>()));
   gh.lazySingleton<GraphQLService>(() => GraphQLService.createGQLService());
   gh.lazySingleton<LocationService>(() => LocationServiceImp());
   gh.lazySingleton<MyLocationCubit>(
