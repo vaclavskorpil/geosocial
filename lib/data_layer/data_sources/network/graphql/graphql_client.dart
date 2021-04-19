@@ -14,15 +14,11 @@ class GraphQLService {
 
   @factoryMethod
   static GraphQLService createGQLService() {
-    final AuthLink authLink =
-        AuthLink(getToken: () async => 'Bearer ${Constants.apiKey}');
 
     final DioLink dioLink = DioLink("", client: injector<Dio>());
 
-    final Link link = Link.from([authLink, dioLink]);
-
     final client = GraphQLClient(
-      link: link,
+      link: dioLink,
       cache: GraphQLCache(
         store: HiveStore(),
       ),
