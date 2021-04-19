@@ -1,0 +1,6 @@
+workflows:
+  ios-workflow:
+    name: iOS build
+    instance_type: mac_mini
+    scripts: 
+      - flutter build ios --debug --no-codesign
