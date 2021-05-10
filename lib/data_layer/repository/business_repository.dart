@@ -71,7 +71,7 @@ class BusinessRepositoryImpl extends BusinessRepository {
       );
 
       if (result.hasException) {
-
+      print(result.exception.toString());
         return left(ServerFailure.serverError());
       }
 

@@ -13,7 +13,7 @@ class ReviewsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return reviews.length != 0 ? ListView.builder(
       clipBehavior: Clip.none,
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -23,8 +23,41 @@ class ReviewsList extends StatelessWidget {
           top: Dimens.paddingSmall,
           bottom: Dimens.paddingSmall,
         ),
-        child: ReviewTile(
+        
+        child:  ReviewTile(
           review: reviews[position],
+        )
+      ),
+    ) : const NoReviewsTile();
+  }
+}
+
+class NoReviewsTile extends StatelessWidget {
+  
+
+  const NoReviewsTile();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(
+          top: Dimens.paddingSmall,
+          bottom: Dimens.paddingSmall,
+        ),
+      child: Material(
+        clipBehavior: Clip.hardEdge,
+        borderRadius: BorderRadius.all(
+          Radius.circular(
+            Dimens.cornerRadiusDefault,
+          ),
+        ),
+        elevation: 7,
+        child: Padding(
+          padding: const EdgeInsets.only(
+          top: Dimens.paddingBig,
+          bottom: Dimens.paddingBig,
+        ),
+          child: Center(child: Text("There are no reviews.", style: Theme.of(context).textTheme.headline2,), ),
         ),
       ),
     );

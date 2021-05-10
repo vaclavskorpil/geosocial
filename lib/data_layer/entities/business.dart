@@ -34,15 +34,16 @@ abstract class Business with _$Business {
   factory Business.empty() => Business(
       "", "", "", "", "", 0, [], null, null, [""], [], [], 0, null, null);
 
-  String getIsOpenString() {
+  String get openOrClosedText {
     if (hours?.isEmpty ?? true) return "";
     return hours.first.isOpenNow ? "Open" : "Closed";
   }
 
-  bool isOpen() {
-    if (hours?.isEmpty ?? true) return false;
-    return hours.first.isOpenNow;
-  }
+  bool get hasPhone =>
+      (phone != null && phone.isNotEmpty) || displayPhone != null;
+
+  bool get isOpen => hours?.isEmpty ?? true? false : hours.first.isOpenNow;
+
 
   String todaysOpeningOursString() {
     try {

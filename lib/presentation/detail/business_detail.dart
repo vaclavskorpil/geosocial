@@ -59,9 +59,9 @@ class DetailBody extends StatelessWidget {
             const SizedBox(height: 8),
             _RatingOpeningHoursRow(business: business),
             const SizedBox(height: 8),
-            Adress(business: business),
+            Address(business: business),
             const SizedBox(height: 8),
-            if (business.phone != null) PhoneContact(business: business),
+            if (business.hasPhone) PhoneContact(business: business),
             const SizedBox(height: 8),
             PriceLevel(business: business),
             const SizedBox(height: 8),
@@ -119,11 +119,11 @@ class _OpeningHours extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text(
-          business.getIsOpenString(),
+          business.openOrClosedText,
           style: Theme.of(context)
               .textTheme
               .headline3
-              .copyWith(color: business.isOpen() ? Colors.green : Colors.red),
+              .copyWith(color: business.isOpen ? Colors.green : Colors.red),
         ),
         Text(
           business.todaysOpeningOursString(),
@@ -134,10 +134,10 @@ class _OpeningHours extends StatelessWidget {
   }
 }
 
-class Adress extends StatelessWidget {
+class Address extends StatelessWidget {
   final Business business;
 
-  Adress({@required this.business});
+  Address({@required this.business});
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +147,7 @@ class Adress extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Adress",
+          "Address",
           style: Theme.of(context).textTheme.headline2,
         ),
         InkWell(
@@ -241,14 +241,13 @@ class PhoneContact extends StatelessWidget {
           "Phone",
           style: Theme.of(context).textTheme.headline2,
         ),
-        if (business.phone != null)
-          InkWell(
-            onTap: openCallIntent,
-            child: Text(
-              business.displayPhone ?? business.phone.toString(),
-              style: Theme.of(context).textTheme.headline3,
-            ),
-          )
+        InkWell(
+          onTap: openCallIntent,
+          child: Text(
+            business.displayPhone ?? business.phone.toString(),
+            style: Theme.of(context).textTheme.headline3,
+          ),
+        )
       ],
     );
   }

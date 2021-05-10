@@ -16,7 +16,7 @@ import 'package:whereisthefood/presentation/styled_widgets/styled_textfield.dart
 
 import 'package:whereisthefood/presentation/theme/my_colors.dart';
 import 'package:vibration/vibration.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 
 class FilterDialog extends StatelessWidget {
   @override

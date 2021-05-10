@@ -202,7 +202,7 @@ class _AdressSkeleton extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Adress",
+          "Address",
           style: Theme.of(context).textTheme.headline2,
         ),
         adressContainer,
